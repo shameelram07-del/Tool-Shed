@@ -8,27 +8,18 @@
   "categories": [
     {
       "id": "power",
-      "name": "Power tools"
-    },
-    {
-      "id": "cordless",
-      "name": "Cordless & batteries"
+      "name": "Power",
+      "blurb": "Plug-in and battery tools."
     },
     {
       "id": "hand",
-      "name": "Hand tools"
+      "name": "Hand",
+      "blurb": "Hand tools, sets and levels."
     },
     {
-      "id": "measure",
-      "name": "Measuring"
-    },
-    {
-      "id": "garden",
-      "name": "Garden"
-    },
-    {
-      "id": "storage",
-      "name": "Storage"
+      "id": "yard",
+      "name": "Yard",
+      "blurb": "Garden gear and the shed itself."
     }
   ],
   "tools": [
@@ -36,6 +27,7 @@
       "id": "bosch-mitre-saw",
       "name": "sliding mitre saw + stand",
       "tag": "Mitre saw",
+      "verb": "Cut",
       "brand": "Bosch",
       "model": null,
       "category": "power",
@@ -63,12 +55,19 @@
           "text": "Blow the sawdust out of the slide rails and guard",
           "every": 30
         }
-      ]
+      ],
+      "uses": [
+        "Clean square and angled cuts",
+        "Skirting, framing and decking",
+        "Picture frames and trim"
+      ],
+      "pairs": []
     },
     {
       "id": "makita-bo5030",
       "name": "random orbital sander",
       "tag": "Sander",
+      "verb": "Sand",
       "brand": "Makita",
       "model": "BO5030",
       "category": "power",
@@ -109,12 +108,21 @@
           "text": "Empty and tap out the dust bag",
           "every": 14
         }
+      ],
+      "uses": [
+        "Stripping old paint and varnish",
+        "Smoothing timber before oil or paint",
+        "Cleaning up flips before they're listed"
+      ],
+      "pairs": [
+        "makita-vc2000l"
       ]
     },
     {
       "id": "makita-vc2000l",
       "name": "20L wet & dry vacuum",
       "tag": "Wet & dry vac",
+      "verb": "Clean",
       "brand": "Makita",
       "model": "VC2000L",
       "category": "power",
@@ -152,42 +160,24 @@
           "text": "Empty the tank and leave it open to dry after wet jobs",
           "every": 14
         }
-      ]
-    },
-    {
-      "id": "ryobi-blower-vac",
-      "name": "18V brushless blower vac",
-      "tag": "Blower vac",
-      "brand": "Ryobi",
-      "model": "One+",
-      "category": "garden",
-      "art": "blower",
-      "colour": "#B5C400",
-      "size": "wide",
-      "paid": 55,
-      "newPrice": null,
-      "newFrom": null,
-      "power": "Ryobi One+ 18V",
-      "includes": [
-        "Blower vac (skin only)"
       ],
-      "specs": [],
-      "notes": "Skin only. Runs off the Ryobi One+ batteries.",
-      "care": [
-        {
-          "id": "bag",
-          "text": "Empty the collection bag and clear the impeller",
-          "every": 30
-        }
+      "uses": [
+        "Dust-free sanding with the Makita sander",
+        "Garage and car clean-ups",
+        "Wet spills and flooded corners"
+      ],
+      "pairs": [
+        "makita-bo5030"
       ]
     },
     {
       "id": "ryobi-batteries",
       "name": "One+ batteries, charger & bag",
       "tag": "Batteries",
+      "verb": "Power",
       "brand": "Ryobi",
       "model": "One+ 18V",
-      "category": "cordless",
+      "category": "power",
       "art": "battery",
       "colour": "#B5C400",
       "size": "small",
@@ -218,12 +208,20 @@
           "text": "Top the batteries up to about half if they've sat unused",
           "every": 90
         }
+      ],
+      "uses": [
+        "Run the blower vac",
+        "Any Ryobi One+ 18V tool"
+      ],
+      "pairs": [
+        "ryobi-blower-vac"
       ]
     },
     {
       "id": "fatmax-hand-lot",
       "name": "hand tool lot + tool bag",
       "tag": "Hand tools",
+      "verb": "Fix",
       "brand": "Stanley",
       "model": "FatMax bag",
       "category": "hand",
@@ -250,12 +248,19 @@
           "text": "Wipe the tools down and oil anything starting to rust",
           "every": 180
         }
-      ]
+      ],
+      "uses": [
+        "Everyday fixes round the house",
+        "Assembling flat-packs",
+        "A grab-and-go bag for jobs"
+      ],
+      "pairs": []
     },
     {
       "id": "toolpro-sockets",
       "name": "socket set",
       "tag": "Sockets",
+      "verb": "Turn",
       "brand": "ToolPro",
       "model": null,
       "category": "hand",
@@ -269,12 +274,18 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": []
+      "care": [],
+      "uses": [
+        "Nuts and bolts on bikes, mowers and furniture",
+        "Car jobs"
+      ],
+      "pairs": []
     },
     {
       "id": "bosch-hand-set",
       "name": "hand tool set",
       "tag": "Bosch set",
+      "verb": "Grip",
       "brand": "Bosch",
       "model": null,
       "category": "hand",
@@ -288,12 +299,17 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": []
+      "care": [],
+      "uses": [
+        "Quick household jobs"
+      ],
+      "pairs": []
     },
     {
       "id": "screwdriver-set",
       "name": "Screwdriver set",
       "tag": "Drivers",
+      "verb": "Drive",
       "brand": null,
       "model": null,
       "category": "hand",
@@ -307,12 +323,18 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": []
+      "care": [],
+      "uses": [
+        "Flat and Phillips screws",
+        "Opening battery covers and fittings"
+      ],
+      "pairs": []
     },
     {
       "id": "kincrome-knife",
       "name": "utility knife",
       "tag": "Knife",
+      "verb": "Slice",
       "brand": "Kincrome",
       "model": null,
       "category": "hand",
@@ -332,12 +354,18 @@
           "text": "Snap or swap the blade if it's dragging",
           "every": 60
         }
-      ]
+      ],
+      "uses": [
+        "Opening boxes",
+        "Cutting carpet, vinyl and plasterboard"
+      ],
+      "pairs": []
     },
     {
       "id": "drill-bits",
       "name": "drill bits + hammer",
       "tag": "Drill bits",
+      "verb": "Drill",
       "brand": "DeWalt & Bosch",
       "model": null,
       "category": "hand",
@@ -355,15 +383,23 @@
       ],
       "specs": [],
       "notes": "Kept from the $1 Black+Decker drill kit before it sold.",
-      "care": []
+      "care": [],
+      "uses": [
+        "Drilling timber, metal and masonry",
+        "Driving screws with the drill"
+      ],
+      "pairs": [
+        "fatmax-hand-lot"
+      ]
     },
     {
       "id": "ox-level-600",
       "name": "600mm level",
       "tag": "600mm level",
+      "verb": "Level",
       "brand": "OX",
       "model": null,
-      "category": "measure",
+      "category": "hand",
       "art": "level",
       "colour": "#E35A1B",
       "size": "wide",
@@ -385,15 +421,22 @@
           "text": "Flip test: read it, turn it end for end, and the bubble should sit the same",
           "every": 180
         }
+      ],
+      "uses": [
+        "Shelves, pictures and cabinets"
+      ],
+      "pairs": [
+        "ox-level-1200"
       ]
     },
     {
       "id": "ox-level-1200",
       "name": "1.2m level",
       "tag": "1.2m level",
+      "verb": "True",
       "brand": "OX",
       "model": null,
-      "category": "measure",
+      "category": "hand",
       "art": "level",
       "colour": "#E35A1B",
       "size": "wide",
@@ -415,15 +458,59 @@
           "text": "Flip test: read it, turn it end for end, and the bubble should sit the same",
           "every": 180
         }
+      ],
+      "uses": [
+        "Fences, decks and door frames",
+        "Long shelves and benches"
+      ],
+      "pairs": [
+        "ox-level-600"
+      ]
+    },
+    {
+      "id": "ryobi-blower-vac",
+      "name": "18V brushless blower vac",
+      "tag": "Blower vac",
+      "verb": "Blow",
+      "brand": "Ryobi",
+      "model": "One+",
+      "category": "yard",
+      "art": "blower",
+      "colour": "#B5C400",
+      "size": "wide",
+      "paid": 55,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Ryobi One+ 18V",
+      "includes": [
+        "Blower vac (skin only)"
+      ],
+      "specs": [],
+      "notes": "Skin only. Runs off the Ryobi One+ batteries.",
+      "care": [
+        {
+          "id": "bag",
+          "text": "Empty the collection bag and clear the impeller",
+          "every": 30
+        }
+      ],
+      "uses": [
+        "Clearing leaves off paths and the drive",
+        "Blowing sawdust out of the shed",
+        "Vacuuming leaves into the bag"
+      ],
+      "pairs": [
+        "ryobi-batteries"
       ]
     },
     {
       "id": "wheelbarrow",
       "name": "Wheelbarrow",
       "tag": "Wheelbarrow",
+      "verb": "Haul",
       "brand": null,
       "model": "Red tray",
-      "category": "garden",
+      "category": "yard",
       "art": "wheelbarrow",
       "colour": "#C2413A",
       "size": "big",
@@ -447,15 +534,21 @@
           "text": "Check the tyre pressure",
           "every": 60
         }
-      ]
+      ],
+      "uses": [
+        "Moving soil, mulch and compost",
+        "Carting heavy tools out to the car"
+      ],
+      "pairs": []
     },
     {
       "id": "keter-shed",
       "name": "1150L storage shed",
       "tag": "Keter shed",
+      "verb": "Store",
       "brand": "Keter",
       "model": "1150L",
-      "category": "storage",
+      "category": "yard",
       "art": "shed",
       "colour": "#7B7F78",
       "size": "big",
@@ -477,7 +570,11 @@
           "text": "Clear leaves off the roof and check for leaks after rain",
           "every": 90
         }
-      ]
+      ],
+      "uses": [
+        "Keeping the tools dry and locked away"
+      ],
+      "pairs": []
     }
   ]
 }
