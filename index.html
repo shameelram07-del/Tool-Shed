@@ -20,7 +20,7 @@
    Tool-themed parts: spirit-level scroll indicator, saw blade hero, tape-measure stats, pegboard wall, saw-tooth slide-up reel with a ruler,
    lineup shelf, caution tape, torque-gauge bargain meter, blueprint spec cards, hex-nut tick boxes, label-tape names.
    Shed tab: hero → bench → wall → reel (one featured tool per step) → lineup → statement → gauge.
-   Power / Hand / Yard: artwork hero, picker, swipe sideways through tool pages. Care tab. All content from data.json. */
+   Power / Hand / Yard: artwork hero, picker, swipe sideways through tool pages. Each tool page has Details and Care tabs. All content from data.json. */
 :root{
   --bg:#D3D7DA; --surface:#ECEEF0; --sunk:#C5CACE; --ink:#111315; --body:#2E3337; --muted:#575D63; --line:#B8BEC3;
   --hv:#E1332A; --hv-ink:#FFFFFF; --hv-rgb:225,51,42; --warn:#C0291F; --ok:#2F7A4F;
@@ -260,9 +260,9 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .plate-val .kicker{color:rgba(228,231,234,.7);display:block;text-align:center}
 .plate-val .vbig{margin:6px 0 0;text-align:center;font-family:var(--display);font-weight:900;font-size:clamp(64px,21vw,104px);line-height:.85;color:var(--hv);text-shadow:0 0 30px rgba(var(--hv-rgb),.35);font-variant-numeric:tabular-nums}
 .plate-val .vsub{margin:6px 0 0;text-align:center;font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.1}
-.plate-val .vrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.plate-val .vrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
 .plate-val .vrow div{background:rgba(0,0,0,.35);border-radius:12px;padding:10px 6px;text-align:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);min-width:0}
-.plate-val .vrow b{display:block;font-family:var(--display);font-weight:900;font-size:24px;line-height:1}
+.plate-val .vrow b{display:block;font-family:var(--display);font-weight:900;font-size:34px;line-height:1}
 .plate-val .vrow span{display:block;font-family:var(--mono);font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:rgba(228,231,234,.7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .plate-val .vnote{margin:12px 0 0;text-align:center;font-size:13px;color:rgba(228,231,234,.6)}
 .facts .valfact{grid-column:span 2;display:grid;padding:0;gap:0;grid-template-columns:1fr 1fr;background:var(--surface);border-radius:18px;overflow:hidden}
@@ -273,6 +273,24 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .facts .valfact .v.acc{color:var(--hv)}
 .facts .valfact .s{font-size:12px;color:var(--muted)}
 .facts .valfact .s a{color:inherit}
+
+/* Tool page tabs: Details | Care */
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line)}
+.seg button{min-height:44px;border:0;border-radius:10px;background:transparent;font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .25s,color .25s}
+.seg button svg{width:18px;height:18px}
+.seg button[aria-selected="true"]{background:var(--hv);color:var(--hv-ink);box-shadow:0 6px 12px -8px rgba(0,0,0,.6)}
+.pane{display:flex;flex-direction:column;gap:14px}
+@media (prefers-reduced-motion:no-preference){.pane.show{animation:fade .45s var(--ease)}}
+.guide{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column}
+.guide li{display:flex;gap:12px;align-items:flex-start;padding:12px 0}
+.guide li+li{border-top:1px solid var(--line)}
+.guide .gi{flex:none;width:34px;height:34px;display:grid;place-items:center;background:var(--hv);color:var(--hv-ink);clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%)}
+.guide .gi svg{width:16px;height:16px}
+.guide .gt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.guide .gf{font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--hv)}
+.guide .gx{font-size:16px;line-height:1.35}
+.guide li.always .gi{background:var(--sunk);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.guide li.always .gf{color:var(--muted)}
 /* Tab heroes with artwork */
 .chero{position:relative;margin:0 0 4px;border-radius:30px;overflow:hidden;background:var(--night);color:var(--cream);padding:150px 20px 22px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:inset 0 0 0 1px rgba(228,231,234,.08)}
 .chero .stipple{opacity:.7}
@@ -851,11 +869,12 @@ const ICON={
   yard:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9M9 3h6"/><path d="M8 12h8v3c0 3-2 5-4 6-2-1-4-3-4-6z"/></svg>',
   care:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h10l1 8H3z"/><path d="M14 14l6-6"/><path d="M6 12c1-4 5-4 6 0"/><path d="M21 12v2"/></svg>'
 };
+const SEG={info:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>',care:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.3L4 17l3 3 5.2-5.2a4 4 0 0 0 5.3-5.3l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>',check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>'};
 const arrow='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>';
 
 /* ---------- State + helpers ---------- */
 const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let data=null, careDone=store.get('ts-care',{}), view='';
+let data=null, view='';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>n==null?null:'$'+(Math.round(n*100)%100?n.toLocaleString('en-NZ',{minimumFractionDigits:2,maximumFractionDigits:2}):Math.round(n).toLocaleString('en-NZ'));
@@ -874,15 +893,14 @@ const loanOf=t=>null; // lending removed
 const deep=c=>`color-mix(in srgb, ${c} 62%, #0b0d0e)`;
 const words=txt=>txt.split(' ').map((w,k)=>`<span class="w"><span style="--k:${k}">${esc(w)}</span></span>`).join(' ');
 const fit=(w,max,share=.94)=>{const n=(share*100/(Math.max(3,w.length)*.6)).toFixed(1);return `min(${max}px,${n}vw,${n}cqw)`}; // sized to the card (cqw), not the screen, so wide screens don't overflow
-function careList(){
-  const out=[];
-  for(const t of tools()) for(const c of (t.care||[])){
-    const key=t.id+':'+c.id, last=careDone[key]||null;
-    const from=last||(c.now?null:data.careStart||null); // never ticked: counts from careStart unless flagged as needed now
-    const left=from?c.every-days(from,today()):0;
-    out.push({t,c,key,last,left,due:left<=0});
-  }
-  return out.sort((a,b)=>a.left-b.left);
+const often=d=>d<=14?'Every 2 weeks':d<=31?'Monthly':d<=62?'Every 2 months':d<=93?'Every 3 months':d<=186?'Every 6 months':'Yearly';
+function generalCare(t){ // tips that apply to every tool of a kind
+  const p=(t.power||'').toLowerCase(), out=[];
+  if(p.includes('corded')){ out.push('Check the cord and plug for cuts or crushing before each use'); out.push('Blow the dust out of the motor vents after dusty jobs'); }
+  else if(p){ out.push('Blow the dust out of the vents and keep the battery contacts clean'); out.push('Store batteries indoors at about half charge, out of the sun'); }
+  else if(t.category==='hand'){ out.push('Wipe clean and dry after use'); out.push('A light wipe of oil on bare steel stops rust'); }
+  else { out.push('Hose or wipe off dirt after use and store it dry'); }
+  return out;
 }
 const go=t=>{ location.hash=t.category+'/'+t.id; };
 const usedOf=t=>t.usedValue!=null?t.usedValue:(t.newPrice?Math.round(t.newPrice*(t.condition==='worn'?.4:.55)):null); // rule of thumb: good used tools sell for about 55% of new
@@ -890,41 +908,26 @@ const usedOf=t=>t.usedValue!=null?t.usedValue:(t.newPrice?Math.round(t.newPrice*
 /* ---------- Shed (home) ---------- */
 function viewShed(){
   const ts=tools(), paid=ts.reduce((s,t)=>s+(t.paid||0),0), home=ts.filter(t=>!loanOf(t)).length;
-  const due=careList().filter(x=>x.due), out=ts.filter(loanOf), feat=featured();
+
   const priced=ts.filter(t=>t.newPrice&&t.paid!=null&&!t.demo), newSum=priced.reduce((s,t)=>s+t.newPrice,0), paidP=priced.reduce((s,t)=>s+t.paid,0);
   const save=newSum?1-paidP/newSum:0;
   const valued=ts.filter(t=>t.newPrice), newAll=valued.reduce((a,t)=>a+t.newPrice,0), usedAll=valued.reduce((a,t)=>a+usedOf(t),0), topT=valued.slice().sort((a,b)=>b.newPrice-a.newPrice)[0];
   const platforms={}; ts.forEach(t=>{if(t.power&&!/corded/i.test(t.power))(platforms[t.power]=platforms[t.power]||[]).push(t)});
   const demoN=ts.filter(t=>t.demo).length;
-  const needs=[
-    ...out.map(t=>{const l=loanOf(t);return `<button class="need screws rv" data-go="${t.id}"><span class="nt"><span class="lvl">Out</span><span class="mini">${svg(t)}</span></span><h3>${esc(t.tag||t.name)} is with ${esc(l.to)}</h3><p>${l.on?'Since '+niceDate(l.on)+' · '+days(l.on,today())+' days':'On loan'}</p></button>`}),
-    ...due.map(x=>`<button class="need screws rv" data-go="${x.t.id}"><span class="nt"><span class="lvl care">Care due</span><span class="mini">${svg(x.t)}</span></span><h3>${esc(x.t.tag||x.t.name)}</h3><p>${esc(x.c.text)}</p></button>`)
-  ];
-  if(!needs.length) needs.push(`<div class="need screws rv"><span class="nt"><span class="lvl calm">All good</span></span><h3>Nothing needs you</h3><p>Every tool is home and looked after.</p></div>`);
   const motes=Array.from({length:14},(_,i)=>`<i style="left:${30+(i*37)%70}%;top:${50+(i*23)%45}%;animation-delay:${(i*0.7)%9}s"></i>`).join('');
   const slots=ts.map((t,i)=>{const l=loanOf(t);return `<button class="slot ${t.size||'small'} ${l?'ghost':''}" style="--i:${i}" data-go="${t.id}" aria-label="${esc(label(t))}${l?', lent to '+esc(l.to):''}"><span class="art">${svg(t)}</span>${l?`<span class="out">With ${esc(l.to)}</span>`:''}<span class="dymo">${esc(t.tag||t.name)}</span></button>`}).join('');
-  const panels=feat.map((t,i)=>{const l=loanOf(t), cat=cats().find(c=>c.id===t.category), w=t.verb||t.tag||'';
-    return `<div class="panel" data-i="${i}" style="--c:${deep(t.colour)};z-index:${i+1}">${i?'<div class="teeth"></div>':''}
-      <div class="rhead"><div class="rnum">${pad(i+1)}<small> / ${pad(feat.length)}</small></div><div class="rcat">${esc(cat?cat.name:'')}</div></div>
-      <div class="rword" style="font-size:${fit(w,270)}">${esc(w)}</div>
-      <div class="rart"><div class="a-float">${svg(t)}</div></div>
-      <div class="rinfo"><span class="dymo lg">${esc(t.tag||t.name)}</span><span class="rname">${esc(label(t))}</span><span class="rrow">${t.paid!=null?`<span class="rpill">Paid ${money(t.paid)}</span>`:''}${t.newPrice?`<span class="rpill">New ${money(t.newPrice)}</span>`:''}${l?`<span class="rpill" style="background:var(--warn)">With ${esc(l.to)}</span>`:''}<button class="rbtn" data-go="${t.id}">Open ${arrow}</button></span></div>
-    </div>`}).join('');
   const tapeTxt='Measure twice · Cut once · Put it back where it hangs · ';
   return `<section class="hero" id="hero"><div class="hstage"><div class="stipple"></div><div class="hglow"></div>
       <div class="blade" id="blade"><svg viewBox="0 0 200 200" aria-hidden="true">${bladeSvg()}</svg></div><div class="motes">${motes}</div>
       <div class="hcopy" id="hcopy">
       <h1 class="tt">${words('The')}<br><span class="acc">${words('Shed')}</span></h1>
       <p class="hsub sub">Every tool, where it hangs, and what it's good for.</p>
-      <div class="hstats sub"><span class="pill"><b data-count="${ts.length}">0</b> tools</span><span class="pill"><b data-count="${ts.filter(t=>t.category==='power').length}">0</b> power</span><span class="pill"><b>${due.length}</b> ${due.length===1?'job':'jobs'} due</span></div></div>
+      <div class="hstats sub"><span class="pill"><b data-count="${ts.length}">0</b> tools</span><span class="pill"><b data-count="${ts.filter(t=>t.category==='power').length}">0</b> power</span><span class="pill"><b data-count="${ts.filter(t=>t.category==='hand').length}">0</b> hand</span></div></div>
       <div class="mist"></div></div></section>
   <div class="flow">
-    <div class="sechead"><h2>On the <span class="serif">bench</span></h2><span class="kicker">${needs.length>1?needs.length+' things':''}</span></div>
-    <div class="needs">${needs.join('')}</div>
     <div class="tapewrap rv" role="group" aria-label="Shed totals"><div class="tcase"><i></i></div><div class="tape"><div><b>${ts.filter(t=>t.category==='power').length}</b><span>Power</span></div><div><b>${ts.filter(t=>t.category==='hand').length}</b><span>Hand</span></div><div><b>${new Set(ts.map(t=>t.brand).filter(Boolean)).size}</b><span>Brands</span></div></div></div>
-    ${valued.length?`<section class="plate-val rv" aria-label="Shed value"><span class="kicker">Whole shed value</span><p class="vbig" data-money="${newAll}">$0</p><p class="vsub">to replace it all new</p>
-      <div class="vrow"><div><b>${money(usedAll)}</b><span>Worth used</span></div><div><b>${valued.length}/${ts.length}</b><span>Tools priced</span></div><div><b>${money(topT.newPrice)}</b><span>${esc(topT.tag||topT.name)}</span></div></div>
-      <p class="vnote">New prices from NZ shops${data.pricedOn?', checked '+niceDate(data.pricedOn):''}. Used value is about 55% of new (40% for worn tools).</p></section>`:''}
+    ${valued.length?`<section class="plate-val rv" aria-label="Shed value"><span class="kicker">Whole shed value</span><p class="vbig" data-money="${newAll}">$0</p>
+      <div class="vrow"><div><b>${money(usedAll)}</b><span>Worth second-hand</span></div><div><b>${ts.length}</b><span>Tools</span></div></div></section>`:''}
     <div class="sechead"><h2>The <span class="serif">wall</span></h2><span class="kicker">Tap a tool</span></div>
     <section class="board" id="board" aria-label="Pegboard"><div class="grid">${slots}</div></section>
   </div>
@@ -943,7 +946,7 @@ function viewShed(){
 
 /* ---------- Category: artwork hero, then swipe through tool pages ---------- */
 function toolPage(t,i,n){
-  const l=loanOf(t), care=careList().filter(x=>x.t===t);
+  const l=loanOf(t), care=(t.care||[]), gen=generalCare(t);
   const save=t.paid!=null&&t.newPrice?Math.round(100-t.paid/t.newPrice*100):null;
   const pairs=(t.pairs||[]).map(byId).filter(Boolean), w=t.verb||'';
   const bp=[...(t.model?[['Model',t.model]]:[]),['Power',t.power||'Hand tool'],...(t.specs||[])];
@@ -962,11 +965,16 @@ function toolPage(t,i,n){
       <div class="fact" style="--n:${k++}"><span class="k">Condition</span><span class="v">${esc({good:'Good',fair:'Fair',worn:'Worn'}[t.condition]||'Working')}</span></div>
       ${t.spot?`<div class="fact wide" style="--n:${k++}"><span class="k">Lives</span><span class="v">${esc(t.spot)}</span></div>`:''}
     </div>
+    <div class="seg" role="tablist" aria-label="${esc(t.tag||t.name)}"><button role="tab" data-seg="info" aria-selected="true">${SEG.info}Details</button><button role="tab" data-seg="care" aria-selected="false">${SEG.care}Care</button></div>
+    <div class="pane show" data-pane="info">
     ${t.notes?`<div class="note">${esc(t.notes)}</div>`:''}
     ${(t.uses||[]).length?`<div class="card cardpad"><h2>Good for</h2><ul class="uses">${t.uses.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
     ${(t.includes||[]).length?`<div class="card cardpad"><h2>In the kit</h2><ul class="kit">${t.includes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
     <div class="bp"><h2>Blueprint</h2><div class="bpart">${svg(t)}</div><div class="dim">${esc(t.tag||t.name)}</div><dl>${bp.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl></div>
-    ${care.length?`<div class="card"><div class="cardpad" style="padding-bottom:0"><h2>Care</h2></div>${care.map(x=>`<label class="task ${x.last&&!x.due?'done':''}"><input type="checkbox" data-care="${x.key}" ${x.last&&!x.due?'checked':''}><span class="tt2"><span class="tx">${esc(x.c.text)}</span><span class="when ${x.due?'due':''}">${x.due?'Due now':'Due in '+x.left+' day'+(x.left>1?'s':'')} · every ${x.c.every} days</span></span></label>`).join('')}</div>`:''}
+    </div>
+    <div class="pane" data-pane="care" hidden>
+      <div class="card cardpad"><h2>How to care for it</h2><ul class="guide">${care.map(c=>`<li><span class="gi">${SEG.care}</span><span class="gt"><span class="gf">${often(c.every)}</span><span class="gx">${esc(c.text)}</span></span></li>`).join('')}${gen.map(x=>`<li class="always"><span class="gi">${SEG.check}</span><span class="gt"><span class="gf">Every time</span><span class="gx">${esc(x)}</span></span></li>`).join('')}</ul></div>
+    </div>
     <p class="swipehint">${n>1?(i<n-1?'Swipe for the next tool →':'← Swipe back'):''}</p>
   </article>`;
 }
@@ -980,19 +988,10 @@ function viewCat(c){
 }
 
 /* ---------- Care ---------- */
-function viewCare(){
-  const list=careList(), due=list.filter(x=>x.due), later=list.filter(x=>!x.due);
-  const task=x=>`<label class="task ${x.last&&!x.due?'done':''}"><input type="checkbox" data-care="${x.key}" ${x.last&&!x.due?'checked':''}><span class="tt2"><span class="tk">${esc(label(x.t))}</span><span class="tx">${esc(x.c.text)}</span><span class="when ${x.due?'due':''}">${x.due?(x.last?'Due now · last done '+niceDate(x.last):'Due now'):(x.last?'Done '+niceDate(x.last)+' · ':'')+'due in '+x.left+' day'+(x.left>1?'s':'')}</span></span></label>`;
-  return `<div class="flow">${chero('care',list.length+' jobs',`${words('Keep it')}<br><span class="acc">${words('sharp')}</span>`,"Small jobs that keep the tools working. Turn the nut when it's done.")}
-  <section class="rv"><h2 class="h2s">Due now · ${due.length}</h2>${due.length?`<div class="card">${due.map(task).join('')}</div>`:'<p class="empty card">Nothing due. Nice work.</p>'}</section>
-  ${later.length?`<section class="rv"><h2 class="h2s">Coming up</h2><div class="card">${later.map(task).join('')}</div></section>`:''}
-  <p class="foot">Ticks are saved on this phone.</p></div>`;
-}
 function row(t){const l=loanOf(t);return `<li><button class="item" data-go="${t.id}"><span class="thumb" style="background:color-mix(in srgb,${t.colour} 16%,transparent)">${svg(t)}</span><span class="txt"><b>${esc(label(t))}</b><span>${l?'With '+esc(l.to):esc([t.model,t.power].filter(Boolean).join(' · ')||'In the shed')}</span></span></button></li>`}
 /* ---------- Tabs, router ---------- */
 function tabs(cur){
-  const due=careList().filter(x=>x.due).length;
-  const T=[['shed','Shed'],...cats().map(c=>[c.id,c.name]),['care','Care',due]];
+  const T=[['shed','Shed'],...cats().map(c=>[c.id,c.name])];
   $('#tabs').innerHTML=T.map(([id,name,n])=>`<a class="tab" href="#${id}" ${cur===id?'aria-current="page"':''}>${ICON[id]||ICON.hand}${esc(name)}${n?`<span class="dot">${n}</span>`:''}</a>`).join('');
 }
 function parse(){ const [v,id]=location.hash.slice(1).split('/'); return {v:v||'shed',id}; }
@@ -1000,12 +999,12 @@ function render(keep){
   if(!data) return;
   let {v,id}=parse();
   const cat=cats().find(c=>c.id===v);
-  if(!cat&&!['shed','care'].includes(v)) v='shed';
+  if(!cat&&v!=='shed') v='shed';
   const same=v===view&&keep;
   if(cat&&v===view&&$('#rail')&&!keep){ scrollRailTo(id,true); return; } // same category: just move to the tool
   view=v;
   const y=window.scrollY, railX=$('#rail')?.scrollLeft;
-  $('#main').innerHTML=v==='shed'?viewShed():v==='care'?viewCare():viewCat(cat);
+  $('#main').innerHTML=v==='shed'?viewShed():viewCat(cat);
   document.body.classList.toggle('dark-top',v==='shed');
   tabs(v);
   if(same){ window.scrollTo(0,y); if($('#rail')&&railX!=null) $('#rail').scrollLeft=railX; }
@@ -1093,12 +1092,8 @@ addEventListener('resize',()=>{ if(!data) return; if(view==='shed') sizeLineup()
 /* ---------- Events ---------- */
 document.addEventListener('click',e=>{
   const g=e.target.closest('[data-go]'); if(g){ e.preventDefault(); closeSheet(); go(byId(g.dataset.go)); return; }
+  const sg=e.target.closest('[data-seg]'); if(sg){ const pg=sg.closest('.page'); pg.querySelectorAll('[data-seg]').forEach(b=>b.setAttribute('aria-selected',b===sg)); pg.querySelectorAll('[data-pane]').forEach(x=>{const on=x.dataset.pane===sg.dataset.seg;x.hidden=!on;x.classList.toggle('show',on)}); const rail=$('#rail'); if(rail) railState(Math.round(rail.scrollLeft/rail.clientWidth)); return; }
   const pk=e.target.closest('[data-idx]'); if(pk){ const rail=$('#rail'); rail.scrollTo({left:+pk.dataset.idx*rail.clientWidth,behavior:'smooth'}); return; }
-});
-document.addEventListener('change',e=>{
-  const k=e.target.dataset&&e.target.dataset.care; if(!k) return;
-  if(e.target.checked) careDone[k]=today(); else delete careDone[k];
-  store.set('ts-care',careDone); setTimeout(()=>render(true),650);
 });
 addEventListener('hashchange',()=>render(false));
 

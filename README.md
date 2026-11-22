@@ -5,20 +5,18 @@ A phone-first page for every tool in the shed. Colours follow the 60/30/10 rule:
 ## How it flows
 
 - **Shed (home):** a dark dotted opening screen with a big saw blade that turns as you scroll, then shrinks into mist. After that:
-  - **On the bench:** care jobs that are due.
-  - **Whole shed value:** a steel plate with the total cost to replace every priced tool new, the estimated used value, how many tools are priced, and the most valuable tool.
+  - **Whole shed value:** a steel plate with the total cost to replace everything new, what it's worth second-hand, and how many tools there are.
   - **Tape measure:** counts of power tools, hand tools and brands pull out of a tape-measure case.
   - **The wall:** a pegboard where every tool swings onto its hook.
   - **The whole kit:** every tool on one long shelf that slides sideways as you scroll down.
   - **Barrier tape**, then "Less buying. More fixing." lighting up word by word.
-- **Power · Hand · Yard:** each tab opens with its own artwork (drill, crossed hammer and spanner, spade). Then a picker row and full tool pages you swipe through sideways. Each page opens up as it arrives: the moving drawing in front of its action word, what it's good for, what's in the kit, a blueprint card that redraws the tool as a white outline, care jobs and what it pairs with.
-- **Care:** small maintenance jobs. The tick boxes are hex nuts that turn when you tick them. A job comes back when it's due again.
+- **Power · Hand · Yard:** each tab opens with its own artwork (drill, crossed hammer and spanner, spade). Then a picker row and full tool pages you swipe through sideways. Each page opens up as it arrives, and has two tabs: **Details** and **Care** (how to look after that tool). Details shows the moving drawing in front of its action word, what it's good for, what's in the kit, a blueprint card that redraws the tool as a white outline, care jobs and what it pairs with.
 - **Search** (magnifying glass, top right) looks through names, brands, kit and uses.
 - **Spirit level** (top of every page): the bubble shows how far down the page you are.
 
 Every drawing moves differently: the saw blade spins, the sander buzzes, the vacuum hose sways, the blower blows leaves, the drill throws dust, the tape measure slides and the level bubble drifts. Motion switches off when the phone's Reduce Motion setting is on.
 
-Care ticks and the light/dark choice are saved on each phone (browser storage), not in the repo.
+The light/dark choice is saved on each phone (browser storage), not in the repo.
 
 ## Files
 
@@ -36,7 +34,6 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
 
 - `updated`: date of the last change (`YYYY-MM-DD`).
 - `pricedOn`: the date the new prices were checked.
-- `careStart`: care timers for jobs never ticked count from this date.
 - `shed`: `{ name }`.
 - `categories[]`: `{ id, name, blurb }`. Tab artwork exists for `power`, `hand` and `yard`.
 - `tools[]`:
@@ -58,7 +55,7 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
   - `pairs[]`: ids of tools it works with.
   - `condition` (optional): `good`, `fair` or `worn`.
   - `spot` (optional): where it lives in the shed.
-  - `care[]`: `{ id, text, every }` (`every` = days between jobs). Add `now: true` if the job is needed straight away.
+  - `care[]`: `{ id, text, every }` (`every` = days between jobs). Shown on the tool's Care tab with a plain-English frequency, plus general tips for that kind of tool.
 
 ## Where the list came from
 

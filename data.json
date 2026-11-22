@@ -1,6 +1,5 @@
 {
   "updated": "2026-11-22",
-  "careStart": "2026-11-22",
   "shed": {
     "name": "Keter 1150L shed"
   },
@@ -156,7 +155,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "blades",
+          "text": "Check the blade teeth and that the blade clamps tight",
+          "every": 90
+        }
+      ],
       "uses": [
         "Quick trims where a cord gets in the way",
         "Cutting out small holes for fittings"
@@ -221,7 +226,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "chuck",
+          "text": "Blow the dust out of the chuck; a worn chuck slips",
+          "every": 60
+        }
+      ],
       "uses": [
         "A second drill: one drills, one drives",
         "Messy jobs you don't want the good drill on"
@@ -251,7 +262,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "collet",
+          "text": "Blow out the hex collet so bits click in and out freely",
+          "every": 60
+        }
+      ],
       "uses": [
         "Driving long screws and coach bolts",
         "Decking and framing",
@@ -317,7 +334,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "mag",
+          "text": "Clear the magazine and wipe the nose so brads don't jam",
+          "every": 60
+        }
+      ],
       "uses": [
         "Skirting, architraves and trim",
         "Small furniture and picture frames"
@@ -718,7 +741,18 @@
       ],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "heads",
+          "text": "Check the heads are tight on the handles and file off burrs",
+          "every": 180
+        },
+        {
+          "id": "rust",
+          "text": "Wire-brush the rust off the club hammer head",
+          "every": 365
+        }
+      ],
       "uses": [
         "Knocking things together without marking",
         "Driving nails and pegs",
@@ -746,7 +780,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "jam",
+          "text": "Clear jammed staples and add a drop of oil to the spring",
+          "every": 180
+        }
+      ],
       "uses": [
         "Fabric, mesh and shade cloth",
         "Cable clips and underlay"
@@ -773,7 +813,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "ends",
+          "text": "Check the ball ends aren't rounded off",
+          "every": 365
+        }
+      ],
       "uses": [
         "Flat-pack furniture",
         "Bike and machine bolts"
@@ -803,7 +849,18 @@
       ],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "joint",
+          "text": "A drop of oil in the joint keeps them opening smoothly",
+          "every": 180
+        },
+        {
+          "id": "insul",
+          "text": "Check the insulated grips for cuts; don't use them on live work if damaged",
+          "every": 180
+        }
+      ],
       "uses": [
         "Cutting wire and cable ties",
         "Gripping and bending"
@@ -830,7 +887,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "worm",
+          "text": "Clean and oil the worm gear so the jaw adjusts easily",
+          "every": 180
+        }
+      ],
       "uses": [
         "Taps, pipe fittings and odd-sized nuts"
       ],
@@ -856,7 +919,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "ratchet",
+          "text": "Keep the ratchet clean and dry; a drop of light oil if it sticks",
+          "every": 180
+        }
+      ],
       "uses": [
         "Fast screwing without a battery"
       ],
@@ -885,7 +954,13 @@
       ],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "insul",
+          "text": "Check the red insulation for nicks before electrical work",
+          "every": 90
+        }
+      ],
       "uses": [
         "Electrical fittings (insulated)"
       ],
@@ -918,7 +993,13 @@
         ]
       ],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "ratchet",
+          "text": "Blow the grit out of the ratchet rings and wipe with light oil",
+          "every": 180
+        }
+      ],
       "uses": [
         "Nuts in tight spots without lifting the spanner"
       ],
@@ -948,7 +1029,13 @@
       ],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "tips",
+          "text": "Check the tips aren't rounded or chipped",
+          "every": 180
+        }
+      ],
       "uses": [
         "Every screw in the house"
       ],
@@ -1021,7 +1108,18 @@
       ],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "back",
+          "text": "Put each socket back in its slot so you know what's missing",
+          "every": 30
+        },
+        {
+          "id": "ratchets",
+          "text": "Clean and lightly oil the ratchet heads",
+          "every": 180
+        }
+      ],
       "uses": [
         "Car and mower jobs",
         "Furniture and machine bolts"
@@ -1048,7 +1146,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "wipe",
+          "text": "Wipe the tools down and keep the case dry",
+          "every": 180
+        }
+      ],
       "uses": [
         "Quick household jobs"
       ],
@@ -1072,7 +1176,13 @@
       "includes": [],
       "specs": [],
       "notes": "",
-      "care": [],
+      "care": [
+        {
+          "id": "tips",
+          "text": "Check the tips aren't rounded",
+          "every": 365
+        }
+      ],
       "uses": [
         "Flat and Phillips screws",
         "Opening battery covers and fittings"
@@ -1134,7 +1244,13 @@
       ],
       "specs": [],
       "notes": "Kept from the $1 Black+Decker drill kit before it sold.",
-      "care": [],
+      "care": [
+        {
+          "id": "sharp",
+          "text": "Swap out blunt or bent bits; dull bits burn and wander",
+          "every": 180
+        }
+      ],
       "uses": [
         "Drilling timber, metal and masonry",
         "Driving screws with the drill"
@@ -1282,8 +1398,7 @@
         {
           "id": "rust",
           "text": "Wire-brush the rusty legs and coat them with rust paint",
-          "every": 365,
-          "now": true
+          "every": 365
         },
         {
           "id": "tyre",
