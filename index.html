@@ -252,6 +252,27 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .gauge .gline{margin:8px 0 0;font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.1}
 .gauge .gnote{margin:8px auto 0;font-size:14px;color:rgba(228,231,234,.7);max-width:30ch}
 
+
+/* Shed value: a stamped steel plate with screws */
+.plate-val{position:relative;border-radius:18px;padding:22px 20px 20px;color:var(--cream);background:var(--tread),linear-gradient(160deg,#2B3034,#15181B);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 2px 0 rgba(255,255,255,.08),0 18px 30px -18px rgba(0,0,0,.6);overflow:hidden}
+.plate-val::before,.plate-val::after{content:"";position:absolute;top:12px;width:12px;height:12px;border-radius:50%;background-image:linear-gradient(transparent 42%,#3a3f42 42% 58%,transparent 58%),radial-gradient(circle at 35% 30%,#f2f2f2,#9aa0a4 60%,#5a6064);box-shadow:0 1px 1px rgba(0,0,0,.5)}
+.plate-val::before{left:12px}.plate-val::after{right:12px;transform:rotate(60deg)}
+.plate-val .kicker{color:rgba(228,231,234,.7);display:block;text-align:center}
+.plate-val .vbig{margin:6px 0 0;text-align:center;font-family:var(--display);font-weight:900;font-size:clamp(64px,21vw,104px);line-height:.85;color:var(--hv);text-shadow:0 0 30px rgba(var(--hv-rgb),.35);font-variant-numeric:tabular-nums}
+.plate-val .vsub{margin:6px 0 0;text-align:center;font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.1}
+.plate-val .vrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.plate-val .vrow div{background:rgba(0,0,0,.35);border-radius:12px;padding:10px 6px;text-align:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);min-width:0}
+.plate-val .vrow b{display:block;font-family:var(--display);font-weight:900;font-size:24px;line-height:1}
+.plate-val .vrow span{display:block;font-family:var(--mono);font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:rgba(228,231,234,.7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plate-val .vnote{margin:12px 0 0;text-align:center;font-size:13px;color:rgba(228,231,234,.6)}
+.valfact{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border-radius:18px;overflow:hidden}
+.valfact>div{padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.valfact>div+div{border-left:1px dashed var(--line)}
+.valfact .k{font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.valfact .v{font-family:var(--display);font-weight:900;font-size:36px;line-height:1}
+.valfact .v.acc{color:var(--hv)}
+.valfact .s{font-size:12px;color:var(--muted)}
+.valfact .s a{color:inherit}
 /* Tab heroes with artwork */
 .chero{position:relative;margin:0 0 4px;border-radius:30px;overflow:hidden;background:var(--night);color:var(--cream);padding:150px 20px 22px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:inset 0 0 0 1px rgba(228,231,234,.08)}
 .chero .stipple{opacity:.7}
@@ -864,6 +885,7 @@ function careList(){
   return out.sort((a,b)=>a.left-b.left);
 }
 const go=t=>{ location.hash=t.category+'/'+t.id; };
+const usedOf=t=>t.usedValue!=null?t.usedValue:(t.newPrice?Math.round(t.newPrice*(t.condition==='worn'?.4:.55)):null); // rule of thumb: good used tools sell for about 55% of new
 
 /* ---------- Shed (home) ---------- */
 function viewShed(){
@@ -871,6 +893,7 @@ function viewShed(){
   const due=careList().filter(x=>x.due), out=ts.filter(loanOf), feat=featured();
   const priced=ts.filter(t=>t.newPrice&&t.paid!=null&&!t.demo), newSum=priced.reduce((s,t)=>s+t.newPrice,0), paidP=priced.reduce((s,t)=>s+t.paid,0);
   const save=newSum?1-paidP/newSum:0;
+  const valued=ts.filter(t=>t.newPrice), newAll=valued.reduce((a,t)=>a+t.newPrice,0), usedAll=valued.reduce((a,t)=>a+usedOf(t),0), topT=valued.slice().sort((a,b)=>b.newPrice-a.newPrice)[0];
   const platforms={}; ts.forEach(t=>{if(t.power&&!/corded/i.test(t.power))(platforms[t.power]=platforms[t.power]||[]).push(t)});
   const demoN=ts.filter(t=>t.demo).length;
   const needs=[
@@ -899,6 +922,9 @@ function viewShed(){
     <div class="sechead"><h2>On the <span class="serif">bench</span></h2><span class="kicker">${needs.length>1?needs.length+' things':''}</span></div>
     <div class="needs">${needs.join('')}</div>
     <div class="tapewrap rv" role="group" aria-label="Shed totals"><div class="tcase"><i></i></div><div class="tape"><div><b>${ts.filter(t=>t.category==='power').length}</b><span>Power</span></div><div><b>${ts.filter(t=>t.category==='hand').length}</b><span>Hand</span></div><div><b>${new Set(ts.map(t=>t.brand).filter(Boolean)).size}</b><span>Brands</span></div></div></div>
+    ${valued.length?`<section class="plate-val rv" aria-label="Shed value"><span class="kicker">Whole shed value</span><p class="vbig" data-money="${newAll}">$0</p><p class="vsub">to replace it all new</p>
+      <div class="vrow"><div><b>${money(usedAll)}</b><span>Worth used</span></div><div><b>${valued.length}/${ts.length}</b><span>Tools priced</span></div><div><b>${money(topT.newPrice)}</b><span>${esc(topT.tag||topT.name)}</span></div></div>
+      <p class="vnote">New prices from NZ shops${data.pricedOn?', checked '+niceDate(data.pricedOn):''}. Used value is about 55% of new (40% for worn tools).</p></section>`:''}
     <div class="sechead"><h2>The <span class="serif">wall</span></h2><span class="kicker">Tap a tool</span></div>
     <section class="board" id="board" aria-label="Pegboard"><div class="grid">${slots}</div></section>
   </div>
@@ -931,6 +957,7 @@ function toolPage(t,i,n){
       <span class="who">${esc([t.brand,t.model].filter(Boolean).join(' · '))}</span>
     </div>
     <div class="facts">
+      ${t.newPrice?`<div class="valfact fact" style="--n:${k++};padding:0"><div><span class="k">New price</span><span class="v">${money(t.newPrice)}</span><span class="s">${t.newUrl?`<a href="${esc(t.newUrl)}" target="_blank" rel="noopener">${esc(t.newFrom||'Source')}</a>`:esc(t.newFrom||'')}</span></div><div><span class="k">Worth used</span><span class="v acc">≈ ${money(usedOf(t))}</span><span class="s">${t.usedValue!=null?'Estimate':t.condition==='worn'?'About 40% of new (worn)':'About 55% of new'}</span></div></div>`:''}
       <div class="fact" style="--n:${k++}"><span class="k">Power</span><span class="v">${esc(t.power||'Hand tool')}</span></div>
       <div class="fact" style="--n:${k++}"><span class="k">Condition</span><span class="v">${esc({good:'Good',fair:'Fair',worn:'Worn'}[t.condition]||'Working')}</span></div>
       ${t.spot?`<div class="fact wide" style="--n:${k++}"><span class="k">Lives</span><span class="v">${esc(t.spot)}</span></div>`:''}
@@ -1017,6 +1044,10 @@ function wire(cat,id,same){
   onScroll();
 }
 function countUp(){
+  $$('[data-money]').forEach(el=>{const to=+el.dataset.money;let done=false;const run=()=>{if(done)return;done=true;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=money(to);return}
+    const t0=performance.now(),dur=1600,step=now=>{const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,4);el.textContent=money(Math.round(to*e));if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)};
+    if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){run();io.disconnect()}},{threshold:.4});io.observe(el)}else run();});
   $$('[data-count]').forEach(el=>{const to=+el.dataset.count,t0=performance.now(),dur=1100;
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=to;return}
     const step=now=>{const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,4);el.textContent=Math.round(to*e);if(p<1)requestAnimationFrame(step)};
