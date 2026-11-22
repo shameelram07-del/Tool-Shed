@@ -1,0 +1,483 @@
+{
+  "updated": "2026-11-22",
+  "careStart": "2026-11-22",
+  "shed": {
+    "name": "Keter 1150L shed",
+    "place": "Papatoetoe, Auckland"
+  },
+  "categories": [
+    {
+      "id": "power",
+      "name": "Power tools"
+    },
+    {
+      "id": "cordless",
+      "name": "Cordless & batteries"
+    },
+    {
+      "id": "hand",
+      "name": "Hand tools"
+    },
+    {
+      "id": "measure",
+      "name": "Measuring"
+    },
+    {
+      "id": "garden",
+      "name": "Garden"
+    },
+    {
+      "id": "storage",
+      "name": "Storage"
+    }
+  ],
+  "tools": [
+    {
+      "id": "bosch-mitre-saw",
+      "name": "sliding mitre saw + stand",
+      "tag": "Mitre saw",
+      "brand": "Bosch",
+      "model": null,
+      "category": "power",
+      "art": "mitresaw",
+      "colour": "#0E7A4B",
+      "size": "big",
+      "paid": 61,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Corded 240V",
+      "includes": [
+        "Sliding mitre saw",
+        "Saw stand"
+      ],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "blade",
+          "text": "Check the blade for chipped or missing teeth",
+          "every": 90
+        },
+        {
+          "id": "dust",
+          "text": "Blow the sawdust out of the slide rails and guard",
+          "every": 30
+        }
+      ]
+    },
+    {
+      "id": "makita-bo5030",
+      "name": "random orbital sander",
+      "tag": "Sander",
+      "brand": "Makita",
+      "model": "BO5030",
+      "category": "power",
+      "art": "sander",
+      "colour": "#00898F",
+      "size": "small",
+      "paid": null,
+      "newPrice": 319,
+      "newFrom": "Bunnings Warehouse",
+      "power": "Corded 240V",
+      "includes": [
+        "Sander",
+        "Dust bag"
+      ],
+      "specs": [
+        [
+          "Pad",
+          "125mm hook-and-loop"
+        ],
+        [
+          "Motor",
+          "300W"
+        ],
+        [
+          "Dust",
+          "Bag, or plugs into a vacuum"
+        ]
+      ],
+      "notes": "Plug it into the Makita vac's tool socket and run the hose to the dust port for dust-free sanding.",
+      "care": [
+        {
+          "id": "pad",
+          "text": "Check the hook-and-loop pad still grips the discs",
+          "every": 60
+        },
+        {
+          "id": "bag",
+          "text": "Empty and tap out the dust bag",
+          "every": 14
+        }
+      ]
+    },
+    {
+      "id": "makita-vc2000l",
+      "name": "20L wet & dry vacuum",
+      "tag": "Wet & dry vac",
+      "brand": "Makita",
+      "model": "VC2000L",
+      "category": "power",
+      "art": "vac",
+      "colour": "#00898F",
+      "size": "big",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Corded 240V",
+      "includes": [
+        "Vacuum",
+        "Hose",
+        "Tool power socket"
+      ],
+      "specs": [
+        [
+          "Tank",
+          "20L, wet or dry"
+        ],
+        [
+          "Tool socket",
+          "Switches on with the tool you plug in"
+        ]
+      ],
+      "notes": "Pairs with the Makita sander.",
+      "care": [
+        {
+          "id": "filter",
+          "text": "Tap out and clean the filter",
+          "every": 30
+        },
+        {
+          "id": "empty",
+          "text": "Empty the tank and leave it open to dry after wet jobs",
+          "every": 14
+        }
+      ]
+    },
+    {
+      "id": "ryobi-blower-vac",
+      "name": "18V brushless blower vac",
+      "tag": "Blower vac",
+      "brand": "Ryobi",
+      "model": "One+",
+      "category": "garden",
+      "art": "blower",
+      "colour": "#B5C400",
+      "size": "wide",
+      "paid": 55,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Ryobi One+ 18V",
+      "includes": [
+        "Blower vac (skin only)"
+      ],
+      "specs": [],
+      "notes": "Skin only. Runs off the Ryobi One+ batteries.",
+      "care": [
+        {
+          "id": "bag",
+          "text": "Empty the collection bag and clear the impeller",
+          "every": 30
+        }
+      ]
+    },
+    {
+      "id": "ryobi-batteries",
+      "name": "One+ batteries, charger & bag",
+      "tag": "Batteries",
+      "brand": "Ryobi",
+      "model": "One+ 18V",
+      "category": "cordless",
+      "art": "battery",
+      "colour": "#B5C400",
+      "size": "small",
+      "paid": 45.99,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Ryobi One+ 18V",
+      "includes": [
+        "5.0Ah battery",
+        "1.4Ah battery ×2",
+        "Charger",
+        "Tool bag"
+      ],
+      "specs": [
+        [
+          "Batteries",
+          "3"
+        ],
+        [
+          "Platform",
+          "Ryobi One+ 18V"
+        ]
+      ],
+      "notes": "Might sell later.",
+      "care": [
+        {
+          "id": "charge",
+          "text": "Top the batteries up to about half if they've sat unused",
+          "every": 90
+        }
+      ]
+    },
+    {
+      "id": "fatmax-hand-lot",
+      "name": "hand tool lot + tool bag",
+      "tag": "Hand tools",
+      "brand": "Stanley",
+      "model": "FatMax bag",
+      "category": "hand",
+      "art": "toolbag",
+      "colour": "#E8B400",
+      "size": "big",
+      "paid": 15,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [
+        "20oz hammer",
+        "Spanners",
+        "About 25 screwdrivers",
+        "Pliers",
+        "Hex keys",
+        "Stanley FatMax tool bag"
+      ],
+      "specs": [],
+      "notes": "From the $15 Stanley FatMax bag lot. Not decided yet whether to sell any of it.",
+      "care": [
+        {
+          "id": "wipe",
+          "text": "Wipe the tools down and oil anything starting to rust",
+          "every": 180
+        }
+      ]
+    },
+    {
+      "id": "toolpro-sockets",
+      "name": "socket set",
+      "tag": "Sockets",
+      "brand": "ToolPro",
+      "model": null,
+      "category": "hand",
+      "art": "sockets",
+      "colour": "#2B5FA8",
+      "size": "small",
+      "paid": 30.99,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": []
+    },
+    {
+      "id": "bosch-hand-set",
+      "name": "hand tool set",
+      "tag": "Bosch set",
+      "brand": "Bosch",
+      "model": null,
+      "category": "hand",
+      "art": "handset",
+      "colour": "#0E7A4B",
+      "size": "small",
+      "paid": 20,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": []
+    },
+    {
+      "id": "screwdriver-set",
+      "name": "Screwdriver set",
+      "tag": "Drivers",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "screwdrivers",
+      "colour": "#C2413A",
+      "size": "small",
+      "paid": 5,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": []
+    },
+    {
+      "id": "kincrome-knife",
+      "name": "utility knife",
+      "tag": "Knife",
+      "brand": "Kincrome",
+      "model": null,
+      "category": "hand",
+      "art": "knife",
+      "colour": "#1F4E9C",
+      "size": "small",
+      "paid": 8.5,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "blade",
+          "text": "Snap or swap the blade if it's dragging",
+          "every": 60
+        }
+      ]
+    },
+    {
+      "id": "drill-bits",
+      "name": "drill bits + hammer",
+      "tag": "Drill bits",
+      "brand": "DeWalt & Bosch",
+      "model": null,
+      "category": "hand",
+      "art": "bits",
+      "colour": "#E8B400",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [
+        "DeWalt bits",
+        "Bosch drill bits",
+        "Hammer"
+      ],
+      "specs": [],
+      "notes": "Kept from the $1 Black+Decker drill kit before it sold.",
+      "care": []
+    },
+    {
+      "id": "ox-level-600",
+      "name": "600mm level",
+      "tag": "600mm level",
+      "brand": "OX",
+      "model": null,
+      "category": "measure",
+      "art": "level",
+      "colour": "#E35A1B",
+      "size": "wide",
+      "paid": 5,
+      "newPrice": 111,
+      "newFrom": "Mitre 10",
+      "power": null,
+      "includes": [],
+      "specs": [
+        [
+          "Length",
+          "600mm"
+        ]
+      ],
+      "notes": "Trade Me KP-2628925.",
+      "care": [
+        {
+          "id": "check",
+          "text": "Flip test: read it, turn it end for end, and the bubble should sit the same",
+          "every": 180
+        }
+      ]
+    },
+    {
+      "id": "ox-level-1200",
+      "name": "1.2m level",
+      "tag": "1.2m level",
+      "brand": "OX",
+      "model": null,
+      "category": "measure",
+      "art": "level",
+      "colour": "#E35A1B",
+      "size": "wide",
+      "paid": 5,
+      "newPrice": 135,
+      "newFrom": "Mitre 10 (about)",
+      "power": null,
+      "includes": [],
+      "specs": [
+        [
+          "Length",
+          "1.2m"
+        ]
+      ],
+      "notes": "Trade Me KP-2628911.",
+      "care": [
+        {
+          "id": "check",
+          "text": "Flip test: read it, turn it end for end, and the bubble should sit the same",
+          "every": 180
+        }
+      ]
+    },
+    {
+      "id": "wheelbarrow",
+      "name": "Wheelbarrow",
+      "tag": "Wheelbarrow",
+      "brand": null,
+      "model": "Red tray",
+      "category": "garden",
+      "art": "wheelbarrow",
+      "colour": "#C2413A",
+      "size": "big",
+      "paid": 5,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "condition": "worn",
+      "includes": [],
+      "specs": [],
+      "notes": "Legs are very rusty.",
+      "care": [
+        {
+          "id": "rust",
+          "text": "Wire-brush the rusty legs and coat them with rust paint",
+          "every": 365,
+          "now": true
+        },
+        {
+          "id": "tyre",
+          "text": "Check the tyre pressure",
+          "every": 60
+        }
+      ]
+    },
+    {
+      "id": "keter-shed",
+      "name": "1150L storage shed",
+      "tag": "Keter shed",
+      "brand": "Keter",
+      "model": "1150L",
+      "category": "storage",
+      "art": "shed",
+      "colour": "#7B7F78",
+      "size": "big",
+      "paid": 100.99,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [],
+      "specs": [
+        [
+          "Volume",
+          "1150 litres"
+        ]
+      ],
+      "notes": "The shed itself.",
+      "care": [
+        {
+          "id": "roof",
+          "text": "Clear leaves off the roof and check for leaks after rain",
+          "every": 90
+        }
+      ]
+    }
+  ]
+}
