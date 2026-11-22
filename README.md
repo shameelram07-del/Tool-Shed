@@ -54,7 +54,8 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
   - `uses[]`: what it's good for.
   - `pairs[]`: ids of tools it works with.
   - `condition` (optional): `good`, `fair` or `worn`.
-  - `spot` (optional): where it lives in the shed.
+  - `spot` (optional): where it lives (e.g. Pegboard).
+  - `storedIn` (optional): the `id` of the tool it's kept in, e.g. `keter-shed` for garden tools. The tool page links to it, and the Keter shed's page lists everything stored inside.
   - `care[]`: `{ id, text, every }` (`every` = days between jobs). Shown on the tool's Care tab with a plain-English frequency, plus general tips for that kind of tool.
 
 ## Where the list came from

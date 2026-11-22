@@ -274,6 +274,10 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .facts .valfact .s{font-size:12px;color:var(--muted)}
 .facts .valfact .s a{color:inherit}
 
+.fact.lives{border:0;text-align:left;cursor:pointer;color:inherit;font:inherit;box-shadow:inset 0 0 0 1.5px var(--hv)}
+.fact.lives .v{color:var(--hv);font-weight:700}
+.pairs{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.pair{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:8px 14px 8px 8px;background:var(--sunk);cursor:pointer;font-weight:700;font-size:15px;text-align:left;color:inherit}
 /* Tool page tabs: Details | Care */
 .seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line)}
 .seg button{min-height:44px;border:0;border-radius:10px;background:transparent;font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .25s,color .25s}
@@ -946,7 +950,7 @@ function viewShed(){
 
 /* ---------- Category: artwork hero, then swipe through tool pages ---------- */
 function toolPage(t,i,n){
-  const l=loanOf(t), care=(t.care||[]), gen=generalCare(t);
+  const l=loanOf(t), care=(t.care||[]), gen=generalCare(t), home=t.storedIn?byId(t.storedIn):null, inside=tools().filter(x=>x.storedIn===t.id);
   const save=t.paid!=null&&t.newPrice?Math.round(100-t.paid/t.newPrice*100):null;
   const pairs=(t.pairs||[]).map(byId).filter(Boolean), w=t.verb||'';
   const bp=[...(t.model?[['Model',t.model]]:[]),['Power',t.power||'Hand tool'],...(t.specs||[])];
@@ -963,11 +967,12 @@ function toolPage(t,i,n){
       ${t.newPrice?`<div class="valfact fact" style="--n:${k++};padding:0"><div><span class="k">New price</span><span class="v">${money(t.newPrice)}</span><span class="s">${t.newUrl?`<a href="${esc(t.newUrl)}" target="_blank" rel="noopener">${esc(t.newFrom||'Source')}</a>`:esc(t.newFrom||'')}</span></div><div><span class="k">Worth used</span><span class="v acc">≈ ${money(usedOf(t))}</span><span class="s">${t.usedValue!=null?'Estimate':t.condition==='worn'?'About 40% of new (worn)':'About 55% of new'}</span></div></div>`:''}
       <div class="fact" style="--n:${k++}"><span class="k">Power</span><span class="v">${esc(t.power||'Hand tool')}</span></div>
       <div class="fact" style="--n:${k++}"><span class="k">Condition</span><span class="v">${esc({good:'Good',fair:'Fair',worn:'Worn'}[t.condition]||'Working')}</span></div>
-      ${t.spot?`<div class="fact wide" style="--n:${k++}"><span class="k">Lives</span><span class="v">${esc(t.spot)}</span></div>`:''}
+      ${home?`<button class="fact wide lives" data-go="${home.id}" style="--n:${k++}"><span class="k">Lives</span><span class="v">Stored in the ${esc(home.brand?home.brand+' shed':home.name)} →</span></button>`:t.spot?`<div class="fact wide" style="--n:${k++}"><span class="k">Lives</span><span class="v">${esc(t.spot)}</span></div>`:''}
     </div>
     <div class="seg" role="tablist" aria-label="${esc(t.tag||t.name)}"><button role="tab" data-seg="info" aria-selected="true">${SEG.info}Details</button><button role="tab" data-seg="care" aria-selected="false">${SEG.care}Care</button></div>
     <div class="pane show" data-pane="info">
     ${t.notes?`<div class="note">${esc(t.notes)}</div>`:''}
+    ${inside.length?`<div class="card cardpad"><h2>Stored inside · ${inside.length}</h2><div class="pairs">${inside.map(x=>`<button class="pair" data-go="${x.id}"><span class="mini">${svg(x)}</span>${esc(label(x))}</button>`).join('')}</div></div>`:''}
     ${(t.uses||[]).length?`<div class="card cardpad"><h2>Good for</h2><ul class="uses">${t.uses.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
     ${(t.includes||[]).length?`<div class="card cardpad"><h2>In the kit</h2><ul class="kit">${t.includes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
     <div class="bp"><h2>Blueprint</h2><div class="bpart">${svg(t)}</div><div class="dim">${esc(t.tag||t.name)}</div><dl>${bp.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl></div>

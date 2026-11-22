@@ -17,7 +17,7 @@
     {
       "id": "yard",
       "name": "Yard",
-      "blurb": "Garden gear and the shed itself."
+      "blurb": "Garden gear, kept in the Keter shed."
     }
   ],
   "tools": [
@@ -1373,7 +1373,8 @@
       "pairs": [
         "ryobi-batteries"
       ],
-      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-hp-brushless-garden-vacuum-and-sweeper-tool-only_p0360060"
+      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-hp-brushless-garden-vacuum-and-sweeper-tool-only_p0360060",
+      "storedIn": "keter-shed"
     },
     {
       "id": "wheelbarrow",
@@ -1437,7 +1438,7 @@
           "1150 litres"
         ]
       ],
-      "notes": "The shed itself.",
+      "notes": "The garden tools are kept in here.",
       "care": [
         {
           "id": "roof",
@@ -1446,7 +1447,7 @@
         }
       ],
       "uses": [
-        "Keeping the tools dry and locked away"
+        "Keeping the garden tools dry and locked away"
       ],
       "pairs": [],
       "newUrl": "https://www.tradetested.co.nz/p/home-outdoor-living/outdoor-furniture/outdoor-storage-boxes/garden-tool-storage-boxes/keter-darwin-store-it-out-1150l-grey"
