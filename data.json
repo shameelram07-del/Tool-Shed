@@ -33,8 +33,8 @@
       "colour": "#1F5E8A",
       "size": "big",
       "paid": null,
-      "newPrice": 401,
-      "newFrom": "Mitre 10 · GKS 18V-57 skin",
+      "newPrice": 379,
+      "newFrom": "Bunnings · GKS 18V-57-2 skin",
       "power": "Bosch 18V Professional",
       "includes": [],
       "specs": [],
@@ -61,7 +61,7 @@
       ],
       "spot": "Pegboard",
       "featured": 1,
-      "newUrl": "https://www.mitre10.co.nz/shop/bosch-professional-blue-professional-cordless-circular-saw-skin-only-18-volt-165mm/p/247693"
+      "newUrl": "https://www.bunnings.co.nz/bosch-18v-circular-saw-skin-only_p0440398"
     },
     {
       "id": "bosch-grinder",
@@ -75,8 +75,8 @@
       "colour": "#1F5E8A",
       "size": "wide",
       "paid": null,
-      "newPrice": 499,
-      "newFrom": "Beyond Tools · GWS 18V-10 skin",
+      "newPrice": 386,
+      "newFrom": "Mitre 10 · GWS 18V-10 PC skin",
       "power": "Bosch 18V Professional",
       "includes": [],
       "specs": [],
@@ -98,7 +98,8 @@
       ],
       "spot": "Pegboard",
       "featured": 6,
-      "newUrl": "https://beyondtools.com/en-nz/products/18v-125mm-angle-grinder-bare-tool-only-gws18v-10sc-06019g340b-by-bosch"
+      "newUrl": "https://www.mitre10.co.nz/shop/bosch-blue-cordless-angle-grinder-skin-only-18-volt-125mm/p/352934",
+      "priceCheck": true
     },
     {
       "id": "bosch-gop250",
@@ -113,7 +114,7 @@
       "size": "wide",
       "paid": null,
       "newPrice": 425,
-      "newFrom": "Mitre 10 · GOP 30-28 (current model; GOP 250 CE discontinued)",
+      "newFrom": "Mitre 10 · GOP 30-28, today's replacement (yours is discontinued)",
       "power": "Corded 240V",
       "includes": [],
       "specs": [],
@@ -135,7 +136,9 @@
       ],
       "spot": "Pegboard",
       "featured": 7,
-      "newUrl": "https://www.mitre10.co.nz/shop/bosch-professional-multi-tool-gop-30-28/p/300843"
+      "newUrl": "https://www.mitre10.co.nz/shop/bosch-professional-multi-tool-gop-30-28-300-watt/p/300843",
+      "priceCheck": true,
+      "usedValue": 100
     },
     {
       "id": "bosch-gop12",
@@ -149,8 +152,8 @@
       "colour": "#1F5E8A",
       "size": "wide",
       "paid": null,
-      "newPrice": 518,
-      "newFrom": "Smartfox · GOP 12V-28 skin (replaces GOP 10.8V-Li)",
+      "newPrice": 299,
+      "newFrom": "Bunnings · GOP 12V-28 skin, today's replacement",
       "power": "Bosch 10.8V / 12V",
       "includes": [],
       "specs": [],
@@ -168,7 +171,9 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://smartfox.co.nz/products/bosch-gop-12v-28-compact-cordless-multi-cutter-skin-only"
+      "newUrl": "https://www.bunnings.co.nz/bosch-professional-12v-brushless-oscillating-starlock-multitool-skin-only_p0236788",
+      "priceCheck": true,
+      "usedValue": 80
     },
     {
       "id": "bosch-hammer-drill",
@@ -182,7 +187,7 @@
       "colour": "#1F5E8A",
       "size": "small",
       "paid": null,
-      "newPrice": 319,
+      "newPrice": 255,
       "newFrom": "Bunnings · GSB 18V-55",
       "power": "Bosch 18V Professional",
       "includes": [],
@@ -206,7 +211,8 @@
       ],
       "spot": "Pegboard",
       "featured": 3,
-      "newUrl": "https://www.bunnings.co.nz/bosch-professional-18v-drill-driver-gsb-18v-55_p0260174"
+      "newUrl": "https://www.bunnings.co.nz/products/tools/power-tools/drills/drill-driver",
+      "priceCheck": true
     },
     {
       "id": "bosch-drill-old",
@@ -220,7 +226,7 @@
       "colour": "#1F5E8A",
       "size": "small",
       "paid": null,
-      "newPrice": 319,
+      "newPrice": 255,
       "newFrom": "Bunnings · GSB 18V-55 as the replacement",
       "power": "Bosch 18V Professional",
       "includes": [],
@@ -242,7 +248,9 @@
       ],
       "spot": "Pegboard",
       "condition": "worn",
-      "newUrl": "https://www.bunnings.co.nz/bosch-professional-18v-drill-driver-gsb-18v-55_p0260174"
+      "newUrl": "https://www.bunnings.co.nz/products/tools/power-tools/drills/drill-driver",
+      "priceCheck": true,
+      "usedValue": 70
     },
     {
       "id": "bosch-impact",
@@ -278,7 +286,8 @@
         "bosch-hammer-drill"
       ],
       "spot": "Pegboard",
-      "newUrl": "https://www.bunnings.co.nz/bosch-blue-18v-brushless-impact-driver-skin-only_p0228271"
+      "newUrl": "https://www.bunnings.co.nz/bosch-blue-18v-brushless-impact-driver-skin-only_p0228271",
+      "priceCheck": true
     },
     {
       "id": "ryobi-framer",
@@ -293,7 +302,7 @@
       "size": "big",
       "paid": null,
       "newPrice": 699,
-      "newFrom": "Bunnings · AirStrike framing nailer RFN1830X skin",
+      "newFrom": "Bunnings · AirStrike framing nailer, tool only",
       "power": "Ryobi One+ 18V",
       "includes": [],
       "specs": [],
@@ -314,7 +323,7 @@
       ],
       "spot": "Pegboard",
       "featured": 2,
-      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-hp-brushless-30-34-framing-nailer-tool-only_p0437501"
+      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-hp-brushless-airstrike-30-34-framing-nailer-tool-only_p0437501"
     },
     {
       "id": "ryobi-brad",
@@ -329,7 +338,7 @@
       "size": "big",
       "paid": null,
       "newPrice": 329,
-      "newFrom": "Bunnings · AirStrike 18GA brad nailer skin",
+      "newFrom": "Bunnings · AirStrike 18GA brad nailer, tool only",
       "power": "Ryobi One+ 18V",
       "includes": [],
       "specs": [],
@@ -349,7 +358,8 @@
         "ryobi-framer"
       ],
       "spot": "Pegboard",
-      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-18ga-c1-brad-nailer-tool-only_p0385367"
+      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-18ga-c1-brad-nailer-tool-only_p0385367",
+      "priceCheck": true
     },
     {
       "id": "ryobi-palm-sander",
@@ -364,7 +374,7 @@
       "size": "small",
       "paid": null,
       "newPrice": 89,
-      "newFrom": "Bunnings · One+ palm sander RPS18 skin",
+      "newFrom": "Bunnings · RPS18 palm sander, tool only",
       "power": "Ryobi One+ 18V",
       "includes": [],
       "specs": [],
@@ -382,7 +392,8 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-palm-sander-rps18-tool-only_p0371771"
+      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-palm-sander-rps18-tool-only_p0371771",
+      "priceCheck": true
     },
     {
       "id": "ryobi-router",
@@ -397,7 +408,7 @@
       "size": "small",
       "paid": null,
       "newPrice": 149,
-      "newFrom": "Ryobi NZ · R18TR2-0 trim router skin (23 Nov 2026)",
+      "newFrom": "Ryobi NZ (Bunnings pricing) · R18TR2-0, 23 Nov 2026",
       "power": "Ryobi One+ 18V",
       "includes": [],
       "specs": [],
@@ -431,7 +442,7 @@
       "size": "big",
       "paid": null,
       "newPrice": 89,
-      "newFrom": "Bunnings · 280W 1/3 sheet sander (closest match)",
+      "newFrom": "Bunnings · 280W 1/3 sheet sander",
       "power": "Corded 240V",
       "includes": [],
       "specs": [],
@@ -449,7 +460,8 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.bunnings.co.nz/ryobi-280w-1-3-sheet-sander_p0282349"
+      "newUrl": "https://www.bunnings.co.nz/ryobi-1-3-sheet-sander-280w_p0282349",
+      "priceCheck": true
     },
     {
       "id": "ryobi-quickturn",
@@ -463,8 +475,8 @@
       "colour": "#C9D21F",
       "size": "small",
       "paid": null,
-      "newPrice": 63,
-      "newFrom": "Ryobi NZ · 4V screwdriver kit",
+      "newPrice": 99,
+      "newFrom": "Bunnings · nearest current 4V-class screwdriver kit (yours is no longer sold)",
       "power": "Ryobi 4V built-in",
       "includes": [],
       "specs": [],
@@ -482,7 +494,9 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://ryobi.co.nz/products/screwdrivers/4v-screwdriver-kit"
+      "newUrl": "https://www.bunnings.co.nz/products/tools/power-tools",
+      "priceCheck": true,
+      "usedValue": 35
     },
     {
       "id": "makita-planer",
@@ -496,8 +510,8 @@
       "colour": "#0F8C99",
       "size": "big",
       "paid": null,
-      "newPrice": 305,
-      "newFrom": "Beyond Tools · KP0800 82mm planer",
+      "newPrice": 498,
+      "newFrom": "Bunnings · Makita 82mm 620W planer",
       "power": "Corded 240V",
       "includes": [],
       "specs": [],
@@ -516,7 +530,8 @@
       "pairs": [],
       "spot": "Pegboard",
       "featured": 4,
-      "newUrl": "https://beyondtools.com/en-nz/products/620w-82mm-planer-kp0800-by-makita"
+      "newUrl": "https://www.bunnings.co.nz/makita-planer-82mm-620w_p0270290",
+      "priceCheck": true
     },
     {
       "id": "bosch-mitre-saw",
@@ -530,8 +545,8 @@
       "colour": "#0E7A4B",
       "size": "big",
       "paid": 61,
-      "newPrice": 676,
-      "newFrom": "Bunnings · Bosch 216mm sliding mitre saw $517 + stand $159",
+      "newPrice": 716,
+      "newFrom": "Bunnings · Bosch 216mm sliding mitre saw $517 + stand $199",
       "power": "Corded 240V",
       "includes": [
         "Sliding mitre saw",
@@ -557,7 +572,8 @@
         "Picture frames and trim"
       ],
       "pairs": [],
-      "newUrl": "https://www.bunnings.co.nz/bosch-professional-1400w-216mm-sliding-mitre-saw-gcm-800-sj-skin-only_p0356492"
+      "newUrl": "https://www.bunnings.co.nz/bosch-professional-1400w-216mm-sliding-mitre-saw-gcm-800-sj-skin-only_p0356492",
+      "priceCheck": true
     },
     {
       "id": "makita-bo5030",
@@ -572,7 +588,7 @@
       "size": "small",
       "paid": null,
       "newPrice": 319,
-      "newFrom": "Trade Tested · BO5030",
+      "newFrom": "Bunnings · BO5030",
       "power": "Corded 240V",
       "includes": [
         "Sander",
@@ -614,7 +630,7 @@
         "makita-vc2000l"
       ],
       "featured": 5,
-      "newUrl": "https://www.tradetested.co.nz/q/tools-hardware/power-tools/sanders/makita-random-orbital-sander-125mm-300w"
+      "newUrl": "https://www.bunnings.co.nz/makita-random-orbital-sander-125mm_p0301665"
     },
     {
       "id": "makita-vc2000l",
@@ -628,8 +644,8 @@
       "colour": "#00898F",
       "size": "big",
       "paid": null,
-      "newPrice": 579,
-      "newFrom": "Mitre 10 · VC2012LX1 20L L-class (VC2000L not sold in NZ)",
+      "newPrice": 494,
+      "newFrom": "Bunnings · VC2012L 20L, nearest current model (VC2000L not sold in NZ)",
       "power": "Corded 240V",
       "includes": [
         "Vacuum",
@@ -668,7 +684,9 @@
         "makita-bo5030",
         "bosch-gop250"
       ],
-      "newUrl": "https://www.mitre10.co.nz/shop/makita-wet-dry-vacuum-cleaner-l-class-1000-watt-20l/p/388853"
+      "newUrl": "https://www.bunnings.co.nz/makita-20l-wet-and-dry-vac_p0331959",
+      "priceCheck": true,
+      "usedValue": 200
     },
     {
       "id": "ryobi-batteries",
@@ -682,8 +700,8 @@
       "colour": "#B5C400",
       "size": "small",
       "paid": 45.99,
-      "newPrice": 371.49,
-      "newFrom": "Bunnings / Ryobi NZ · 5Ah $169 + 2× 2Ah $75 + charger $52.49 (bag not counted)",
+      "newPrice": 333,
+      "newFrom": "Bunnings · 5Ah $169 + 2Ah $75 + 2Ah & charger kit $89",
       "power": "Ryobi One+ 18V",
       "includes": [
         "5.0Ah battery",
@@ -716,7 +734,8 @@
       "pairs": [
         "ryobi-blower-vac"
       ],
-      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-lithium-high-performance-5-0ah-battery_p0518481"
+      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-lithium-high-performance-5-0ah-battery_p0518481",
+      "priceCheck": true
     },
     {
       "id": "hammers",
@@ -730,8 +749,8 @@
       "colour": "#8A5634",
       "size": "wide",
       "paid": null,
-      "newPrice": 111.44,
-      "newFrom": "Bunnings / Mitre 10 · mallet $7.98, wood mallet $23.98, club $54.50, claw $24.98",
+      "newPrice": 60.92,
+      "newFrom": "Bunnings · mallet $7.98, wood mallet $12.98, club $14.98, claw $24.98",
       "power": null,
       "includes": [
         "Rubber mallet (Craftright)",
@@ -760,7 +779,7 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.bunnings.co.nz/craftright-rubber-mallet-450g-16oz_p5760010"
+      "newUrl": "https://www.bunnings.co.nz/craftright-450g-16oz-rubber-mallet_p0489971"
     },
     {
       "id": "staple-gun",
@@ -774,8 +793,8 @@
       "colour": "#9BA2A7",
       "size": "wide",
       "paid": null,
-      "newPrice": 66.99,
-      "newFrom": "Harvey Norman · Stanley TR150",
+      "newPrice": 62,
+      "newFrom": "Bunnings · Stanley heavy-duty staple gun",
       "power": null,
       "includes": [],
       "specs": [],
@@ -793,7 +812,7 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.harveynorman.co.nz/customer-direct/tools-garden-and-pet-supplies/cd-tools/aluminium-heavy-duty-staple-gun.html"
+      "newUrl": "https://www.bunnings.co.nz/stanley-heavy-duty-steel-staple-gun-6-tr110_p0702551"
     },
     {
       "id": "hex-keys",
@@ -807,8 +826,8 @@
       "colour": "#2B5FA8",
       "size": "small",
       "paid": null,
-      "newPrice": 32.64,
-      "newFrom": "Mitre 10 · 9 pc ball-end set",
+      "newPrice": 55.49,
+      "newFrom": "Bunnings · 9 pc ball-end hex keys",
       "power": null,
       "includes": [],
       "specs": [],
@@ -826,7 +845,7 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.mitre10.co.nz/shop/bahco-9-piece-metric-hex-l-key-long-ball-end-set-9-piece-phosphate-finish/p/351188"
+      "newUrl": "https://www.bunnings.co.nz/kincrome-ball-point-hex-key-set-9-piece-metric_p0152375"
     },
     {
       "id": "pliers",
@@ -840,8 +859,8 @@
       "colour": "#D7332C",
       "size": "small",
       "paid": null,
-      "newPrice": 158.98,
-      "newFrom": "Bunnings · Wiha VDE pliers $84.40 + cutters $74.58",
+      "newPrice": 159.48,
+      "newFrom": "Bunnings · Wiha VDE pliers $84.80 + cutters $74.68",
       "power": null,
       "includes": [
         "Combination pliers",
@@ -881,8 +900,8 @@
       "colour": "#9BA2A7",
       "size": "small",
       "paid": null,
-      "newPrice": 41.98,
-      "newFrom": "Mitre 10 · 250mm forged adjustable",
+      "newPrice": 28.98,
+      "newFrom": "Bunnings · 250mm adjustable wrench",
       "power": null,
       "includes": [],
       "specs": [],
@@ -899,7 +918,7 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.mitre10.co.nz/shop/stanley-adjustable-wrench-250mm/p/254004"
+      "newUrl": "https://www.bunnings.co.nz/trojan-250mm-adjustable-wide-mouth-wrench_p0105937"
     },
     {
       "id": "ratchet-driver",
@@ -913,8 +932,8 @@
       "colour": "#C2413A",
       "size": "small",
       "paid": null,
-      "newPrice": 46.95,
-      "newFrom": "Bunnings · ratcheting screwdriver",
+      "newPrice": 31.49,
+      "newFrom": "Bunnings · ratcheting screwdriver set",
       "power": null,
       "includes": [],
       "specs": [],
@@ -931,7 +950,8 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.bunnings.co.nz/kincrome-15-piece-ratcheting-screwdriver_p0732114"
+      "newUrl": "https://www.bunnings.co.nz/stanley-29-piece-multi-bit-ratcheting-screwdriver-set_p0588130",
+      "priceCheck": true
     },
     {
       "id": "wiha-drivers",
@@ -945,8 +965,8 @@
       "colour": "#D7332C",
       "size": "small",
       "paid": null,
-      "newPrice": 54.64,
-      "newFrom": "element14 / Bunnings · PH2 $28.66 + 5.5 flat $25.98",
+      "newPrice": 69.95,
+      "newFrom": "Bunnings · Wiha PH2 $34.95 + 5.5 flat ~$35",
       "power": null,
       "includes": [
         "PH2 × 100",
@@ -966,7 +986,8 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.bunnings.co.nz/wiha-5-5-x-125mm-flat-slotted-insulated-screwdriver_p6060228"
+      "newUrl": "https://www.bunnings.co.nz/wiha-ph-no-2-x-100mm-vde-softfinish-phillips-screwdriver_p6060231",
+      "priceCheck": true
     },
     {
       "id": "ratchet-spanners",
@@ -981,7 +1002,7 @@
       "size": "wide",
       "paid": null,
       "newPrice": 159,
-      "newFrom": "Mitre 10 · 6 pc ratcheting set (Bahco)",
+      "newFrom": "Mitre 10 · 6 pc ratcheting spanner set",
       "power": null,
       "includes": [
         "6 combination ratchet spanners"
@@ -1019,8 +1040,8 @@
       "colour": "#C2413A",
       "size": "wide",
       "paid": null,
-      "newPrice": null,
-      "newFrom": null,
+      "newPrice": 35,
+      "newFrom": "Bunnings · comparable screwdriver set (HART not sold in NZ)",
       "power": null,
       "includes": [
         "11 screwdrivers",
@@ -1040,7 +1061,9 @@
         "Every screw in the house"
       ],
       "pairs": [],
-      "spot": "Pegboard"
+      "spot": "Pegboard",
+      "newUrl": "https://www.bunnings.co.nz/stanley-fatmax-standard-ratchet-screwdriver-and-12-piece-bit-set_p6110654",
+      "priceCheck": true
     },
     {
       "id": "fatmax-hand-lot",
@@ -1055,7 +1078,7 @@
       "size": "big",
       "paid": 15,
       "newPrice": 99,
-      "newFrom": "Bunnings · FatMax 18\" bag only (mixed tools not counted)",
+      "newFrom": "Bunnings · FatMax 18\" bag (mixed tools not counted)",
       "power": null,
       "includes": [
         "20oz hammer",
@@ -1080,7 +1103,8 @@
         "A grab-and-go bag for jobs"
       ],
       "pairs": [],
-      "newUrl": "https://www.bunnings.co.nz/stanley-fatmax-18-round-top-rigid-tool-bag-fmst1-70749_p0864092"
+      "newUrl": "https://www.bunnings.co.nz/brands/s/stanley-fatmax-",
+      "priceCheck": true
     },
     {
       "id": "toolpro-sockets",
@@ -1094,8 +1118,8 @@
       "colour": "#C8312E",
       "size": "big",
       "paid": 30.99,
-      "newPrice": 199,
-      "newFrom": "Supercheap Auto · ToolPRO 216 pc kit (was $349)",
+      "newPrice": 219,
+      "newFrom": "Mitre 10 · Stanley 201 pc set, comparable (ToolPro not sold there)",
       "power": null,
       "includes": [
         "Deep sockets",
@@ -1126,7 +1150,9 @@
       ],
       "pairs": [],
       "featured": 8,
-      "newUrl": "https://www.supercheapauto.co.nz/p/toolpro-toolpro-automotive-tool-kit-216-piece/681154.html"
+      "newUrl": "https://www.mitre10.co.nz/shop/tools-equipment/hand-tools/spanners-socket-sets-wrenches/socket-sets/c/RF5110",
+      "priceCheck": true,
+      "usedValue": 180
     },
     {
       "id": "bosch-hand-set",
@@ -1140,8 +1166,8 @@
       "colour": "#0E7A4B",
       "size": "small",
       "paid": 20,
-      "newPrice": null,
-      "newFrom": null,
+      "newPrice": 31,
+      "newFrom": "Mitre 10 · comparable 26 pc tool set",
       "power": null,
       "includes": [],
       "specs": [],
@@ -1156,7 +1182,9 @@
       "uses": [
         "Quick household jobs"
       ],
-      "pairs": []
+      "pairs": [],
+      "newUrl": "https://www.mitre10.co.nz/shop/hand-tools/tool-kits/c/RS2040",
+      "priceCheck": true
     },
     {
       "id": "screwdriver-set",
@@ -1202,8 +1230,8 @@
       "colour": "#1F4E9C",
       "size": "small",
       "paid": 8.5,
-      "newPrice": 17.8,
-      "newFrom": "Bunnings · Kincrome folding knife",
+      "newPrice": 21.95,
+      "newFrom": "Bunnings · Kincrome folding utility knife",
       "power": null,
       "includes": [],
       "specs": [],
@@ -1220,7 +1248,7 @@
         "Cutting carpet, vinyl and plasterboard"
       ],
       "pairs": [],
-      "newUrl": "https://www.bunnings.co.nz/kincrome-heavy-duty-mini-folding-utility-knife_p0732130"
+      "newUrl": "https://www.bunnings.co.nz/kincrome-150mm-folding-lock-back-utility-knife_p0234754"
     },
     {
       "id": "drill-bits",
@@ -1234,8 +1262,8 @@
       "colour": "#E8B400",
       "size": "small",
       "paid": null,
-      "newPrice": 69.99,
-      "newFrom": "Bunnings / Mitre 10 · DeWalt bits $32 + Bosch drills $37.99",
+      "newPrice": 74.98,
+      "newFrom": "Bunnings / Mitre 10 · DeWalt 40 pc bits $49.98 + Bosch drills $25",
       "power": null,
       "includes": [
         "DeWalt bits",
@@ -1259,7 +1287,7 @@
         "fatmax-hand-lot",
         "demo-drill"
       ],
-      "newUrl": "https://www.bunnings.co.nz/dewalt-flextorq-22-piece-screwdriving-bit-set-dwaf22pcset_p0677722"
+      "newUrl": "https://www.bunnings.co.nz/dewalt-flextorq-40-piece-screwdriver-impact-set_p0365149"
     },
     {
       "id": "ox-level-600",
@@ -1351,7 +1379,7 @@
       "size": "wide",
       "paid": 55,
       "newPrice": 298,
-      "newFrom": "Bunnings · One+ HP brushless garden vac skin",
+      "newFrom": "Bunnings · R18XBLV20 garden vac, tool only",
       "power": "Ryobi One+ 18V",
       "includes": [
         "Blower vac (skin only)"
@@ -1373,8 +1401,9 @@
       "pairs": [
         "ryobi-batteries"
       ],
-      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-hp-brushless-garden-vacuum-and-sweeper-tool-only_p0360060",
-      "storedIn": "keter-shed"
+      "newUrl": "https://www.bunnings.co.nz/ryobi-one-18v-cordless-garden-vacuum-sweeper-r18xblv20-tool-only_p0360060",
+      "storedIn": "keter-shed",
+      "priceCheck": true
     },
     {
       "id": "wheelbarrow",
@@ -1428,8 +1457,8 @@
       "colour": "#7B7F78",
       "size": "big",
       "paid": 100.99,
-      "newPrice": 699,
-      "newFrom": "Trade Tested · Keter Store-It-Out 1150L",
+      "newPrice": 879,
+      "newFrom": "Bunnings · Keter 1150L Elite-Store",
       "power": null,
       "includes": [],
       "specs": [
@@ -1450,8 +1479,8 @@
         "Keeping the garden tools dry and locked away"
       ],
       "pairs": [],
-      "newUrl": "https://www.tradetested.co.nz/p/home-outdoor-living/outdoor-furniture/outdoor-storage-boxes/garden-tool-storage-boxes/keter-darwin-store-it-out-1150l-grey"
+      "newUrl": "https://www.bunnings.co.nz/keter-1150l-1410mm-x-820mm-elite-store-mini-shed_p0194473"
     }
   ],
-  "pricedOn": "2026-11-22"
+  "pricedOn": "2026-11-23"
 }

@@ -47,7 +47,8 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
   - `size`: wall slot size: `small`, `wide` or `big`.
   - `paid`: what was paid. `null` if not recorded.
   - `newPrice`, `newFrom`, `newUrl`: current NZ new price, the shop (and the model matched, if not the exact one) and the page it came from. Look it up, never guess.
-  - `usedValue` (optional): a set used value. Without it, used value is 55% of new, or 40% if `condition` is `worn`.
+  - `priceCheck` (optional): `true` when the price came from a search result rather than a confirmed page; the tool page shows "To confirm".
+  - `usedValue` (optional): a set used value, used for old or discontinued tools (estimated from Trade Me or the tool's age). Without it, used value is 55% of new, or 40% if `condition` is `worn`.
   - `power`: `Corded 240V`, a battery platform such as `Ryobi One+ 18V`, or `null` for hand tools.
   - `includes[]`, `specs[[label, value]]`, `notes`.
   - `uses[]`: what it's good for.
