@@ -20,7 +20,7 @@
    Tool-themed parts: spirit-level scroll indicator, saw blade hero, tape-measure stats, pegboard wall, saw-tooth slide-up reel with a ruler,
    lineup shelf, caution tape, torque-gauge bargain meter, blueprint spec cards, hex-nut tick boxes, label-tape names.
    Shed tab: hero → bench → wall → reel (one featured tool per step) → lineup → statement → gauge.
-   Power / Hand / Yard: artwork hero, picker, swipe sideways through tool pages. Care and Lent tabs. All content from data.json. */
+   Power / Hand / Yard: artwork hero, picker, swipe sideways through tool pages. Care tab. All content from data.json. */
 :root{
   --bg:#EFE6D4; --surface:#FBF6EC; --sunk:#E4D9C3; --ink:#16191B; --body:#3B4043; --muted:#64665F; --line:#D6C9AF;
   --hv:#F4C21B; --hv-ink:#16191B; --warn:#B3362D; --ok:#2F7A4F;
@@ -337,7 +337,7 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .btn.hvb{background:var(--hv);color:var(--hv-ink)}
 .swipehint{text-align:center;font-size:13px;color:var(--muted);margin:0}
 
-/* Care + Lent. Tick boxes are hex nuts that turn when you tick them. */
+/* Care. Tick boxes are hex nuts that turn when you tick them. */
 .task{display:flex;align-items:flex-start;gap:12px;padding:14px;cursor:pointer}
 .task+.task{border-top:1px solid var(--line)}
 .task input{appearance:none;-webkit-appearance:none;width:30px;height:30px;margin:0;flex:none;cursor:pointer;display:grid;place-items:center;background:var(--muted);clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%);transition:transform .6s cubic-bezier(.3,1.5,.5,1),background .3s}
@@ -576,6 +576,168 @@ const ART={
     <path class="a-glint" d="M124 22l3 7l7 3l-7 3l-3 7l-3-7l-7-3l7-3z" fill="${HV}"/>`},
   generic:c=>gs(80,96,54)+`<rect x="30" y="40" width="100" height="50" rx="10" fill="${c}"/><rect class="x" x="30" y="72" width="100" height="18" rx="9" fill="${dk(c)}" opacity=".5"/><rect x="60" y="30" width="40" height="12" rx="4" fill="${D}"/>`
 };
+/* ---------- Drawings of the real tools (from the owner's photos). Added on top of ART; same rules: base, shade, highlight, detail (.x). ---------- */
+const BRED='#D52B1E', RG='#5C6166', RD='#3B3F43', STEEL='#C9CED2', STEELD='#9BA2A7';
+const batt=(x,y,w,kind)=>kind==='ryobi'
+  ?`<path d="M${x} ${y+3}q0-3 3-3h${w-6}q3 0 3 3v12q0 3-3 3h-${w-6}q-3 0-3-3z" fill="${RD}"/><rect x="${x}" y="${y+4}" width="${w}" height="3.4" fill="#C9D21F"/><rect class="x" x="${x+4}" y="${y+10}" width="${w*.5}" height="1.6" rx=".8" fill="#6B7378"/><circle class="x" cx="${x+w-7}" cy="${y+11}" r="1.6" fill="#7CD85A"/>`
+  :`<path d="M${x} ${y+3}q0-3 3-3h${w-6}q3 0 3 3v12q0 3-3 3h-${w-6}q-3 0-3-3z" fill="#26292B"/><rect class="x" x="${x+3}" y="${y+1.5}" width="${w-6}" height="3" rx="1" fill="#4B5257"/><rect x="${x+4}" y="${y+8}" width="9" height="6" rx="1.2" fill="${BRED}"/><rect class="x" x="${x+17}" y="${y+10}" width="${w-25}" height="1.5" rx=".7" fill="#6B7378"/>`;
+const blabel=(x,y,w,h)=>`<g class="x"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="1.4" fill="#F4F4F0"/><rect x="${x+1.6}" y="${y+1.6}" width="${w*.34}" height="${h-3.2}" rx=".8" fill="${BRED}"/><rect x="${x+w*.42}" y="${y+h/2-.8}" width="${w*.48}" height="1.6" rx=".8" fill="#9BA2A7"/></g>`;
+Object.assign(ART,{
+  /* Bosch cordless drill / impact driver. kind: drill | impact. worn: older tool with scuffs */
+  bdrill:(c,kind='drill',worn=false)=>{const d=dk(c),l=lt(c);const nose=kind==='impact'
+      ?`<rect x="10" y="42" width="12" height="4" rx="1" fill="${STEELD}"/><path d="M20 38h12v12H20z" fill="${STEEL}"/><path class="x" d="M23 38v12M27 38v12" stroke="${STEELD}" stroke-width="1"/><path d="M30 32h18v24H30q-4 0-4-4V36q0-4 4-4z" fill="${D}"/><path class="x" d="M33 35h12" stroke="${D2}" stroke-width="2" stroke-linecap="round"/>`
+      :`<rect x="2" y="42" width="12" height="4" rx="1" fill="${STEELD}"/><path class="x" d="M5 42l2 4M9 42l2 4" stroke="${D}" stroke-width=".8"/><path d="M12 36l18-4v24l-18-4z" fill="${D}"/><path class="x" d="M16 37v14M20 36v16M24 35v18" stroke="#000" stroke-width="1.4" opacity=".55"/><path d="M30 30h16v28H30z" fill="${D2}"/><path class="x" d="M33 30v28M37 30v28M41 30v28" stroke="#fff" stroke-width=".9" opacity=".45"/><rect class="x" x="30" y="30" width="16" height="3" fill="#F4F4F0" opacity=".25"/>`;
+    return gs(96,114,40)+batt(70,94,58,'bosch')+`<path d="M66 86h62q6 0 6 6v4H62v-4q0-6 4-6z" fill="${c}"/><path class="x" d="M62 92h72v4H62z" fill="${d}" opacity=".6"/>
+    <path d="M84 58h28l-4 30H88z" fill="${c}"/><path d="M98 58h14l-4 30h-8z" fill="${INK}"/>${ribs(100,64,7,8)}<path class="x" d="M87 62l2 22" stroke="${l}" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M78 60h10v14q-8 1-10-5z" fill="${BRED}"/><path class="x" d="M80 62v8" stroke="#F08A80" stroke-width="1.2" stroke-linecap="round"/>
+    ${nose}<path d="M46 24h60q18 0 18 18v2q0 18-18 18H46z" fill="${c}"/><path class="x" d="M46 50h78q-2 12-18 12H46z" fill="${d}" opacity=".55"/><path d="M104 24q20 2 20 18v2q0 16-20 18z" fill="${INK}"/>${vents(108,32,5,10)}<path class="x" d="M52 29h40" stroke="${l}" stroke-width="3" stroke-linecap="round"/>${blabel(56,36,26,9)}<rect x="84" y="44" width="14" height="5" rx="2" fill="${BRED}"/>${screw(58,54,1.8)}
+    ${worn?`<g class="x"><path d="M60 30q10-5 18 1q-4 9-15 7q-5-3-3-8z" fill="#D9E3EA" opacity=".85"/><path d="M64 32q4-2 9 0" stroke="#9FB2C2" stroke-width="1" fill="none"/><path d="M90 66l6 10M112 34l6-2M50 56l8 1" stroke="#B9C7D2" stroke-width="1.2" opacity=".7" stroke-linecap="round"/><path d="M68 98h40" stroke="#6B7378" stroke-width="1" opacity=".6"/></g>`:''}`},
+  bimpact:c=>ART.bdrill(c,'impact'),
+  bdrillold:c=>ART.bdrill(c,'drill',true),
+  /* Bosch cordless circular saw: silver guard, blue motor and handle, battery at the back */
+  circsaw:c=>{const d=dk(c),l=lt(c);return gs(80,113,66)+`<g class="a-puff"><circle cx="24" cy="96" r="4" fill="${S}"/><circle cx="16" cy="92" r="3" fill="${S}"/><circle cx="30" cy="98" r="3" fill="${S}"/></g>
+    ${sawblade(62,74,30)}<path d="M8 96h140l-3 7H11z" fill="${STEEL}"/><rect class="x" x="10" y="96" width="136" height="1.6" fill="${ML}"/><path class="x" d="M14 103h128" stroke="${STEELD}" stroke-width="1.2"/><rect class="x" x="30" y="98" width="10" height="3" fill="${STEELD}"/>
+    <path d="M26 74a36 36 0 0 1 72 0h-8a28 28 0 0 0-56 0z" fill="#DDE1E4"/><path d="M26 74a36 36 0 0 1 72 0z" fill="#DDE1E4"/><path class="x" d="M62 38a36 36 0 0 1 36 36H80a18 18 0 0 0-18-18z" fill="${STEELD}" opacity=".5"/><path class="x" d="M33 68a30 30 0 0 1 17-24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><rect x="44" y="50" width="24" height="7" rx="1.5" fill="${BRED}" opacity=".9"/><path class="x" d="M47 53.5h18" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>${screw(34,70)}
+    <path d="M90 44h30q8 0 8 8v14q0 8-8 8H90z" fill="${c}"/><path class="x" d="M90 64h38v2q0 8-8 8H90z" fill="${d}" opacity=".55"/>${vents(100,50,3,14)}<path class="x" d="M94 47.5h18" stroke="${l}" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M84 46q4-30 42-20l-3 10q-26-6-29 12z" fill="${c}"/><path d="M98 30q14-5 26-2l-2 7q-12-3-22 1z" fill="${INK}"/><path d="M96 38h7v7q-5 0-7-3z" fill="${BRED}"/>
+    <path d="M28 46q-2-12 10-12h8v12z" fill="${c}"/><circle class="x" cx="36" cy="40" r="2.4" fill="${d}"/>
+    <g transform="rotate(-20 140 56)">${batt(122,48,32,'bosch')}</g><circle cx="62" cy="74" r="6" fill="${D}"/><circle class="x" cx="62" cy="74" r="2.4" fill="${G}"/>`},
+  /* Bosch brushless angle grinder */
+  grinder:c=>{const d=dk(c),l=lt(c);return gs(80,104,66,4)+`<rect x="28" y="6" width="9" height="36" rx="4" fill="${INK}"/>${ribs(29.5,10,8,6)}
+    <path d="M6 76h58v4H6z" fill="#3A3F42"/><path class="x" d="M8 77.4h54" stroke="#6B7378" stroke-width="1"/><path d="M4 74q0-12 30-14q30 2 30 14z" fill="${STEELD}"/><path class="x" d="M10 70q6-6 22-7" fill="none" stroke="${ML}" stroke-width="1.8" stroke-linecap="round"/><rect x="31" y="66" width="6" height="10" fill="${D}"/>
+    <path d="M18 40h36v26H24q-6 0-6-6z" fill="${STEEL}"/><path class="x" d="M18 58h36v8H24q-6 0-6-6z" fill="${STEELD}"/><rect x="22" y="34" width="20" height="8" rx="2" fill="${BRED}"/><path class="x" d="M21 44h28" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
+    <path d="M54 38h66q8 0 8 8v14q0 8-8 8H54z" fill="${c}"/><path d="M78 40h36v26H78z" fill="${INK}"/>${ribs(82,44,6,28)}<path class="x" d="M54 60h74q0 8-8 8H54z" fill="${d}" opacity=".5"/><path class="x" d="M58 42h16" stroke="${l}" stroke-width="2.4" stroke-linecap="round"/>
+    <g class="x"><rect x="57" y="48" width="18" height="6" rx="1" fill="${INK}"/><rect x="59" y="50.2" width="14" height="1.6" rx=".8" fill="#E8E8E2"/></g>${vents(60,58,2,12)}
+    <path d="M76 68h40q-2 6-8 6H82q-6 0-6-6z" fill="${BRED}"/>
+    <g transform="rotate(90 140 53)">${batt(118,44,44,'bosch')}</g>`},
+  /* Bosch oscillating multi-tool. cordless: GOP 10.8V with stick battery, else corded GOP 250 CE */
+  multitool:(c,cordless=false)=>{const d=dk(c),l=lt(c);const end=cordless?118:132;return gs(78,96,62,4)+`<path d="M6 58h24l2 12H8q-4 0-4-4v-4q0-4 2-4z" fill="${STEEL}"/><path class="x" d="M6 70l2 3 2-3 2 3 2-3 2 3 2-3 2 3 2-3 2 3 2-3 2 3 2-3" fill="none" stroke="${STEELD}" stroke-width="1.2"/><path class="x" d="M10 61h16" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M18 34h22v32H24q-6 0-6-6z" fill="${INK}"/><path class="x" d="M21 37h14" stroke="${D2}" stroke-width="2" stroke-linecap="round"/><path d="M24 26h16l2 10H22z" fill="${D2}"/><circle cx="28" cy="58" r="5" fill="${STEEL}"/><circle class="x" cx="28" cy="58" r="2" fill="${STEELD}"/>
+    <path d="M40 36h${end-48}q8 0 8 8v14q0 8-8 8H40z" fill="${c}"/><path class="x" d="M40 58h${end-40}q-2 8-8 8H40z" fill="${d}" opacity=".55"/><path d="M${end-46} 38h${cordless?24:30}v26h-${cordless?24:30}z" fill="${INK}"/>${ribs(end-42,42,6,cordless?16:22)}<path class="x" d="M44 40h${cordless?30:40}" stroke="${l}" stroke-width="2.4" stroke-linecap="round"/>${vents(48,46,3,14)}${blabel(66,45,22,8)}<rect x="${cordless?70:72}" y="56" width="${cordless?14:12}" height="4" rx="1.6" fill="${cordless?'#7CD85A':BRED}"/>
+    ${cordless?`<path d="M${end} 40h20q4 0 4 4v18q0 4-4 4h-20z" fill="#26292B"/><rect class="x" x="${end+3}" y="44" width="14" height="3" fill="#4B5257"/><rect x="${end+6}" y="52" width="8" height="5" rx="1" fill="${BRED}"/>`
+      :`<path d="M${end} 44h8q4 0 4 4v6q0 4-4 4h-8z" fill="${INK}"/><path d="M${end+12} 51q16 0 14 20q-2 18 6 26" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>`}`},
+  multitool12:c=>ART.multitool(c,true),
+  /* Ryobi AirStrike framing nailer */
+  framer:c=>{const d=dk(c),l=lt(c);return gs(96,114,54)+`<path d="M28 58l74 36l-6 11l-74-36z" fill="${INK}"/><path class="x" d="M34 63l62 30" stroke="#D9B44A" stroke-width="2.6" stroke-dasharray="1.6 1.4"/><path class="x" d="M30 66l64 31" stroke="${D2}" stroke-width="1.4"/><rect x="88" y="94" width="10" height="8" rx="1.5" fill="${D2}" transform="rotate(26 93 98)"/>
+    <path d="M22 16h22v50l-6 12H26l-4-8z" fill="${D}"/><path class="x" d="M25 20h4v44" stroke="${D2}" stroke-width="2" fill="none"/><path d="M24 76h16l-2 16h-8l-6-6z" fill="${STEEL}"/><path class="x" d="M27 80h9" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+    ${batt(94,96,52,'ryobi')}<path d="M96 88h46q4 0 4 4v4H92v-4q0-4 4-4z" fill="${c}"/>
+    <path d="M108 52h24l-4 38h-20z" fill="${RG}"/><path d="M110 56h6l-2 32h-4z" fill="${c}"/>${ribs(118,60,7,10)}<path d="M102 56h8v10q-6 0-8-4z" fill="#E8E8E2"/>
+    <path d="M40 12h92q20 0 20 20v6q0 18-20 18H40z" fill="${RG}"/><path d="M40 12h92q20 0 20 20v2H40z" fill="${c}"/><path class="x" d="M40 44h112q-2 12-20 12H40z" fill="#000" opacity=".25"/><path class="x" d="M46 16h60" stroke="${l}" stroke-width="2.6" stroke-linecap="round"/>
+    <rect x="62" y="22" width="56" height="14" rx="2" fill="#D9DDE0"/><g class="x"><rect x="66" y="25" width="30" height="3" rx="1" fill="${RD}"/><rect x="66" y="30.5" width="44" height="1.8" rx=".9" fill="${G}"/><path d="M110 23l6 0-4 6h4l-8 6 2-5h-4z" fill="${c}"/></g>
+    <path d="M138 16q14 2 14 18v4q0 14-14 16z" fill="${RD}"/>${vents(142,26,4,6)}<path class="x" d="M50 40h8M62 40h8M74 40h8" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/>`},
+  /* Ryobi AirStrike 18 gauge brad nailer */
+  brad:c=>{const d=dk(c),l=lt(c);return gs(92,114,54)+`<path d="M36 34h22v66q0 4-4 4H40q-4 0-4-4z" fill="${INK}"/><path class="x" d="M42 38v58" stroke="${D2}" stroke-width="3"/><path class="x" d="M50 40v56" stroke="#D9B44A" stroke-width="2" stroke-dasharray="1.4 1.6"/><rect x="38" y="92" width="18" height="12" rx="2" fill="#E2562A"/><text class="x" x="47" y="101.5" text-anchor="middle" font-family="Big Shoulders Display,Impact,sans-serif" font-weight="900" font-size="9" fill="#fff">18</text>
+    <path d="M44 20h22v26H44z" fill="${RG}"/><path d="M42 18h8v14h-8z" fill="${STEEL}"/>
+    ${batt(96,96,52,'ryobi')}<path d="M98 88h46q4 0 4 4v4H94v-4q0-4 4-4z" fill="${c}"/>
+    <path d="M110 50h24l-4 40h-20z" fill="${RG}"/><path d="M112 54h6l-2 34h-4z" fill="${c}"/>${ribs(120,58,8,10)}<path d="M102 54h9v12q-7 0-9-5z" fill="#E8E8E2"/>
+    <path d="M62 16h66q16 0 16 16v4q0 16-16 16H62z" fill="${c}"/><path d="M118 16h10q16 0 16 16v4q0 16-16 16h-10z" fill="${RG}"/><path class="x" d="M62 42h82q-2 10-16 10H62z" fill="${d}" opacity=".5"/><path class="x" d="M68 20h40" stroke="${l}" stroke-width="2.6" stroke-linecap="round"/>
+    <rect x="76" y="24" width="40" height="12" rx="2" fill="#D9DDE0"/><g class="x"><rect x="80" y="27" width="24" height="2.6" rx="1" fill="${RD}"/><rect x="80" y="31.6" width="30" height="1.6" rx=".8" fill="${G}"/></g><rect x="64" y="40" width="10" height="9" rx="1.5" fill="${RD}"/><text class="x" x="69" y="47" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="800" font-size="5" fill="#fff">18</text>`},
+  /* Ryobi One+ palm sander */
+  palmsander:c=>{const d=dk(c),l=lt(c);return gs(76,113,50)+`<g class="a-puff"><circle cx="26" cy="104" r="4" fill="${S}"/><circle cx="128" cy="106" r="3.5" fill="${S}" style="--dx:14px"/><circle cx="32" cy="108" r="3" fill="${S}"/></g>
+    <g class="a-buzz"><path d="M30 94h92l8 14H22z" fill="#3A3330"/><path class="x" d="M26 104h100" stroke="#5A4E48" stroke-width="2" stroke-dasharray="1.2 1.6"/><path class="x" d="M34 96h84" stroke="#8C7F72" stroke-width="1.4" opacity=".6"/>
+    <path d="M38 36q0-10 10-10h56q10 0 10 10v58H38z" fill="${c}"/><path class="x" d="M94 26h10q10 0 10 10v58H94z" fill="${d}" opacity=".5"/><path class="x" d="M44 54v34" stroke="${l}" stroke-width="3" stroke-linecap="round"/>
+    <path d="M38 36q0-10 10-10h56q10 0 10 10v12H38z" fill="${RG}"/><path class="x" d="M46 31h36" stroke="#80868B" stroke-width="2.4" stroke-linecap="round"/><path class="x" d="M38 46h76" stroke="${RD}" stroke-width="1.6"/>
+    <rect x="50" y="60" width="44" height="13" rx="2" fill="${INK}"/><text class="x" x="72" y="69.6" text-anchor="middle" font-family="Big Shoulders Display,Impact,sans-serif" font-weight="900" font-size="9" letter-spacing=".5" fill="#fff">RYOBI</text>
+    <rect x="38" y="84" width="76" height="10" fill="${RG}"/>${vents(48,86.4,2,24,3)}<text class="x" x="106" y="70" font-family="JetBrains Mono,monospace" font-weight="800" font-size="5.5" fill="${d}" transform="rotate(90 106 70)">ONE+</text></g>`},
+  /* Ryobi One+ trim router with clear base */
+  router:c=>{const d=dk(c),l=lt(c);return gs(80,114,44,3)+`<rect x="76" y="104" width="8" height="10" rx="1" fill="${STEEL}"/><path class="x" d="M77 108h6M77 111h6" stroke="${STEELD}" stroke-width="1"/>
+    <path d="M44 86h72l8 16H36z" fill="#D8EDF4" opacity=".6" stroke="#9FC3CF" stroke-width="1.4"/><rect x="32" y="100" width="96" height="6" rx="2" fill="#E2F2F7" opacity=".75" stroke="#9FC3CF" stroke-width="1.2"/><path class="x" d="M48 90l-6 10M112 90l6 10" stroke="#fff" stroke-width="1.6" opacity=".7"/><circle class="x" cx="50" cy="103" r="1.6" fill="#9FC3CF"/><circle class="x" cx="110" cy="103" r="1.6" fill="#9FC3CF"/>
+    <path d="M56 46h48v42H56z" fill="${c}"/><path class="x" d="M90 46h14v42H90z" fill="${d}" opacity=".5"/><rect x="62" y="50" width="9" height="30" rx="1.5" fill="#F4F4F0"/><path class="x" d="M64 54h5M64 58h3M64 62h5M64 66h3M64 70h5M64 74h3" stroke="${RD}" stroke-width="1"/><path class="x" d="M66 60l3-2v4z" fill="#C2413A"/>
+    <rect x="78" y="74" width="10" height="8" rx="2" fill="#2F7A4F"/><path d="M102 60h10v14h-10z" fill="${RD}"/>
+    <path d="M44 22q0-8 8-8h56q8 0 8 8v12q0 12-12 12H56q-12 0-12-12z" fill="${c}"/><path d="M84 18h26q6 0 6 6v10q0 12-12 12H84z" fill="${RG}"/>${ribs(90,24,5,18)}<path class="x" d="M50 19h26" stroke="${l}" stroke-width="2.6" stroke-linecap="round"/>${vents(52,26,3,14)}<rect x="52" y="36" width="24" height="7" rx="1.5" fill="${INK}"/><rect class="x" x="55" y="38.7" width="18" height="1.6" rx=".8" fill="#E8E8E2"/>`},
+  /* Ryobi corded 1/3 sheet sander with clear dust box */
+  sheetsander:c=>{const d=dk(c),l=lt(c);return gs(80,111,66)+`<path d="M140 46q14 0 14 18q0 22 6 40" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>
+    <g class="a-buzz"><rect x="14" y="94" width="108" height="9" rx="2" fill="${STEELD}"/><rect class="x" x="14" y="94" width="108" height="2.4" fill="${STEEL}"/><path class="x" d="M20 98.5h12M104 98.5h12" stroke="${D}" stroke-width="2.4" stroke-linecap="round"/><rect x="12" y="102" width="112" height="4" rx="1" fill="#E7D3A6"/>
+    <path d="M18 74h100v20H18z" fill="${c}"/><path class="x" d="M18 88h100v6H18z" fill="${d}" opacity=".55"/>${vents(48,79,3,40)}<text class="x" x="22" y="84" font-family="Atkinson Hyperlegible,sans-serif" font-style="italic" font-weight="700" font-size="5" fill="${RD}">Micro Filtration</text>
+    <path d="M110 58h34q8 0 8 8v22q0 8-8 8h-34z" fill="#F2F1EA" opacity=".9"/><path class="x" d="M112 84h38v4q0 6-6 6h-32z" fill="#C9B79A" opacity=".55"/><path class="x" d="M116 64h22" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path class="x" d="M112 58v38" stroke="#BDBAB0" stroke-width="1.2"/>
+    <path d="M38 74q-2-26 26-30h46q14 2 18 14l2 16z" fill="${c}"/><path class="x" d="M96 44h14q14 2 18 14l2 16H96z" fill="${d}" opacity=".45"/>
+    <path d="M30 50q0-12 14-14h86q12 0 12 10q0 8-10 8H52q-10 0-12 8l-6 6z" fill="${RG}"/><path class="x" d="M50 41h70" stroke="#80868B" stroke-width="2.4" stroke-linecap="round"/>${vents(104,44,2,16,3.2)}<path d="M30 50q-8 4-6 14l10 0z" fill="${RG}"/>
+    <rect x="58" y="56" width="32" height="10" rx="1.6" fill="${INK}"/><text class="x" x="74" y="63.6" text-anchor="middle" font-family="Big Shoulders Display,Impact,sans-serif" font-weight="900" font-size="7.4" fill="#fff">RYOBI</text></g>`},
+  /* Ryobi 4V QuickTurn screwdriver */
+  quickturn:c=>{const d=dk(c),l=lt(c);return gs(82,112,46,3)+`<g class="a-buzz"><rect x="2" y="48" width="14" height="3" rx="1" fill="${STEELD}"/><path d="M14 45h12v10H14z" fill="${STEEL}"/><path class="x" d="M18 45v10M22 45v10" stroke="${STEELD}" stroke-width="1"/></g>
+    <path d="M86 52l16-6l28 50q3 7-4 10l-10 4q-8 2-11-5z" fill="${RG}"/><path d="M98 54l8-3l22 42q2 5-3 7l-4 1z" fill="${c}"/>${ribs(102,66,6,8,4)}<path d="M92 58l8-2v12q-6 0-8-4z" fill="#E8E8E2"/>
+    <path d="M24 38h64q10 0 10 10v4q0 10-10 10H24z" fill="${RG}"/><path d="M24 38h64q10 0 10 10H24z" fill="#6B7176"/><path class="x" d="M30 42h44" stroke="#8C9297" stroke-width="2" stroke-linecap="round"/><rect x="40" y="35" width="40" height="4" rx="2" fill="${c}"/><circle class="a-blink" cx="30" cy="54" r="2" fill="#FDF3B0"/>
+    <rect x="44" y="44" width="30" height="10" rx="2" fill="${INK}"/><text class="x" x="59" y="51.6" text-anchor="middle" font-family="Big Shoulders Display,Impact,sans-serif" font-weight="900" font-size="7" fill="#fff">RYOBI</text><path d="M84 48l14 2l-2 10l-12-2z" fill="${c}"/>`},
+  /* Makita corded power planer */
+  planer:c=>{const d=dk(c),l=lt(c);return gs(80,112,70)+`<g class="a-puff"><circle cx="150" cy="70" r="4" fill="${S}" style="--dx:14px"/><circle cx="154" cy="62" r="3" fill="${S}" style="--dx:16px"/><circle cx="146" cy="76" r="3" fill="${S}" style="--dx:12px"/></g>
+    <path d="M10 96h140l-4 8H14z" fill="${STEELD}"/><rect class="x" x="12" y="96" width="136" height="2" fill="${STEEL}"/><path d="M22 92h116v6H22z" fill="${D}"/>
+    <path d="M24 62h112q6 0 6 6v24H20V66q0-4 4-4z" fill="${c}"/><path class="x" d="M20 84h122v8H20z" fill="${d}" opacity=".55"/>
+    <path d="M58 68h70q6 0 6 6v16q0 4-4 4H58z" fill="${INK}"/><path class="x" d="M62 72h60" stroke="${D2}" stroke-width="2" stroke-linecap="round"/><text class="x" x="94" y="86" text-anchor="middle" font-family="Atkinson Hyperlegible,sans-serif" font-style="italic" font-weight="700" font-size="9" fill="#4B5257">makita</text>${screw(64,90,1.6)}${screw(126,90,1.6)}
+    <path d="M60 64q4-42 22-42h44q14 0 16 14l2 26h-14l-2-22q0-6-6-6H86q-10 0-12 30z" fill="${c}"/><path class="x" d="M86 26h36q10 0 12 10" fill="none" stroke="${l}" stroke-width="2.6" stroke-linecap="round"/><path class="x" d="M120 34h6l2 26h-6z" fill="${d}" opacity=".5"/><path d="M82 30h8v8h-8z" fill="${INK}" transform="rotate(-8 86 34)"/>
+    <path d="M12 52h24v26H16q-4 0-4-4z" fill="${INK}"/><rect class="x" x="15" y="54" width="18" height="3" fill="${D2}"/><circle cx="24" cy="46" r="10" fill="${INK}"/><circle class="x" cx="21" cy="43" r="3" fill="${D2}"/><path class="x" d="M17 60v14M21 60v14M25 60v14M29 60v14" stroke="${D2}" stroke-width="1.2"/>
+    <path d="M142 66q10 2 10 12" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/><path d="M38 76l6 0" stroke="${c}"/>`},
+  /* Makita VC2000L: teal top, stainless drum, black base */
+  vac:c=>{const d=dk(c),l=lt(c);return gs(74,115,52)+`<g class="a-sway" style="transform-origin:72px 76px"><path d="M72 78q4 26 32 28q26 2 36 12" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round"/><path class="x" d="M72 78q4 26 32 28q26 2 36 12" fill="none" stroke="#4B5257" stroke-width="9" stroke-dasharray="1.4 2.8"/></g>
+    <circle cx="40" cy="110" r="5" fill="${INK}"/><circle cx="104" cy="110" r="5" fill="${INK}"/>
+    <path d="M28 94h88l-4 14H32z" fill="${INK}"/><path class="x" d="M32 97h80" stroke="#7A2E3E" stroke-width="2" opacity=".7"/>
+    <path d="M34 56h76v38H34z" fill="${STEEL}"/><path class="x" d="M92 56h18v38H92z" fill="${STEELD}" opacity=".7"/><rect class="x" x="40" y="58" width="6" height="34" fill="#fff" opacity=".7"/><rect class="x" x="50" y="58" width="2" height="34" fill="#fff" opacity=".5"/><path class="x" d="M34 66h76" stroke="${STEELD}" stroke-width="1" opacity=".6"/>
+    <path d="M58 56h28v20q0 6-6 6H64q-6 0-6-6z" fill="${INK}"/><circle cx="72" cy="76" r="6.5" fill="#26292B"/>
+    <path d="M28 30q0-12 12-12h64q12 0 12 12v26H28z" fill="${c}"/><path class="x" d="M96 18h8q12 0 12 12v26H96z" fill="${d}" opacity=".5"/><path class="x" d="M34 30q2-8 12-8h26" fill="none" stroke="${l}" stroke-width="3" stroke-linecap="round"/>
+    <path d="M24 34h8v26h-8z" fill="${INK}"/><path d="M112 34h8v26h-8z" fill="${INK}"/><path d="M28 50h88v8H28z" fill="${INK}"/>
+    <path d="M58 12h28v10H58z" fill="${INK}"/><rect x="62" y="24" width="10" height="6" rx="1" fill="${INK}"/><circle cx="80" cy="27" r="2.6" fill="#E3C27A"/>
+    <rect x="64" y="34" width="16" height="13" rx="2" fill="${INK}"/><g class="x"><rect x="66.5" y="36.5" width="11" height="8" rx="1" fill="#2B2F31"/><path d="M70 42v-3M74 42v-3M69 42h6" stroke="#E8E8E2" stroke-width="1" stroke-linecap="round"/></g>
+    <text class="x" x="88" y="46" font-family="Atkinson Hyperlegible,sans-serif" font-style="italic" font-weight="700" font-size="7.6" fill="#fff">makita</text>`},
+  /* Makita BO5030: black dotted top, teal band, teal base, black cloth dust bag */
+  sander:c=>{const d=dk(c),l=lt(c);const dots=(cx,cy,rx,ry,n)=>Array.from({length:n},(_,i)=>{const a=i/n*Math.PI*2;return `<circle cx="${(cx+rx*Math.cos(a)).toFixed(1)}" cy="${(cy+ry*Math.sin(a)).toFixed(1)}" r=".9"/>`}).join('');
+    return gs(70,111,58)+`<g class="a-puff"><circle cx="16" cy="100" r="5" fill="${S}"/><circle cx="118" cy="104" r="4" fill="${S}" style="--dx:14px"/><circle cx="22" cy="104" r="3.5" fill="${S}"/></g>
+    <path d="M104 28q24-6 40 4" fill="none" stroke="${INK}" stroke-width="3.4" stroke-linecap="round"/><path d="M140 30l14-2" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+    <g class="a-buzz"><ellipse cx="68" cy="100" rx="52" ry="8" fill="#2B2E30"/><ellipse class="x" cx="68" cy="98.5" rx="48" ry="5" fill="#3A3E41"/>
+    <path d="M20 92q0-12 14-14h68q14 2 14 14v4H20z" fill="${c}"/><path class="x" d="M90 78h12q14 2 14 14v4H90z" fill="${d}" opacity=".5"/>${vents(30,86,2,30,3.4)}${vents(70,86,2,26,3.4)}
+    <path d="M30 80q-6-22 38-30q44 8 38 30z" fill="${INK}"/><g class="x" fill="#4B5257">${dots(68,70,28,6,14)}${dots(68,74,22,4,10)}</g>
+    <path d="M40 60q28-10 56 0v10q-28-8-56 0z" fill="${c}"/><text class="x" x="68" y="66.6" text-anchor="middle" font-family="Atkinson Hyperlegible,sans-serif" font-style="italic" font-weight="700" font-size="7.6" fill="#fff">makita</text>
+    <path d="M32 40q0-20 36-22q36 2 36 22q0 10-8 14H40q-8-4-8-14z" fill="${INK}"/><g class="x" fill="#4B5257">${dots(68,34,26,9,16)}${dots(68,34,16,5,10)}</g><path d="M70 18q30 2 34 22q0 10-8 14H80q8-16-10-36z" fill="${c}"/>${vents(86,30,3,10)}<path class="x" d="M42 32q4-8 18-11" fill="none" stroke="#5A6064" stroke-width="2.4" stroke-linecap="round"/><rect x="32" y="34" width="8" height="10" rx="2" fill="#E8E8E2"/>
+    <path d="M110 74h8v10h-8z" fill="${INK}"/><path d="M116 66q0-6 6-6h22q10 0 12 10l2 18q0 8-8 8h-28q-6 0-6-6z" fill="#2B2E30"/><path class="x" d="M124 66l4 28M136 64l2 30M146 66l-2 28" stroke="#3E4245" stroke-width="1.6"/><path class="x" d="M120 64h24" stroke="#4B5257" stroke-width="2" stroke-linecap="round"/><text class="x" x="136" y="82" text-anchor="middle" font-family="Atkinson Hyperlegible,sans-serif" font-style="italic" font-weight="700" font-size="6.6" fill="#E8E8E2" transform="rotate(-6 136 82)">makita</text></g>`},
+  /* Four hammers hanging */
+  hammers:c=>gs(80,114,66,3)+`<rect x="22" y="28" width="9" height="44" rx="2" fill="#F08A2B"/><rect class="x" x="22" y="58" width="9" height="4" fill="${INK}"/><path d="M21 70h11l1 40q0 4-4 4h-5q-4 0-4-4z" fill="#5A6064"/>${ribs(22.5,74,10,8,3.4)}
+    <path d="M6 14q0-6 6-6h28q6 0 6 6v14q0 6-6 6H12q-6 0-6-6z" fill="#26292B"/><path class="x" d="M36 10q8 2 8 10q-2 6-6 8q2-8-2-18z" fill="#E6E2D4" opacity=".85"/><path class="x" d="M10 13h24" stroke="#4B5257" stroke-width="2" stroke-linecap="round"/>
+    <rect x="50" y="30" width="9" height="78" rx="3" fill="${WL}"/><path class="x" d="M52 36v66" stroke="#D2A766" stroke-width="1.4"/><path class="x" d="M57 40v56" stroke="${W}" stroke-width="1.2"/><path d="M40 16q0-5 5-5h20q5 0 5 5v14q0 5-5 5H45q-5 0-5-5z" fill="#3A3F42"/><path class="x" d="M44 15h18" stroke="#5A6064" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="128" y="26" width="9" height="78" rx="3" fill="${INK}"/><rect x="127" y="26" width="11" height="12" rx="3" fill="#E84D7A"/><rect x="127" y="94" width="11" height="12" rx="3" fill="#E84D7A"/>${ribs(129,44,14,7,3.2)}<path d="M116 18h20v10h-20z" fill="${G}"/><path d="M136 16q12 0 18 10l-4 3q-4-6-14-5z" fill="${G}"/><rect x="110" y="16" width="8" height="14" rx="2" fill="${G}"/><path class="x" d="M114 19h20" stroke="${ML}" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M90 32h11l3 80q0 4-4 4h-7q-4 0-4-4z" fill="#C79A5E"/><path class="x" d="M93 38l2 70" stroke="#E0BC85" stroke-width="1.6" stroke-linecap="round"/><path class="x" d="M98 44l1 50M95 60l1 20" stroke="#9A6E3A" stroke-width="1" opacity=".8"/>
+    <path d="M72 18q0-8 8-8h28q8 0 10 8l2 6q0 8-8 8H80q-8 0-8-8z" fill="#8A5634"/><path d="M68 14q-4 6 0 14h6V14z" fill="#7A4A2C"/><path class="x" d="M80 13q8-2 20 0" fill="none" stroke="#B87A50" stroke-width="2" stroke-linecap="round"/><g class="x" fill="#6E3E22"><circle cx="86" cy="22" r="2"/><circle cx="100" cy="18" r="1.6"/><circle cx="108" cy="25" r="2.2"/><circle cx="92" cy="27" r="1.4"/></g>`,
+  /* Heavy duty staple gun */
+  staplegun:c=>gs(78,104,62,4)+`<path d="M20 38h18v58H24q-4 0-4-4z" fill="${STEELD}"/><path class="x" d="M23 42v48" stroke="${STEEL}" stroke-width="2"/><circle cx="29" cy="32" r="6" fill="${STEEL}"/><path class="x" d="M25 32h8" stroke="${STEELD}" stroke-width="1.4"/>
+    <path d="M34 50h96q6 0 6 6v32q0 6-6 6H34z" fill="${STEEL}"/><path class="x" d="M34 84h102v4q0 6-6 6H34z" fill="${STEELD}" opacity=".7"/><path class="x" d="M40 54h70" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M60 62h56q6 0 6 6v8q0 6-6 6H60q-6 0-6-6v-8q0-6 6-6z" fill="#C2413A"/><path d="M64 66h48q4 0 4 4v4q0 4-4 4H64q-4 0-4-4v-4q0-4 4-4z" fill="#2B2E30"/>
+    <path d="M30 36h100q10 0 10 8v6H30z" fill="${INK}"/><path class="x" d="M36 40h80" stroke="${D2}" stroke-width="2" stroke-linecap="round"/><path d="M126 34l18-4v10l-18 4z" fill="${STEEL}"/>
+    <text class="x" x="44" y="80" font-family="JetBrains Mono,monospace" font-weight="800" font-size="5" fill="#5A6064" transform="rotate(-90 44 80)">HEAVY DUTY</text><rect x="22" y="96" width="14" height="4" rx="1" fill="${D}"/>`,
+  /* Hex key set in a holder */
+  hexkeys:c=>{const k=[0,1,2,3,4,5,6,7,8];return gs(80,114,30,3)+k.map(i=>{const x=60+i*4.6,h=78-i*5;return `<rect x="${x}" y="40" width="${2.6+i*.2}" height="${h}" rx="1" fill="${STEEL}"/><circle cx="${x+1.4}" cy="${40+h}" r="${1.8+i*.12}" fill="${STEEL}"/><rect class="x" x="${x+.5}" y="44" width=".8" height="${h-8}" fill="#fff" opacity=".7"/>`}).join('')+k.map(i=>{const x=61.3+i*4.6,y=8+i*1.3,w=2.6+i*.2;return `<path d="M${x} 24V${y+3}q0-3-3-3H${x-7-i*1.4}" fill="none" stroke="${STEEL}" stroke-width="${w}" stroke-linecap="round"/><path class="x" d="M${x-.6} 22V${y+3}" stroke="#fff" stroke-width=".7" opacity=".7"/>`}).reverse().join('')+
+    `<path d="M52 18h52q4 0 4 4v22q0 4-4 4H52q-4 0-4-4V22q0-4 4-4z" fill="${c}"/><path class="x" d="M86 18h18q4 0 4 4v22q0 4-4 4H86z" fill="${dk(c)}" opacity=".45"/><path class="x" d="M54 22h28" stroke="${lt(c)}" stroke-width="2.4" stroke-linecap="round"/><rect x="48" y="32" width="60" height="7" fill="${INK}"/><g class="x" fill="#E8E8E2">${k.map(i=>`<rect x="${60+i*4.6}" y="34.4" width="2" height="2" rx=".4"/>`).join('')}</g>`},
+  /* Insulated pliers and side cutters */
+  pliers:c=>{const one=(x,rot,ky)=>`<g transform="rotate(${rot} ${x} 70)"><path d="M${x-2} 74l-5 34q-1 4 2 5l3-2l4-37z" fill="${STEEL}"/><path d="M${x+2} 74l5 34q1 4-2 5l-3-2l-4-37z" fill="${STEELD}"/><path class="x" d="M${x-3} 80l-3 22" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/><circle cx="${x}" cy="72" r="6.5" fill="${STEEL}"/><circle class="x" cx="${x}" cy="72" r="2.6" fill="${STEELD}"/>
+      <path d="M${x-5} 66q-12-20-10-56q0-4 5-4h4q4 0 4 4q-2 30 4 54z" fill="#D7332C"/><path d="M${x-12} 30q-1-16 0-22q0-2 3-2h3v30z" fill="${ky}"/><path d="M${x+5} 66q12-20 10-56q0-4-5-4h-4q-4 0-4 4q2 30-4 54z" fill="#D7332C"/><path d="M${x+12} 30q1-16 0-22q0-2-3-2h-3v30z" fill="${ky}"/><path class="x" d="M${x-11} 14q-1 26 4 46" fill="none" stroke="#F08A80" stroke-width="1.4" stroke-linecap="round"/><rect x="${x-9}" y="58" width="18" height="4" rx="1" fill="${ky}"/></g>`;
+    return gs(80,114,44,3)+one(58,-6,'#F4C21B')+one(98,6,'#F4C21B')},
+  /* Adjustable wrench */
+  adjwrench:c=>gs(80,104,56,4)+`<g transform="rotate(-32 80 60)"><path d="M14 54h84v12H14q-6 0-6-6t6-6z" fill="${STEEL}"/><path class="x" d="M16 62h80v4H16q-4 0-6-2z" fill="${STEELD}"/><path class="x" d="M22 57h60" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="60" r="3.4" fill="#121516" opacity=".55"/><text class="x" x="44" y="63" font-family="JetBrains Mono,monospace" font-weight="800" font-size="5" fill="${STEELD}">FORGED</text>
+    <path d="M96 46h22q16 0 20 14l2 10q0 6-6 8l-14 2l-4-10h10q4 0 4-4q0-6-6-6H98z" fill="${STEEL}"/><path d="M96 46l26-14q10-4 14 4l4 10H118q-6 0-8 4z" fill="${STEEL}"/><path class="x" d="M100 38l20-10" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path class="x" d="M98 58h40" stroke="${STEELD}" stroke-width="1.4"/>
+    <rect x="100" y="66" width="12" height="10" rx="2" fill="${STEELD}"/><path class="x" d="M102 66v10M105 66v10M108 66v10" stroke="#5A6064" stroke-width="1"/></g>`,
+  /* Ratcheting screwdriver */
+  ratchetdriver:c=>gs(80,96,54,3)+`<rect x="4" y="57" width="10" height="4" rx="1" fill="${STEELD}"/><rect x="12" y="55" width="44" height="8" fill="${STEEL}"/><rect class="x" x="14" y="56" width="40" height="1.6" fill="#fff" opacity=".8"/>
+    <rect x="54" y="50" width="12" height="18" rx="3" fill="#C2413A"/><path class="x" d="M57 50v18M61 50v18" stroke="#8E2A24" stroke-width="1"/>
+    <path d="M66 46q20-4 38-2q22 2 36 4q10 2 10 12t-10 12q-14 2-36 4q-18 2-38-2z" fill="${INK}"/><path d="M80 50q30-4 60 2q6 2 6 8t-6 8q-30 6-60 2q-6-10 0-20z" fill="#3A3F42"/><path class="x" d="M86 54q22-3 46 1M86 66q22 3 46-1" fill="none" stroke="#C2413A" stroke-width="2" stroke-linecap="round"/>${ribs(94,57,3,30,3)}<path d="M140 48q10 2 10 12t-10 12z" fill="#C2413A"/>`,
+  /* Wiha insulated screwdrivers */
+  wiha:c=>{const one=(x,len)=>`<rect x="${x-1.6}" y="56" width="3.2" height="${len}" fill="#D7332C"/><rect x="${x-1.6}" y="${56+len}" width="3.2" height="7" fill="${STEEL}"/><path d="M${x-1.6} ${63+len}l1.6 3l1.6-3z" fill="${STEELD}"/>
+      <path d="M${x-8} 16q0-8 8-8t8 8v34q0 6-8 6t-8-6z" fill="#D7332C"/><path d="M${x-8} 30h16v12h-16z" fill="#F4C21B"/><path class="x" d="M${x-4} 14v34" stroke="#F08A80" stroke-width="2" stroke-linecap="round"/><path class="x" d="M${x+4} 12q4 2 4 8v26q0 6-4 8z" fill="#9E1F1A" opacity=".45"/><rect x="${x-6}" y="7" width="12" height="4" rx="2" fill="#F4C21B"/>`;
+    return gs(80,114,36,3)+one(62,40)+one(98,48)},
+  /* Ratcheting combination spanners */
+  spanners:c=>gs(80,114,66,3)+[0,1,2,3,4,5].map(i=>{const y=22+i*15,len=124-i*9,x1=148-len,r=6.2-i*.45;return `<path d="M${x1+6} ${y-2.2}h${len-16}v4.4h-${len-16}z" fill="${STEEL}"/><path class="x" d="M${x1+8} ${y-1.4}h${len-22}" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M${x1} ${y-r}h${r*1.2}l${r*.6} ${r*.5}v${r}l-${r*.6} ${r*.5}h-${r*1.2}l${r*.7}-${r*.7}h${r*.4}v-${r*.6}h-${r*.4}z" fill="${STEEL}"/>
+      <circle cx="${142}" cy="${y}" r="${r+1.6}" fill="${STEEL}"/><circle cx="142" cy="${y}" r="${r-.8}" fill="#3A3F42"/><circle class="x" cx="142" cy="${y}" r="${r-.8}" fill="none" stroke="${STEELD}" stroke-width="1.2" stroke-dasharray="1 1"/><path class="x" d="M${142-r} ${y-r*.8}a${r+1} ${r+1} 0 0 1 ${r*.9} -${r*.7}" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/>`}).join(''),
+  /* HART screwdriver set on a rack */
+  hartrack:c=>{const caps=['#2B6FD0','#7CC243','#BFC4C8','#BFC4C8','#2B6FD0','#7CC243','#F4C21B','#7CC243','#F4C21B','#7CC243','#F4C21B','#7CC243'];
+    return gs(80,116,72,3)+caps.map((cp,i)=>{const x=14+i*12, stub=i===0, len=stub?16:22+((i*7)%5)*6+(i>7?12:0), top=stub?42:18+(i%3)*2;return `<rect x="${x-1.2}" y="70" width="2.4" height="${len}" fill="${STEEL}"/><path d="M${x-1.2} ${70+len}l1.2 3l1.2-3z" fill="${STEELD}"/><rect class="x" x="${x-.6}" y="72" width=".6" height="${len-4}" fill="#fff" opacity=".8"/>
+      <path d="M${x-5} ${top+6}q0-6 5-6t5 6v${62-top-6}h-10z" fill="${INK}"/><path class="x" d="M${x-3.4} ${top+8}v${54-top-6}M${x+3.4} ${top+8}v${54-top-6}" stroke="#C2413A" stroke-width="1"/><path class="x" d="M${x-1.6} ${top+12}v${44-top}" stroke="#4B5257" stroke-width="1.8" stroke-linecap="round"/><path d="M${x-5} ${top+6}q0-6 5-6t5 6v2h-10z" fill="${cp}"/><rect x="${x-5}" y="60" width="10" height="3" fill="#C2413A"/>`}).join('')+`<rect x="6" y="63" width="148" height="9" rx="1.5" fill="#1D2124"/><rect class="x" x="8" y="64" width="144" height="1.6" fill="#3A3F42"/><text class="x" x="132" y="44" font-family="Big Shoulders Display,Impact,sans-serif" font-weight="900" font-size="6" fill="#fff" transform="rotate(-90 132 44)">HART</text>`},
+  /* ToolPro socket set, open case: red lid, black base */
+  sockets:c=>{const d=dk(c),l=lt(c);return gs(80,116,70,3)+`<rect x="10" y="4" width="140" height="54" rx="6" fill="${c}"/><rect x="16" y="9" width="128" height="44" rx="3" fill="${d}"/><path class="x" d="M16 9h128v3H16z" fill="${l}" opacity=".4"/>
+    ${Array.from({length:11},(_,i)=>{const x=20+i*11.4,w=7.4-i*.32,h=18-i*.6;return `<rect x="${x}" y="13" width="${w}" height="${h}" rx="1.2" fill="${STEEL}"/><rect class="x" x="${x+1}" y="14" width="1.2" height="${h-2}" fill="#fff" opacity=".7"/>`}).join('')}
+    ${Array.from({length:18},(_,i)=>`<rect x="${20+i*6.8}" y="34" width="3.6" height="6" rx=".8" fill="${STEEL}"/>`).join('')}${[0,1,2].map(i=>`<path d="M${22+i*2} ${44+i*3}h${50-i*6}" stroke="${STEEL}" stroke-width="1.8" stroke-linecap="round"/><path d="M${84+i*2} ${44+i*3}h${50-i*6}" stroke="${STEEL}" stroke-width="1.8" stroke-linecap="round"/>`).join('')}
+    <rect x="10" y="58" width="140" height="4" fill="${INK}"/>${[34,62,98,126].map(x=>`<rect x="${x}" y="57" width="8" height="5" rx="1" fill="${c}"/>`).join('')}
+    <rect x="10" y="62" width="140" height="52" rx="6" fill="#26292B"/><rect x="16" y="66" width="128" height="44" rx="3" fill="#1A1D1F"/>
+    ${Array.from({length:12},(_,i)=>{const r=4.6-i*.22;return `<circle cx="${22+i*10.6}" cy="72" r="${r}" fill="${STEEL}"/><circle class="x" cx="${22+i*10.6}" cy="72" r="${r*.5}" fill="#3A3F42"/>`}).join('')}
+    ${[0,1,2].map(i=>{const y=84+i*8.6,len=58-i*10;return `<rect x="${44}" y="${y-1.6}" width="${len}" height="3.2" rx="1.6" fill="${STEEL}"/><circle cx="44" cy="${y}" r="${4-i*.6}" fill="${STEEL}"/><circle class="x" cx="44" cy="${y}" r="${1.6-i*.2}" fill="#3A3F42"/><rect x="${44+len*.55}" y="${y-2.6}" width="${len*.5}" height="5.2" rx="2.6" fill="#B3332E"/><rect class="x" x="${44+len*.62}" y="${y-1}" width="${len*.32}" height="2" rx="1" fill="${INK}"/>`}).join('')}
+    <rect x="24" y="80" width="12" height="5" rx="1" fill="${STEEL}"/><rect x="24" y="90" width="12" height="5" rx="1" fill="${STEEL}"/><rect x="22" y="100" width="40" height="2.4" rx="1.2" fill="${STEEL}"/>
+    <g class="x" fill="#6B5A3E">${Array.from({length:24},(_,i)=>`<rect x="${112+(i%6)*4.6}" y="${86+Math.floor(i/6)*5}" width="2.6" height="3.6" rx=".6"/>`).join('')}</g><rect x="64" y="108" width="32" height="5" rx="2" fill="${INK}"/><rect x="58" y="108" width="6" height="5" rx="1" fill="${c}"/><rect x="96" y="108" width="6" height="5" rx="1" fill="${c}"/>`}
+});
 const svg=t=>`<svg viewBox="0 0 160 120" aria-hidden="true">${(ART[t.art]||ART.generic)(t.colour||'#7B7F78')}</svg>`;
 /* Tab artwork */
 const EMB={
@@ -585,8 +747,7 @@ const EMB={
   yard:()=>`<svg viewBox="0 0 160 120">${ART.spade(HV)}<path class="a-leaf" d="M120 50q8-10 16 0q-8 8-16 0z" fill="#9BB04A"/><path class="a-leaf2" d="M124 84q8-10 16 0q-8 8-16 0z" fill="#C0883A"/></svg>`,
   care:()=>{const d=dk(HV),l=lt(HV);return `<svg viewBox="0 0 160 120">${gs(70,110,46)}<path d="M98 64L142 26" stroke="${M}" stroke-width="6.500" stroke-linecap="round"/><path class="x" d="M101 60L138 28" stroke="${ML}" stroke-width="1.600" stroke-linecap="round"/><path d="M52 52q15-28 32 0" fill="none" stroke="${M}" stroke-width="6.500" stroke-linecap="round"/>
     <path d="M38 60h66l8 46q.500 2-2 2H32q-2 0-2-2z" fill="${HV}"/><path class="x" d="M86 60h18l8 46q.500 2-2 2H86z" fill="${d}" opacity=".5"/><path class="x" d="M42 68l-4 30" stroke="${l}" stroke-width="3.500" stroke-linecap="round"/><rect x="34" y="52" width="74" height="11" rx="3.500" fill="${D}"/><rect class="x" x="40" y="54.500" width="40" height="2" rx="1" fill="${D2}"/>
-    <rect x="48" y="76" width="40" height="18" rx="3" fill="${PAPER}"/><path class="x" d="M54 82h28M54 88h18" stroke="${D}" stroke-width="2.400" stroke-linecap="round"/><path class="a-drop" d="M144 32q7 11 0 16q-7-5 0-16z" fill="${HV}"/></svg>`},
-  lent:()=>{const d=dk(HV),l=lt(HV);return `<svg viewBox="0 0 160 120"><g class="a-sway" style="transform-origin:80px 2px"><path d="M80 2q-6 20 0 42" fill="none" stroke="${M}" stroke-width="2.400"/><path d="M54 32h52l12 18v56q0 4-4 4H46q-4 0-4-4V50z" fill="${HV}"/><path class="x" d="M96 32h10l12 18v56q0 4-4 4H96z" fill="${d}" opacity=".45"/><path class="x" d="M48 54l8-16" stroke="${l}" stroke-width="3" stroke-linecap="round"/><circle cx="80" cy="46" r="6.500" fill="#121516"/><circle class="x" cx="80" cy="46" r="8.500" fill="none" stroke="${d}" stroke-width="2"/><path d="M56 68h48M56 82h48M56 96h30" stroke="${D}" stroke-width="5" stroke-linecap="round"/></g></svg>`}
+    <rect x="48" y="76" width="40" height="18" rx="3" fill="${PAPER}"/><path class="x" d="M54 82h28M54 88h18" stroke="${D}" stroke-width="2.400" stroke-linecap="round"/><path class="a-drop" d="M144 32q7 11 0 16q-7-5 0-16z" fill="${HV}"/></svg>`}
 };
 /* Saw blade (hero + loader) */
 function bladePath(n,R,r){let d='';for(let i=0;i<n;i++){const a=i/n*Math.PI*2,b=(i+.62)/n*Math.PI*2,c=(i+1)/n*Math.PI*2;d+=`${i?'L':'M'}${(100+R*Math.cos(a)).toFixed(1)} ${(100+R*Math.sin(a)).toFixed(1)}L${(100+r*Math.cos(b)).toFixed(1)} ${(100+r*Math.sin(b)).toFixed(1)}L${(100+r*Math.cos(c)).toFixed(1)} ${(100+r*Math.sin(c)).toFixed(1)}`}return d+'Z'}
@@ -597,14 +758,13 @@ const ICON={
   power:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6h8a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2h-3l1.5 7h-4L9 12H7z"/><path d="M7 9H2"/></svg>',
   hand:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l9-9"/><path d="M11 5l3-2 7 7-2 3-3-1-3-3z"/></svg>',
   yard:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9M9 3h6"/><path d="M8 12h8v3c0 3-2 5-4 6-2-1-4-3-4-6z"/></svg>',
-  care:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h10l1 8H3z"/><path d="M14 14l6-6"/><path d="M6 12c1-4 5-4 6 0"/><path d="M21 12v2"/></svg>',
-  lent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12V5h7l9 9-7 7z"/><circle cx="8.5" cy="9.5" r="1.2" fill="currentColor"/></svg>'
+  care:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h10l1 8H3z"/><path d="M14 14l6-6"/><path d="M6 12c1-4 5-4 6 0"/><path d="M21 12v2"/></svg>'
 };
 const arrow='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>';
 
 /* ---------- State + helpers ---------- */
 const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let data=null, loans=store.get('ts-loans',{}), careDone=store.get('ts-care',{}), view='';
+let data=null, careDone=store.get('ts-care',{}), view='';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>n==null?null:'$'+(Math.round(n*100)%100?n.toLocaleString('en-NZ',{minimumFractionDigits:2,maximumFractionDigits:2}):Math.round(n).toLocaleString('en-NZ'));
@@ -619,7 +779,7 @@ const byId=id=>tools().find(t=>t.id===id);
 const cats=()=>data.categories||[];
 const inCat=c=>tools().filter(t=>t.category===c);
 const featured=()=>{const f=tools().filter(t=>t.featured).sort((a,b)=>a.featured-b.featured);return f.length?f:tools().slice(0,8)};
-const loanOf=t=>loans[t.id]||(t.lentTo?{to:t.lentTo,on:t.lentOn||null,repo:true}:null);
+const loanOf=t=>null; // lending removed
 const deep=c=>`color-mix(in srgb, ${c} 62%, #0b0d0e)`;
 const words=txt=>txt.split(' ').map((w,k)=>`<span class="w"><span style="--k:${k}">${esc(w)}</span></span>`).join(' ');
 const fit=(w,max,share=.94)=>`min(${max}px,${(share*100/(Math.max(3,w.length)*.5)).toFixed(1)}vw)`;
@@ -663,12 +823,12 @@ function viewShed(){
       <div class="hcopy" id="hcopy"><span class="kicker" style="color:rgba(239,230,212,.7)">${esc(data.shed?.place||'')}</span>
       <h1 class="tt">${words('The')}<br><span class="acc">${words('Shed')}</span></h1>
       <p class="hsub sub">Every tool, where it hangs, and what it's good for.</p>
-      <div class="hstats sub"><span class="pill"><b data-count="${ts.length}">0</b> tools</span><span class="pill"><b data-count="${home}">0</b> home</span><span class="pill"><b>${due.length}</b> ${due.length===1?'job':'jobs'} due</span></div></div>
+      <div class="hstats sub"><span class="pill"><b data-count="${ts.length}">0</b> tools</span><span class="pill"><b data-count="${ts.filter(t=>t.category==='power').length}">0</b> power</span><span class="pill"><b>${due.length}</b> ${due.length===1?'job':'jobs'} due</span></div></div>
       <div class="hscroll"><i></i>Scroll</div><div class="mist"></div></div></section>
   <div class="flow">
     <div class="sechead"><h2>On the <span class="serif">bench</span></h2><span class="kicker">${needs.length>1?needs.length+' things':''}</span></div>
     <div class="needs">${needs.join('')}</div>
-    <div class="tapewrap rv" role="group" aria-label="Shed totals"><div class="tcase"><i></i></div><div class="tape"><div><b>${ts.length}</b><span>Tools</span></div><div><b>${home}</b><span>At home</span></div><div><b>${money(Math.round(paid))}</b><span>Paid</span></div></div></div>
+    <div class="tapewrap rv" role="group" aria-label="Shed totals"><div class="tcase"><i></i></div><div class="tape"><div><b>${ts.length}</b><span>Tools</span></div><div><b>${new Set(ts.map(t=>t.brand).filter(Boolean)).size}</b><span>Brands</span></div><div><b>${money(Math.round(paid))}</b><span>Paid</span></div></div></div>
     <div class="sechead"><h2>The <span class="serif">wall</span></h2><span class="kicker">Tap a tool</span></div>
     <section class="board" id="board" aria-label="Pegboard"><div class="grid">${slots}</div></section>
     <div class="sechead"><h2>The <span class="serif">favourites</span></h2><span class="kicker">Keep scrolling</span></div>
@@ -719,10 +879,6 @@ function toolPage(t,i,n){
     <div class="bp"><h2>Blueprint</h2><div class="bpart">${svg(t)}</div><div class="dim">${esc(t.tag||t.name)}</div><dl>${bp.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl></div>
     ${care.length?`<div class="card"><div class="cardpad" style="padding-bottom:0"><h2>Care</h2></div>${care.map(x=>`<label class="task ${x.last&&!x.due?'done':''}"><input type="checkbox" data-care="${x.key}" ${x.last&&!x.due?'checked':''}><span class="tt2"><span class="tx">${esc(x.c.text)}</span><span class="when ${x.due?'due':''}">${x.due?'Due now':'Due in '+x.left+' day'+(x.left>1?'s':'')} · every ${x.c.every} days</span></span></label>`).join('')}</div>`:''}
     ${pairs.length?`<div class="card cardpad"><h2>Pairs with</h2><div class="pairs">${pairs.map(p=>`<button class="pair" data-go="${p.id}"><span class="mini">${svg(p)}</span>${esc(label(p))}</button>`).join('')}</div></div>`:''}
-    <div class="card cardpad"><h2>${l?'On loan':'Lend it'}</h2>
-      ${l?`<p style="margin:8px 0 0;color:var(--body)">With <b>${esc(l.to)}</b>${l.on?' since '+niceDate(l.on):''}.</p>${l.repo?'':`<div class="lendform"><button class="btn hvb" data-back="${t.id}" style="flex:1">It's back in the shed</button></div>`}`
-        :`<form class="lendform" data-lend="${t.id}"><input name="who" placeholder="Who's borrowing it?" aria-label="Who's borrowing it?" autocomplete="off" required><button class="btn">Lend</button></form>`}
-    </div>
     <p class="swipehint">${n>1?(i<n-1?'Swipe for the next tool →':'← Swipe back'):''}</p>
   </article>`;
 }
@@ -735,7 +891,7 @@ function viewCat(c){
     <div class="rail" id="rail">${list.map((t,i)=>toolPage(t,i,list.length)).join('')}</div></div>`;
 }
 
-/* ---------- Care + Lent ---------- */
+/* ---------- Care ---------- */
 function viewCare(){
   const list=careList(), due=list.filter(x=>x.due), later=list.filter(x=>!x.due);
   const task=x=>`<label class="task ${x.last&&!x.due?'done':''}"><input type="checkbox" data-care="${x.key}" ${x.last&&!x.due?'checked':''}><span class="tt2"><span class="tk">${esc(label(x.t))}</span><span class="tx">${esc(x.c.text)}</span><span class="when ${x.due?'due':''}">${x.due?(x.last?'Due now · last done '+niceDate(x.last):'Due now'):(x.last?'Done '+niceDate(x.last)+' · ':'')+'due in '+x.left+' day'+(x.left>1?'s':'')}</span></span></label>`;
@@ -745,18 +901,10 @@ function viewCare(){
   <p class="foot">Ticks are saved on this phone.</p></div>`;
 }
 function row(t){const l=loanOf(t);return `<li><button class="item" data-go="${t.id}"><span class="thumb" style="background:color-mix(in srgb,${t.colour} 16%,transparent)">${svg(t)}</span><span class="txt"><b>${esc(label(t))}</b><span>${l?'With '+esc(l.to):esc([t.model,t.power].filter(Boolean).join(' · ')||'In the shed')}</span></span><span class="val">${money(t.paid)||''}</span></button></li>`}
-function viewLent(){
-  const out=tools().filter(loanOf), home=tools().filter(t=>!loanOf(t));
-  return `<div class="flow">${chero('lent',out.length+' out',`${words("Who's got")}<br><span class="acc">${words('it?')}</span>`,"Lend a tool and it shows as an empty outline on the wall until it's back.")}
-  <section class="rv"><h2 class="h2s">Out now · ${out.length}</h2>${out.length?`<div class="card">${out.map(t=>{const l=loanOf(t);return `<div class="loan"><span class="mini">${svg(t)}</span><div style="flex:1;min-width:0"><b>${esc(label(t))}</b><div style="font-size:14px;color:var(--muted)">With ${esc(l.to)}${l.on?' since '+niceDate(l.on)+' ('+days(l.on,today())+' days)':''}</div></div>${l.repo?'':`<button class="btn hvb" data-back="${t.id}">Back</button>`}</div>`}).join('')}</div>`:'<p class="empty card">Everything is home.</p>'}</section>
-  <section class="rv"><h2 class="h2s">Lend something</h2><ul class="items card">${home.map(row).join('')}</ul></section>
-  <p class="foot">Loans are saved on this phone.</p></div>`;
-}
-
 /* ---------- Tabs, router ---------- */
 function tabs(cur){
-  const due=careList().filter(x=>x.due).length, out=tools().filter(loanOf).length;
-  const T=[['shed','Shed'],...cats().map(c=>[c.id,c.name]),['care','Care',due],['lent','Lent',out]];
+  const due=careList().filter(x=>x.due).length;
+  const T=[['shed','Shed'],...cats().map(c=>[c.id,c.name]),['care','Care',due]];
   $('#tabs').innerHTML=T.map(([id,name,n])=>`<a class="tab" href="#${id}" ${cur===id?'aria-current="page"':''}>${ICON[id]||ICON.hand}${esc(name)}${n?`<span class="dot">${n}</span>`:''}</a>`).join('');
 }
 function parse(){ const [v,id]=location.hash.slice(1).split('/'); return {v:v||'shed',id}; }
@@ -764,12 +912,12 @@ function render(keep){
   if(!data) return;
   let {v,id}=parse();
   const cat=cats().find(c=>c.id===v);
-  if(!cat&&!['shed','care','lent'].includes(v)) v='shed';
+  if(!cat&&!['shed','care'].includes(v)) v='shed';
   const same=v===view&&keep;
   if(cat&&v===view&&$('#rail')&&!keep){ scrollRailTo(id,true); return; } // same category: just move to the tool
   view=v;
   const y=window.scrollY, railX=$('#rail')?.scrollLeft;
-  $('#main').innerHTML=v==='shed'?viewShed():v==='care'?viewCare():v==='lent'?viewLent():viewCat(cat);
+  $('#main').innerHTML=v==='shed'?viewShed():v==='care'?viewCare():viewCat(cat);
   document.body.classList.toggle('dark-top',v==='shed');
   tabs(v);
   if(same){ window.scrollTo(0,y); if($('#rail')&&railX!=null) $('#rail').scrollLeft=railX; }
@@ -854,17 +1002,11 @@ addEventListener('resize',()=>{ if(!data) return; if(view==='shed') sizeLineup()
 document.addEventListener('click',e=>{
   const g=e.target.closest('[data-go]'); if(g){ e.preventDefault(); closeSheet(); go(byId(g.dataset.go)); return; }
   const pk=e.target.closest('[data-idx]'); if(pk){ const rail=$('#rail'); rail.scrollTo({left:+pk.dataset.idx*rail.clientWidth,behavior:'smooth'}); return; }
-  const b=e.target.closest('[data-back]'); if(b){ delete loans[b.dataset.back]; store.set('ts-loans',loans); render(true); }
 });
 document.addEventListener('change',e=>{
   const k=e.target.dataset&&e.target.dataset.care; if(!k) return;
   if(e.target.checked) careDone[k]=today(); else delete careDone[k];
   store.set('ts-care',careDone); setTimeout(()=>render(true),650);
-});
-document.addEventListener('submit',e=>{
-  const f=e.target.closest('[data-lend]'); if(!f) return; e.preventDefault();
-  const who=f.who.value.trim(); if(!who) return;
-  loans[f.dataset.lend]={to:who,on:today()}; store.set('ts-loans',loans); render(true);
 });
 addEventListener('hashchange',()=>render(false));
 

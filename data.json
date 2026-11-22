@@ -24,6 +24,465 @@
   ],
   "tools": [
     {
+      "id": "bosch-circ-saw",
+      "name": "cordless circular saw",
+      "tag": "Circ saw",
+      "verb": "Rip",
+      "brand": "Bosch",
+      "model": "GKS 18V",
+      "category": "power",
+      "art": "circsaw",
+      "colour": "#1F5E8A",
+      "size": "big",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Bosch 18V Professional",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "blade",
+          "text": "Check the blade for pitch build-up and dull teeth",
+          "every": 90
+        },
+        {
+          "id": "guard",
+          "text": "Check the lower guard snaps back freely",
+          "every": 60
+        }
+      ],
+      "uses": [
+        "Ripping sheets of ply and MDF",
+        "Cross-cutting framing timber",
+        "Breaking down big boards before the mitre saw"
+      ],
+      "pairs": [
+        "bosch-grinder"
+      ],
+      "spot": "Pegboard",
+      "featured": 1
+    },
+    {
+      "id": "bosch-grinder",
+      "name": "brushless angle grinder",
+      "tag": "Grinder",
+      "verb": "Grind",
+      "brand": "Bosch",
+      "model": "18V brushless",
+      "category": "power",
+      "art": "grinder",
+      "colour": "#1F5E8A",
+      "size": "wide",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Bosch 18V Professional",
+      "includes": [],
+      "specs": [],
+      "notes": "Wear the safety glasses that hang next to it.",
+      "care": [
+        {
+          "id": "guard",
+          "text": "Check the guard is tight and the disc isn't chipped",
+          "every": 30
+        }
+      ],
+      "uses": [
+        "Cutting bolts, rebar and tiles",
+        "Grinding off rust and old welds",
+        "Sharpening spades and mower blades"
+      ],
+      "pairs": [
+        "bosch-circ-saw"
+      ],
+      "spot": "Pegboard",
+      "featured": 6
+    },
+    {
+      "id": "bosch-gop250",
+      "name": "corded multi-tool",
+      "tag": "Multi-tool",
+      "verb": "Plunge",
+      "brand": "Bosch",
+      "model": "GOP 250 CE",
+      "category": "power",
+      "art": "multitool",
+      "colour": "#1F5E8A",
+      "size": "wide",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Corded 240V",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "blades",
+          "text": "Check the blades for worn teeth",
+          "every": 90
+        }
+      ],
+      "uses": [
+        "Plunge cuts in skirting and plasterboard",
+        "Flush-cutting door frames and dowels",
+        "Scraping old sealant and glue"
+      ],
+      "pairs": [
+        "makita-vc2000l"
+      ],
+      "spot": "Pegboard",
+      "featured": 7
+    },
+    {
+      "id": "bosch-gop12",
+      "name": "cordless multi-tool",
+      "tag": "Mini multi",
+      "verb": "Trim",
+      "brand": "Bosch",
+      "model": "GOP 10.8V-Li",
+      "category": "power",
+      "art": "multitool12",
+      "colour": "#1F5E8A",
+      "size": "wide",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Bosch 10.8V / 12V",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Quick trims where a cord gets in the way",
+        "Cutting out small holes for fittings"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "bosch-hammer-drill",
+      "name": "cordless hammer drill",
+      "tag": "Drill",
+      "verb": "Drill",
+      "brand": "Bosch",
+      "model": "GSB 18V",
+      "category": "power",
+      "art": "bdrill",
+      "colour": "#1F5E8A",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Bosch 18V Professional",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "chuck",
+          "text": "Blow the dust out of the chuck",
+          "every": 60
+        }
+      ],
+      "uses": [
+        "Drilling timber, metal and masonry",
+        "Hammer mode for brick and concrete",
+        "Driving big screws"
+      ],
+      "pairs": [
+        "bosch-impact",
+        "bosch-drill-old"
+      ],
+      "spot": "Pegboard",
+      "featured": 3
+    },
+    {
+      "id": "bosch-drill-old",
+      "name": "cordless drill (older)",
+      "tag": "Old drill",
+      "verb": "Bore",
+      "brand": "Bosch",
+      "model": "18V, label worn",
+      "category": "power",
+      "art": "bdrillold",
+      "colour": "#1F5E8A",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Bosch 18V Professional",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "A second drill: one drills, one drives",
+        "Messy jobs you don't want the good drill on"
+      ],
+      "pairs": [
+        "bosch-hammer-drill"
+      ],
+      "spot": "Pegboard",
+      "condition": "worn"
+    },
+    {
+      "id": "bosch-impact",
+      "name": "impact driver",
+      "tag": "Impact",
+      "verb": "Drive",
+      "brand": "Bosch",
+      "model": "GDR 18V-200",
+      "category": "power",
+      "art": "bimpact",
+      "colour": "#1F5E8A",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Bosch 18V Professional",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Driving long screws and coach bolts",
+        "Decking and framing",
+        "Undoing stuck bolts"
+      ],
+      "pairs": [
+        "bosch-hammer-drill"
+      ],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "ryobi-framer",
+      "name": "AirStrike framing nailer",
+      "tag": "Framer",
+      "verb": "Frame",
+      "brand": "Ryobi",
+      "model": "AirStrike",
+      "category": "power",
+      "art": "framer",
+      "colour": "#C9D21F",
+      "size": "big",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Ryobi One+ 18V",
+      "includes": [],
+      "specs": [],
+      "notes": "No compressor or gas needed: the air is made inside the tool.",
+      "care": [
+        {
+          "id": "mag",
+          "text": "Clear the magazine and wipe the nose",
+          "every": 60
+        }
+      ],
+      "uses": [
+        "Framing walls, sheds and decks",
+        "Fences and pallets"
+      ],
+      "pairs": [
+        "ryobi-brad"
+      ],
+      "spot": "Pegboard",
+      "featured": 2
+    },
+    {
+      "id": "ryobi-brad",
+      "name": "AirStrike 18 gauge brad nailer",
+      "tag": "Brad nailer",
+      "verb": "Nail",
+      "brand": "Ryobi",
+      "model": "AirStrike 18G",
+      "category": "power",
+      "art": "brad",
+      "colour": "#C9D21F",
+      "size": "big",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Ryobi One+ 18V",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Skirting, architraves and trim",
+        "Small furniture and picture frames"
+      ],
+      "pairs": [
+        "ryobi-framer"
+      ],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "ryobi-palm-sander",
+      "name": "One+ palm sander",
+      "tag": "Palm sander",
+      "verb": "Smooth",
+      "brand": "Ryobi",
+      "model": "One+",
+      "category": "power",
+      "art": "palmsander",
+      "colour": "#C9D21F",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Ryobi One+ 18V",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "pad",
+          "text": "Check the pad still grips the paper",
+          "every": 60
+        }
+      ],
+      "uses": [
+        "Light sanding between coats",
+        "Corners and small panels"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "ryobi-router",
+      "name": "One+ trim router",
+      "tag": "Router",
+      "verb": "Route",
+      "brand": "Ryobi",
+      "model": "One+",
+      "category": "power",
+      "art": "router",
+      "colour": "#C9D21F",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Ryobi One+ 18V",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "bits",
+          "text": "Clean resin off the bits",
+          "every": 90
+        }
+      ],
+      "uses": [
+        "Rounding over edges",
+        "Cutting grooves and hinge recesses",
+        "Trimming laminate flush"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "ryobi-sheet-sander",
+      "name": "corded sheet sander",
+      "tag": "Sheet sander",
+      "verb": "Finish",
+      "brand": "Ryobi",
+      "model": "Micro Filtration",
+      "category": "power",
+      "art": "sheetsander",
+      "colour": "#C9D21F",
+      "size": "big",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Corded 240V",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "box",
+          "text": "Empty and tap out the dust box",
+          "every": 14
+        }
+      ],
+      "uses": [
+        "Flat panels, doors and table tops",
+        "Final finish sanding"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "ryobi-quickturn",
+      "name": "4V QuickTurn screwdriver",
+      "tag": "QuickTurn",
+      "verb": "Twist",
+      "brand": "Ryobi",
+      "model": "4V QuickTurn",
+      "category": "power",
+      "art": "quickturn",
+      "colour": "#C9D21F",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Ryobi 4V built-in",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "charge",
+          "text": "Top up the charge",
+          "every": 60
+        }
+      ],
+      "uses": [
+        "Flat-pack furniture",
+        "Light fittings and switch plates"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "makita-planer",
+      "name": "corded power planer",
+      "tag": "Planer",
+      "verb": "Plane",
+      "brand": "Makita",
+      "model": null,
+      "category": "power",
+      "art": "planer",
+      "colour": "#0F8C99",
+      "size": "big",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": "Corded 240V",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "blades",
+          "text": "Check the blades are sharp and tight",
+          "every": 90
+        }
+      ],
+      "uses": [
+        "Taking doors down so they close",
+        "Levelling and trimming timber edges"
+      ],
+      "pairs": [],
+      "spot": "Pegboard",
+      "featured": 4
+    },
+    {
       "id": "bosch-mitre-saw",
       "name": "sliding mitre saw + stand",
       "tag": "Mitre saw",
@@ -61,8 +520,7 @@
         "Skirting, framing and decking",
         "Picture frames and trim"
       ],
-      "pairs": [],
-      "featured": 1
+      "pairs": []
     },
     {
       "id": "makita-bo5030",
@@ -118,7 +576,7 @@
       "pairs": [
         "makita-vc2000l"
       ],
-      "featured": 2
+      "featured": 5
     },
     {
       "id": "makita-vc2000l",
@@ -169,9 +627,9 @@
         "Wet spills and flooded corners"
       ],
       "pairs": [
-        "makita-bo5030"
-      ],
-      "featured": 4
+        "makita-bo5030",
+        "bosch-gop250"
+      ]
     },
     {
       "id": "ryobi-batteries",
@@ -221,97 +679,256 @@
       ]
     },
     {
-      "id": "demo-drill",
-      "name": "drill driver",
-      "tag": "Drill",
-      "verb": "Drill",
-      "brand": "DeWalt",
-      "model": "18V XR",
-      "category": "power",
-      "art": "drill",
-      "colour": "#E8B400",
-      "size": "big",
-      "paid": 80,
-      "newPrice": 249,
-      "newFrom": "Sample price",
-      "power": "DeWalt 18V XR",
+      "id": "hammers",
+      "name": "hammers and mallets",
+      "tag": "Hammers",
+      "verb": "Strike",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "hammers",
+      "colour": "#8A5634",
+      "size": "wide",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
       "includes": [
-        "Drill driver",
-        "2Ah battery",
-        "Charger"
+        "Rubber mallet (Craftright)",
+        "Wooden-handled mallet",
+        "Club hammer",
+        "Claw hammer"
       ],
-      "specs": [
-        [
-          "Chuck",
-          "13mm keyless"
-        ],
-        [
-          "Speeds",
-          "2"
-        ]
-      ],
-      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
-      "care": [
-        {
-          "id": "chuck",
-          "text": "Blow the dust out of the chuck and wipe it down",
-          "every": 60
-        }
-      ],
+      "specs": [],
+      "notes": "",
+      "care": [],
       "uses": [
-        "Drilling timber, metal and masonry",
-        "Driving screws all day"
-      ],
-      "pairs": [
-        "drill-bits"
-      ],
-      "demo": true,
-      "featured": 3
-    },
-    {
-      "id": "demo-circ-saw",
-      "name": "circular saw",
-      "tag": "Circ saw",
-      "verb": "Rip",
-      "brand": "Makita",
-      "model": "185mm",
-      "category": "power",
-      "art": "circsaw",
-      "colour": "#00898F",
-      "size": "big",
-      "paid": 60,
-      "newPrice": 199,
-      "newFrom": "Sample price",
-      "power": "Corded 240V",
-      "includes": [
-        "Saw",
-        "Rip fence",
-        "Blade spanner"
-      ],
-      "specs": [
-        [
-          "Blade",
-          "185mm"
-        ],
-        [
-          "Motor",
-          "1200W"
-        ]
-      ],
-      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
-      "care": [
-        {
-          "id": "blade",
-          "text": "Check the blade for pitch build-up and dull teeth",
-          "every": 90
-        }
-      ],
-      "uses": [
-        "Ripping sheets of ply",
-        "Straight cuts in framing timber"
+        "Knocking things together without marking",
+        "Driving nails and pegs",
+        "Demolition jobs"
       ],
       "pairs": [],
-      "demo": true
+      "spot": "Pegboard"
+    },
+    {
+      "id": "staple-gun",
+      "name": "heavy-duty staple gun",
+      "tag": "Staple gun",
+      "verb": "Staple",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "staplegun",
+      "colour": "#9BA2A7",
+      "size": "wide",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Fabric, mesh and shade cloth",
+        "Cable clips and underlay"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "hex-keys",
+      "name": "hex key set",
+      "tag": "Hex keys",
+      "verb": "Hex",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "hexkeys",
+      "colour": "#2B5FA8",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Flat-pack furniture",
+        "Bike and machine bolts"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "pliers",
+      "name": "insulated pliers and side cutters",
+      "tag": "Pliers",
+      "verb": "Grip",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "pliers",
+      "colour": "#D7332C",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [
+        "Combination pliers",
+        "Side cutters"
+      ],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Cutting wire and cable ties",
+        "Gripping and bending"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "adj-wrench",
+      "name": "adjustable wrench",
+      "tag": "Shifter",
+      "verb": "Adjust",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "adjwrench",
+      "colour": "#9BA2A7",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Taps, pipe fittings and odd-sized nuts"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "ratchet-driver",
+      "name": "ratcheting screwdriver",
+      "tag": "Ratchet driver",
+      "verb": "Spin",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "ratchetdriver",
+      "colour": "#C2413A",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Fast screwing without a battery"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "wiha-drivers",
+      "name": "insulated screwdrivers",
+      "tag": "Wiha",
+      "verb": "Safe",
+      "brand": "Wiha",
+      "model": "SoftFinish",
+      "category": "hand",
+      "art": "wiha",
+      "colour": "#D7332C",
+      "size": "small",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [
+        "PH2 × 100",
+        "5.5 × 125 flat"
+      ],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Electrical fittings (insulated)"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "ratchet-spanners",
+      "name": "ratcheting spanners",
+      "tag": "Spanners",
+      "verb": "Wrench",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "spanners",
+      "colour": "#9BA2A7",
+      "size": "wide",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [
+        "6 combination ratchet spanners"
+      ],
+      "specs": [
+        [
+          "Steel",
+          "Chrome vanadium"
+        ]
+      ],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Nuts in tight spots without lifting the spanner"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
+    },
+    {
+      "id": "hart-drivers",
+      "name": "screwdriver set",
+      "tag": "HART set",
+      "verb": "Screw",
+      "brand": "HART",
+      "model": null,
+      "category": "hand",
+      "art": "hartrack",
+      "colour": "#C2413A",
+      "size": "wide",
+      "paid": null,
+      "newPrice": null,
+      "newFrom": null,
+      "power": null,
+      "includes": [
+        "11 screwdrivers",
+        "1 stubby",
+        "Wall rack"
+      ],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Every screw in the house"
+      ],
+      "pairs": [],
+      "spot": "Pegboard"
     },
     {
       "id": "fatmax-hand-lot",
@@ -350,39 +967,47 @@
         "Assembling flat-packs",
         "A grab-and-go bag for jobs"
       ],
-      "pairs": [],
-      "featured": 5
+      "pairs": []
     },
     {
       "id": "toolpro-sockets",
-      "name": "socket set",
+      "name": "socket and spanner set",
       "tag": "Sockets",
       "verb": "Turn",
       "brand": "ToolPro",
       "model": null,
       "category": "hand",
       "art": "sockets",
-      "colour": "#2B5FA8",
-      "size": "small",
+      "colour": "#C8312E",
+      "size": "big",
       "paid": 30.99,
       "newPrice": null,
       "newFrom": null,
       "power": null,
-      "includes": [],
+      "includes": [
+        "Deep sockets",
+        "Bit sockets",
+        "12 combination spanners",
+        "3 ratchets",
+        "Extensions and universal joints",
+        "T-bar and spinner handle",
+        "Bit trays"
+      ],
       "specs": [],
       "notes": "",
       "care": [],
       "uses": [
-        "Nuts and bolts on bikes, mowers and furniture",
-        "Car jobs"
+        "Car and mower jobs",
+        "Furniture and machine bolts"
       ],
-      "pairs": []
+      "pairs": [],
+      "featured": 8
     },
     {
       "id": "bosch-hand-set",
       "name": "hand tool set",
       "tag": "Bosch set",
-      "verb": "Grip",
+      "verb": "Kit",
       "brand": "Bosch",
       "model": null,
       "category": "hand",
@@ -563,71 +1188,7 @@
       ],
       "pairs": [
         "ox-level-600"
-      ],
-      "featured": 6
-    },
-    {
-      "id": "demo-tape",
-      "name": "8m tape measure",
-      "tag": "Tape",
-      "verb": "Measure",
-      "brand": "Stanley",
-      "model": "FatMax",
-      "category": "hand",
-      "art": "tape",
-      "colour": "#E8B400",
-      "size": "small",
-      "paid": 10,
-      "newPrice": 38,
-      "newFrom": "Sample price",
-      "power": null,
-      "includes": [],
-      "specs": [
-        [
-          "Length",
-          "8m"
-        ]
-      ],
-      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
-      "care": [],
-      "uses": [
-        "Measure twice, cut once"
-      ],
-      "pairs": [],
-      "demo": true
-    },
-    {
-      "id": "demo-clamps",
-      "name": "quick clamps",
-      "tag": "Clamps",
-      "verb": "Hold",
-      "brand": "Irwin",
-      "model": "Quick-Grip",
-      "category": "hand",
-      "art": "clamp",
-      "colour": "#1F4E9C",
-      "size": "small",
-      "paid": 15,
-      "newPrice": 60,
-      "newFrom": "Sample price",
-      "power": null,
-      "includes": [
-        "300mm clamp ×2"
-      ],
-      "specs": [
-        [
-          "Opening",
-          "300mm"
-        ]
-      ],
-      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
-      "care": [],
-      "uses": [
-        "Holding glue-ups",
-        "A third hand at the bench"
-      ],
-      "pairs": [],
-      "demo": true
+      ]
     },
     {
       "id": "ryobi-blower-vac",
@@ -663,8 +1224,7 @@
       ],
       "pairs": [
         "ryobi-batteries"
-      ],
-      "featured": 7
+      ]
     },
     {
       "id": "wheelbarrow",
@@ -704,8 +1264,7 @@
       ],
       "pairs": [
         "demo-spade"
-      ],
-      "featured": 8
+      ]
     },
     {
       "id": "keter-shed",
@@ -741,80 +1300,6 @@
         "Keeping the tools dry and locked away"
       ],
       "pairs": []
-    },
-    {
-      "id": "demo-spade",
-      "name": "garden spade",
-      "tag": "Spade",
-      "verb": "Dig",
-      "brand": "Fiskars",
-      "model": null,
-      "category": "yard",
-      "art": "spade",
-      "colour": "#E35A1B",
-      "size": "small",
-      "paid": 12,
-      "newPrice": 65,
-      "newFrom": "Sample price",
-      "power": null,
-      "includes": [],
-      "specs": [],
-      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
-      "care": [
-        {
-          "id": "edge",
-          "text": "Clean the blade and touch up the edge with a file",
-          "every": 120
-        }
-      ],
-      "uses": [
-        "Digging and edging garden beds",
-        "Planting trees and shrubs"
-      ],
-      "pairs": [
-        "wheelbarrow"
-      ],
-      "demo": true
-    },
-    {
-      "id": "demo-ladder",
-      "name": "step ladder",
-      "tag": "Ladder",
-      "verb": "Climb",
-      "brand": "Bailey",
-      "model": "1.8m",
-      "category": "yard",
-      "art": "ladder",
-      "colour": "#C2413A",
-      "size": "small",
-      "paid": 30,
-      "newPrice": 159,
-      "newFrom": "Sample price",
-      "power": null,
-      "includes": [],
-      "specs": [
-        [
-          "Height",
-          "1.8m"
-        ],
-        [
-          "Load",
-          "120kg"
-        ]
-      ],
-      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
-      "care": [
-        {
-          "id": "feet",
-          "text": "Check the feet and hinges before you climb",
-          "every": 180
-        }
-      ],
-      "uses": [
-        "Gutters, light fittings and high shelves"
-      ],
-      "pairs": [],
-      "demo": true
     }
   ]
 }
