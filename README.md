@@ -1,18 +1,16 @@
 # Tool Shed
 
-A phone-first page for every tool in the shed. Colours follow the 60/30/10 rule: graphite, sawdust cream and one hi-vis yellow accent.
+A phone-first page for every tool in the shed. Colours follow the 60/30/10 rule: gunmetal and black, steel grey, and one signal-red accent, with diamond-plate texture on the dark panels.
 
 ## How it flows
 
 - **Shed (home):** a dark dotted opening screen with a big saw blade that turns as you scroll, then shrinks into mist. After that:
   - **On the bench:** care jobs that are due.
-  - **Tape measure:** the totals pull out of a tape-measure case.
+  - **Tape measure:** counts of power tools, hand tools and brands pull out of a tape-measure case.
   - **The wall:** a pegboard where every tool swings onto its hook.
-  - **The favourites:** a scroll reel of the `featured` tools. Each one fills the screen on its brand colour with a giant action word behind it (CUT, SAND, DRILL…). The next one slides up over the last with a saw-tooth edge, and a ruler down the side shows how far through you are.
   - **The whole kit:** every tool on one long shelf that slides sideways as you scroll down.
-  - **Caution tape**, then "Less buying. More fixing." lighting up word by word.
-  - **Bargain meter:** a glowing gauge of how far under the new price you paid.
-- **Power · Hand · Yard:** each tab opens with its own artwork (drill, crossed hammer and spanner, spade). Then a picker row and full tool pages you swipe through sideways. Each page opens up as it arrives: the moving drawing in front of its action word, price tags, what it's good for, what's in the kit, a blueprint card that redraws the tool as a white outline, care jobs and what it pairs with.
+  - **Barrier tape**, then "Less buying. More fixing." lighting up word by word.
+- **Power · Hand · Yard:** each tab opens with its own artwork (drill, crossed hammer and spanner, spade). Then a picker row and full tool pages you swipe through sideways. Each page opens up as it arrives: the moving drawing in front of its action word, what it's good for, what's in the kit, a blueprint card that redraws the tool as a white outline, care jobs and what it pairs with.
 - **Care:** small maintenance jobs. The tick boxes are hex nuts that turn when you tick them. A job comes back when it's due again.
 - **Search** (magnifying glass, top right) looks through names, brands, kit and uses.
 - **Spirit level** (top of every page): the bubble shows how far down the page you are.
@@ -44,7 +42,6 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
   - `name`: what it is, without the brand.
   - `tag`: short name for the wall label (about 12 characters).
   - `verb`: one action word shown huge behind the drawing (Cut, Sand, Clean…).
-  - `featured` (optional): a number. Tools with one appear in the home page reel, in that order (about 8 works best).
   - `brand`, `model`: `null` if unknown.
   - `category`: a category `id` (`power`, `hand` or `yard`). Each category is a tab in the bottom bar.
   - `art`: drawing key (`mitresaw`, `sander`, `vac`, `blower`, `battery`, `wheelbarrow`, `toolbag`, `sockets`, `handset`, `screwdrivers`, `knife`, `bits`, `level`, `shed`, `drill`, `circsaw`, `tape`, `clamp`, `spade`, `ladder`, `generic`).
