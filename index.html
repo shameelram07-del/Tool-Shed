@@ -265,14 +265,14 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .plate-val .vrow b{display:block;font-family:var(--display);font-weight:900;font-size:24px;line-height:1}
 .plate-val .vrow span{display:block;font-family:var(--mono);font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:rgba(228,231,234,.7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .plate-val .vnote{margin:12px 0 0;text-align:center;font-size:13px;color:rgba(228,231,234,.6)}
-.valfact{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border-radius:18px;overflow:hidden}
-.valfact>div{padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
-.valfact>div+div{border-left:1px dashed var(--line)}
-.valfact .k{font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.valfact .v{font-family:var(--display);font-weight:900;font-size:36px;line-height:1}
-.valfact .v.acc{color:var(--hv)}
-.valfact .s{font-size:12px;color:var(--muted)}
-.valfact .s a{color:inherit}
+.facts .valfact{grid-column:span 2;display:grid;padding:0;gap:0;grid-template-columns:1fr 1fr;background:var(--surface);border-radius:18px;overflow:hidden}
+.facts .valfact>div{padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.facts .valfact>div+div{border-left:1px dashed var(--line)}
+.facts .valfact .k{font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.facts .valfact .v{font-family:var(--display);font-weight:900;font-size:36px;line-height:1}
+.facts .valfact .v.acc{color:var(--hv)}
+.facts .valfact .s{font-size:12px;color:var(--muted)}
+.facts .valfact .s a{color:inherit}
 /* Tab heroes with artwork */
 .chero{position:relative;margin:0 0 4px;border-radius:30px;overflow:hidden;background:var(--night);color:var(--cream);padding:150px 20px 22px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:inset 0 0 0 1px rgba(228,231,234,.08)}
 .chero .stipple{opacity:.7}
@@ -301,7 +301,7 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .rail{display:flex;align-items:flex-start;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;margin:0 -16px}
 .rail::-webkit-scrollbar{display:none}
 .page{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;padding:0 16px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.plate{position:relative;border-radius:200px 200px 28px 28px;padding:44px 16px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;overflow:hidden;color:var(--cream);background-image:radial-gradient(circle at center,rgba(0,0,0,.25) 0 2.2px,transparent 2.8px);background-size:20px 20px}
+.plate{container-type:inline-size;position:relative;border-radius:200px 200px 28px 28px;padding:44px 16px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;overflow:hidden;color:var(--cream);background-image:radial-gradient(circle at center,rgba(0,0,0,.25) 0 2.2px,transparent 2.8px);background-size:20px 20px}
 .plate .verb{position:absolute;left:0;right:0;top:20%;text-align:center;font-family:var(--display);font-weight:900;line-height:.8;text-transform:uppercase;color:rgba(228,231,234,.95);white-space:nowrap;pointer-events:none}
 .plate .big{position:relative;z-index:1;width:min(300px,84%);margin-top:34px;filter:drop-shadow(0 18px 14px rgba(0,0,0,.4))}
 .plate .big svg{width:100%;height:auto;overflow:visible}
@@ -873,7 +873,7 @@ const featured=()=>{const f=tools().filter(t=>t.featured).sort((a,b)=>a.featured
 const loanOf=t=>null; // lending removed
 const deep=c=>`color-mix(in srgb, ${c} 62%, #0b0d0e)`;
 const words=txt=>txt.split(' ').map((w,k)=>`<span class="w"><span style="--k:${k}">${esc(w)}</span></span>`).join(' ');
-const fit=(w,max,share=.94)=>`min(${max}px,${(share*100/(Math.max(3,w.length)*.5)).toFixed(1)}vw)`;
+const fit=(w,max,share=.94)=>{const n=(share*100/(Math.max(3,w.length)*.6)).toFixed(1);return `min(${max}px,${n}vw,${n}cqw)`}; // sized to the card (cqw), not the screen, so wide screens don't overflow
 function careList(){
   const out=[];
   for(const t of tools()) for(const c of (t.care||[])){

@@ -6,6 +6,7 @@ A phone-first page for every tool in the shed. Colours follow the 60/30/10 rule:
 
 - **Shed (home):** a dark dotted opening screen with a big saw blade that turns as you scroll, then shrinks into mist. After that:
   - **On the bench:** care jobs that are due.
+  - **Whole shed value:** a steel plate with the total cost to replace every priced tool new, the estimated used value, how many tools are priced, and the most valuable tool.
   - **Tape measure:** counts of power tools, hand tools and brands pull out of a tape-measure case.
   - **The wall:** a pegboard where every tool swings onto its hook.
   - **The whole kit:** every tool on one long shelf that slides sideways as you scroll down.
@@ -34,6 +35,7 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
 ## data.json shape
 
 - `updated`: date of the last change (`YYYY-MM-DD`).
+- `pricedOn`: the date the new prices were checked.
 - `careStart`: care timers for jobs never ticked count from this date.
 - `shed`: `{ name, place }`.
 - `categories[]`: `{ id, name, blurb }`. Tab artwork exists for `power`, `hand` and `yard`.
@@ -48,7 +50,8 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
   - `colour`: brand colour for the drawing and the tool page.
   - `size`: wall slot size: `small`, `wide` or `big`.
   - `paid`: what was paid. `null` if not recorded.
-  - `newPrice`, `newFrom`: current NZ new price and the shop it came from. Look it up, never guess.
+  - `newPrice`, `newFrom`, `newUrl`: current NZ new price, the shop (and the model matched, if not the exact one) and the page it came from. Look it up, never guess.
+  - `usedValue` (optional): a set used value. Without it, used value is 55% of new, or 40% if `condition` is `worn`.
   - `power`: `Corded 240V`, a battery platform such as `Ryobi One+ 18V`, or `null` for hand tools.
   - `includes[]`, `specs[[label, value]]`, `notes`.
   - `uses[]`: what it's good for.
