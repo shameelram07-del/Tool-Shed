@@ -917,7 +917,7 @@ function viewShed(){
       <h1 class="tt">${words('The')}<br><span class="acc">${words('Shed')}</span></h1>
       <p class="hsub sub">Every tool, where it hangs, and what it's good for.</p>
       <div class="hstats sub"><span class="pill"><b data-count="${ts.length}">0</b> tools</span><span class="pill"><b data-count="${ts.filter(t=>t.category==='power').length}">0</b> power</span><span class="pill"><b>${due.length}</b> ${due.length===1?'job':'jobs'} due</span></div></div>
-      <div class="hscroll"><i></i>Scroll</div><div class="mist"></div></div></section>
+      <div class="mist"></div></div></section>
   <div class="flow">
     <div class="sechead"><h2>On the <span class="serif">bench</span></h2><span class="kicker">${needs.length>1?needs.length+' things':''}</span></div>
     <div class="needs">${needs.join('')}</div>
