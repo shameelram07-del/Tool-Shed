@@ -16,14 +16,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Instrument+Serif:ital@0;1&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
 <style>
-/* Tool Shed. Phone-first inventory of the tools in the shed.
-   60/30/10: graphite / sawdust cream / hi-vis yellow.
-   Shed tab: stippled hero that shrinks into mist → what needs you → pegboard wall → scroll reel (one tool per step, giant verb behind it, numbered, brand-colour screen) → word-by-word statement.
-   Category tabs: swipe sideways through full tool pages. Care and Lent tabs. All content from data.json. */
+/* Tool Shed. Phone-first inventory of the tools in the shed. 60/30/10: graphite / sawdust cream / hi-vis yellow.
+   Tool-themed parts: spirit-level scroll indicator, saw blade hero, tape-measure stats, pegboard wall, saw-tooth slide-up reel with a ruler,
+   lineup shelf, caution tape, torque-gauge bargain meter, blueprint spec cards, hex-nut tick boxes, label-tape names.
+   Shed tab: hero → bench → wall → reel (one featured tool per step) → lineup → statement → gauge.
+   Power / Hand / Yard: artwork hero, picker, swipe sideways through tool pages. Care and Lent tabs. All content from data.json. */
 :root{
   --bg:#EFE6D4; --surface:#FBF6EC; --sunk:#E4D9C3; --ink:#16191B; --body:#3B4043; --muted:#64665F; --line:#D6C9AF;
   --hv:#F4C21B; --hv-ink:#16191B; --warn:#B3362D; --ok:#2F7A4F;
-  --night:#121516; --cream:#EFE6D4;
+  --night:#121516; --cream:#EFE6D4; --wood:#8A5A2B; --blue:#1D4C86;
   --board:#C8A678; --hole:rgba(58,38,18,.55); --board-edge:#A9875A; --ghost:rgba(58,38,18,.6);
   --shadow:rgba(40,30,20,.35); --glass:rgba(251,246,236,.86);
   --display:"Big Shoulders Display",Impact,sans-serif; --serif:"Instrument Serif",Georgia,serif; --sans:"Atkinson Hyperlegible",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
@@ -49,50 +50,65 @@ button,input{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--hv);outline-offset:2px}
 [hidden]{display:none!important}
 .wrap{max-width:560px;margin:0 auto;min-height:100vh;padding-bottom:calc(120px + env(safe-area-inset-bottom))}
+main{overflow-x:clip}
 .kicker{font-family:var(--mono);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .serif{font-family:var(--serif);font-style:italic;font-weight:400}
 
-/* Header: transparent over the hero, glass once you scroll */
+/* Header: transparent over the hero, glass after. The spirit level's bubble shows how far down the page you are. */
 .top{position:sticky;top:0;z-index:12;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;display:flex;justify-content:space-between;align-items:center;gap:10px;transition:background .3s,box-shadow .3s,color .3s}
 .top.glassy{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--line)}
-body.onhero .top:not(.glassy){color:var(--cream)}
-.brand{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+body.dark-top .top:not(.glassy){color:var(--cream)}
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
 .brand i{width:12px;height:12px;border-radius:3px;background:var(--hv);box-shadow:inset 0 0 0 2px currentColor}
+.level{flex:none;width:86px;height:22px;border-radius:6px;background:var(--hv);box-shadow:inset 0 0 0 2px #16191B,0 2px 6px rgba(0,0,0,.25);display:grid;place-items:center}
+.vial{position:relative;width:60px;height:12px;border-radius:6px;background:#B9E36A;box-shadow:inset 0 0 0 1.5px #16191B;overflow:hidden}
+.vial::before,.vial::after{content:"";position:absolute;top:0;bottom:0;width:1.5px;background:#16191B;left:22px}
+.vial::after{left:auto;right:22px}
+.vial i{position:absolute;left:50%;top:50%;width:12px;height:8px;margin:-4px 0 0 -6px;border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(22,25,27,.35);will-change:transform}
 .acts{display:flex;gap:8px}
-.iconbtn{width:44px;height:44px;border-radius:50%;border:1px solid color-mix(in srgb,currentColor 22%,transparent);background:color-mix(in srgb,currentColor 6%,transparent);display:grid;place-items:center;cursor:pointer;color:inherit}
+.iconbtn{width:44px;height:44px;border-radius:50%;border:1px solid color-mix(in srgb,currentColor 22%,transparent);background:color-mix(in srgb,currentColor 6%,transparent);display:grid;place-items:center;cursor:pointer;color:inherit;transition:transform .2s var(--ease)}
+.iconbtn:active{transform:scale(.9) rotate(-8deg)}
+@media (max-width:370px){.level{width:66px}.vial{width:44px}.vial::before{left:15px}.vial::after{right:15px}}
 
-/* Hero (Fernwood): stippled night, hi-vis glow, mist at the bottom. Shrinks away as you scroll. */
+/* Loader */
+.loader{min-height:70vh;display:grid;place-items:center;text-align:center;color:var(--muted)}
+.loader svg{width:72px;height:72px;animation:spin 1.2s linear infinite}
+
+/* Hero: stippled night, a saw blade that turns as you scroll, hi-vis glow, mist at the bottom */
 .hero{position:relative;height:150svh;margin-top:calc(-64px - env(safe-area-inset-top))}
 .hstage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--night);color:var(--cream);display:flex;flex-direction:column;justify-content:center;padding:0 22px}
 .stipple{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(239,230,212,.16) 0 1.6px,transparent 2.2px);background-size:18px 18px;opacity:.9}
-.hglow{position:absolute;left:-30%;right:-30%;top:18%;height:70%;background:radial-gradient(45% 40% at 50% 50%,rgba(244,194,27,.34),rgba(244,194,27,.06) 55%,transparent 72%);pointer-events:none}
+.hglow{position:absolute;left:-10%;right:-50%;top:22%;height:70%;background:radial-gradient(45% 42% at 62% 55%,rgba(244,194,27,.36),rgba(244,194,27,.07) 55%,transparent 72%);pointer-events:none}
+.blade{position:absolute;right:-42%;top:50%;width:min(118vw,620px);margin-top:calc(min(118vw,620px) / -2.6);pointer-events:none;will-change:transform;filter:drop-shadow(0 0 30px rgba(244,194,27,.16))}
+.blade svg{width:100%;height:auto;display:block}
+@media (prefers-reduced-motion:no-preference){.blade svg{animation:spin 60s linear infinite}}
 .motes i{position:absolute;width:3px;height:3px;border-radius:50%;background:#F4D46A;opacity:0}
-@media (prefers-reduced-motion:no-preference){.motes i{animation:mote 9s linear infinite}@keyframes mote{0%{transform:translate(0,0);opacity:0}15%{opacity:.8}100%{transform:translate(40px,-60vh);opacity:0}}}
+@media (prefers-reduced-motion:no-preference){.motes i{animation:mote 9s linear infinite}@keyframes mote{0%{transform:translate(0,0);opacity:0}15%{opacity:.8}100%{transform:translate(-50px,-60vh);opacity:0}}}
 .mist{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--bg) 70%,transparent) 60%,var(--bg));pointer-events:none}
-.hcopy{position:relative;z-index:1;transform-origin:50% 40%;will-change:transform,opacity}
-.hero h1{margin:10px 0 0;font-family:var(--display);font-weight:900;font-size:clamp(108px,36vw,190px);line-height:.8;letter-spacing:-.01em;text-transform:uppercase}
+.hcopy{position:relative;z-index:1;transform-origin:30% 40%;will-change:transform,opacity}
+.hero h1{margin:10px 0 0;font-family:var(--display);font-weight:900;font-size:clamp(108px,36vw,190px);line-height:.8;letter-spacing:-.01em;text-transform:uppercase;text-shadow:0 6px 30px rgba(0,0,0,.5)}
 .hero h1 .acc{color:var(--hv)}
-.hsub{margin:16px 0 0;font-family:var(--serif);font-style:italic;font-size:clamp(24px,7vw,32px);line-height:1.1;max-width:14em}
-.hstats{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
-.pill{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px;border-radius:999px;background:rgba(239,230,212,.1);border:1px solid rgba(239,230,212,.2);font-family:var(--mono);font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.hsub{margin:16px 0 0;font-family:var(--serif);font-style:italic;font-size:clamp(24px,7vw,32px);line-height:1.1;max-width:12em;text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.hstats{margin-top:22px;display:flex;gap:8px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 13px;border-radius:999px;background:rgba(18,21,22,.55);border:1px solid rgba(239,230,212,.22);font-family:var(--mono);font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .pill b{color:var(--hv);font-variant-numeric:tabular-nums}
-.hscroll{position:absolute;left:0;right:0;bottom:calc(16% + env(safe-area-inset-bottom));z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);opacity:.75}
+.hscroll{position:absolute;left:0;right:0;bottom:calc(15% + env(safe-area-inset-bottom));z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);opacity:.75}
 .hscroll i{width:2px;height:28px;background:linear-gradient(currentColor,transparent);border-radius:2px}
 @media (prefers-reduced-motion:no-preference){.hscroll i{animation:drip 1.8s var(--ease) infinite}@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}}
 
-/* Animated titles: words rise out of a mask, the accent word blurs in with a hi-vis swash */
+/* Animated titles: words rise out of a mask, the accent word blurs in, a hi-vis swash draws under */
 .tt .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.04em}
 .tt .w>span{display:inline-block}
-.tt .acc{position:relative}
 @media (prefers-reduced-motion:no-preference){
   .tt .w>span{transform:translateY(110%) rotate(4deg);transform-origin:0 100%;animation:up .95s var(--ease) forwards;animation-delay:calc(var(--k) * 90ms + 80ms)}
   .tt .acc .w>span{filter:blur(8px);animation-name:upblur}
-  .tt+.sub,.tt~.sub{opacity:0;animation:fade .8s var(--ease) .5s forwards}
+  .sub{opacity:0;animation:fade .8s var(--ease) .5s forwards}
 }
 @keyframes up{to{transform:none}}
 @keyframes upblur{60%{filter:blur(1px)}to{transform:none;filter:none}}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.swash{display:block;height:6px;width:min(220px,50%);margin-top:6px;border-radius:6px;background:var(--hv);transform-origin:left}
+@keyframes spin{to{transform:rotate(360deg)}}
+.swash{display:block;height:6px;width:min(200px,50%);margin-top:8px;border-radius:6px;background:var(--hv);transform-origin:left}
 @media (prefers-reduced-motion:no-preference){.swash{transform:scaleX(0);animation:grow .9s var(--ease) .55s forwards}@keyframes grow{to{transform:scaleX(1)}}}
 
 /* Reveal on scroll */
@@ -103,24 +119,33 @@ body.onhero .top:not(.glassy){color:var(--cream)}
 .sechead h2{margin:0;font-family:var(--display);font-weight:900;font-size:44px;line-height:.85;text-transform:uppercase}
 .sechead h2 .serif{text-transform:none;font-size:.82em;color:var(--muted)}
 
-/* Needs you */
+/* On the bench */
 .needs{display:flex;gap:10px;overflow-x:auto;margin:0 -16px;padding:4px 16px 8px;scroll-snap-type:x mandatory;scrollbar-width:none}
 .needs::-webkit-scrollbar{display:none}
-.need{flex:0 0 78%;scroll-snap-align:start;border:0;text-align:left;cursor:pointer;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--surface);box-shadow:0 10px 24px -20px var(--shadow);min-height:150px}
-.need .nt{display:flex;align-items:center;gap:10px}
-.need .lvl{font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:3px 8px;background:var(--warn);color:#fff}
-.need .lvl.care{background:var(--hv);color:var(--hv-ink)}
-.need .lvl.calm{background:var(--ok);color:#fff}
+.need{position:relative;flex:0 0 78%;scroll-snap-align:start;border:0;text-align:left;cursor:pointer;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--surface);box-shadow:0 10px 24px -20px var(--shadow);min-height:150px;color:inherit}
+.need .nt{display:flex;align-items:center;gap:10px;padding:0 14px 0 16px}
+.lvl{font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:3px 8px;background:var(--warn);color:#fff}
+.lvl.care{background:var(--hv);color:var(--hv-ink)}
+.lvl.calm{background:var(--ok);color:#fff}
 .need h3{margin:0;font-family:var(--display);font-weight:900;font-size:28px;line-height:.95;text-transform:uppercase}
 .need p{margin:0;color:var(--body);font-size:15px}
 .need .mini{margin-left:auto}
+/* screw heads in the corners of cards; they turn as the card arrives */
+.screws::before,.screws::after{content:"";position:absolute;top:10px;width:10px;height:10px;border-radius:50%;background-image:linear-gradient(transparent 42%,#3a3f42 42% 58%,transparent 58%),radial-gradient(circle at 35% 30%,#f2f2f2,#9aa0a4 60%,#5a6064);box-shadow:0 1px 1px rgba(0,0,0,.4);transition:transform 1.2s var(--ease)}
+.screws::before{left:10px}.screws::after{right:10px}
+@media (prefers-reduced-motion:no-preference){.rv.screws:not(.in)::before{transform:rotate(-300deg)}.rv.screws:not(.in)::after{transform:rotate(300deg)}}
 
-/* Tape measure strip */
-.tape{position:relative;background:var(--hv);color:var(--hv-ink);border-radius:14px;padding:14px 16px 26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;overflow:hidden;box-shadow:0 10px 24px -16px var(--shadow)}
+/* Tape measure strip: the blade pulls out of the case */
+.tapewrap{display:flex;align-items:stretch;filter:drop-shadow(0 10px 14px rgba(0,0,0,.18))}
+.tcase{flex:none;width:58px;border-radius:14px;background:var(--night);display:grid;place-items:center;position:relative;z-index:1;box-shadow:inset 0 0 0 2px rgba(239,230,212,.12)}
+.tcase i{width:30px;height:30px;border-radius:50%;background:var(--hv);box-shadow:inset 0 0 0 5px var(--night),inset 0 0 0 7px var(--hv)}
+.tape{flex:1;position:relative;background:var(--hv);color:var(--hv-ink);border-radius:0 6px 6px 0;margin-left:-8px;padding:12px 14px 22px 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;overflow:hidden}
 .tape::after{content:"";position:absolute;left:0;right:0;bottom:0;height:12px;background:repeating-linear-gradient(90deg,var(--hv-ink) 0 2px,transparent 2px 10px) bottom/100% 6px no-repeat,repeating-linear-gradient(90deg,var(--hv-ink) 0 2px,transparent 2px 50px) bottom/100% 12px no-repeat;opacity:.85}
+.tape::before{content:"";position:absolute;right:0;top:0;bottom:0;width:6px;background:#8E959A}
 .tape div{display:flex;flex-direction:column;min-width:0}
-.tape b{font-family:var(--display);font-weight:900;font-size:clamp(30px,9vw,42px);line-height:.95;font-variant-numeric:tabular-nums}
+.tape b{font-family:var(--display);font-weight:900;font-size:clamp(28px,8.4vw,40px);line-height:.95;font-variant-numeric:tabular-nums}
 .tape span{font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+@media (prefers-reduced-motion:no-preference){.tapewrap .tape{clip-path:inset(0 100% 0 0);transition:clip-path 1.3s var(--ease) .15s}.tapewrap.in .tape{clip-path:inset(0 0 0 0)}}
 
 /* Pegboard */
 .board{position:relative;border-radius:18px;padding:18px 14px 20px;background-color:var(--board);background-image:radial-gradient(circle at center,var(--hole) 0 2.6px,transparent 3.2px);background-size:22px 22px;background-position:3px 3px;box-shadow:inset 0 0 0 6px var(--board-edge),0 18px 30px -22px var(--shadow)}
@@ -132,7 +157,7 @@ body.onhero .top:not(.glassy){color:var(--cream)}
 .slot .art{width:100%;flex:1;display:grid;place-items:center;transform-origin:50% 0;min-height:0}
 .slot .art svg{width:100%;height:auto;max-height:100%;filter:drop-shadow(0 8px 6px rgba(0,0,0,.28));overflow:visible}
 .slot.big .art svg{max-width:220px}
-.slot:active .art{transform:rotate(-3deg) scale(.97);transition:transform .15s}
+.slot:active .art{transform:rotate(-5deg) scale(.96);transition:transform .15s}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .board .art svg{filter:drop-shadow(0 0 1px rgba(239,230,212,.6)) drop-shadow(0 8px 6px rgba(0,0,0,.5))}}
 :root[data-theme="dark"] .board .art svg{filter:drop-shadow(0 0 1px rgba(239,230,212,.6)) drop-shadow(0 8px 6px rgba(0,0,0,.5))}
 .board .ghost .art svg{filter:none}
@@ -140,47 +165,66 @@ body.onhero .top:not(.glassy){color:var(--cream)}
 .out{position:absolute;top:22px;right:4px;background:var(--warn);color:#fff;font-family:var(--mono);font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:2px 6px;max-width:90%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media (prefers-reduced-motion:no-preference){
   .board .slot .art{opacity:0}
-  .board.in .slot .art{animation:hang 1.1s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--i) * 55ms)}
+  .board.in .slot .art{animation:hang 1.1s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--i) * 45ms)}
   @keyframes hang{0%{transform:translateY(-26px) rotate(-14deg);opacity:0}35%{opacity:1}60%{transform:rotate(6deg)}80%{transform:rotate(-2deg)}100%{transform:none;opacity:1}}
 }
 
-/* Dymo label tape */
+/* Label tape */
 .dymo{display:inline-block;max-width:100%;background:#17191A;color:#F4F4F0;font-family:var(--mono);font-weight:800;font-size:10px;line-height:1.2;letter-spacing:.08em;text-transform:uppercase;padding:4px 7px 3px;border-radius:2px;text-shadow:0 1px 0 rgba(255,255,255,.25),0 -1px 0 rgba(0,0,0,.6);box-shadow:0 1px 2px rgba(0,0,0,.35);transform:rotate(-1deg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dymo.lg{font-size:clamp(15px,4.6vw,20px);padding:7px 12px 6px;white-space:normal;letter-spacing:.06em}
 
-/* Reel (Pour/Play): one tool per scroll step on a full brand-colour screen */
+/* Reel: each featured tool is a full-screen panel in its brand colour. The next one slides up over the last with a saw-tooth edge. */
 .reel{position:relative;margin:10px 0 0}
-.rstage{position:sticky;top:0;height:100svh;overflow:hidden;color:var(--cream);background:var(--c,#222);transition:background .6s ease}
-.rstage::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.22) 0 1.8px,transparent 2.4px);background-size:20px 20px}
-.rglow{position:absolute;left:-20%;right:-20%;top:20%;height:60%;background:radial-gradient(45% 45% at 50% 50%,rgba(255,255,255,.22),transparent 70%);pointer-events:none}
-.rhead{position:absolute;left:20px;right:20px;top:calc(76px + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:baseline;z-index:3}
+.rstage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--night);color:var(--cream)}
+.panel{position:absolute;inset:0;background:var(--c);will-change:transform}
+.panel::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.22) 0 1.8px,transparent 2.4px);background-size:20px 20px}
+.panel::after{content:"";position:absolute;left:-20%;right:-20%;top:20%;height:60%;background:radial-gradient(45% 45% at 50% 50%,rgba(255,255,255,.2),transparent 70%);pointer-events:none}
+.teeth{position:absolute;left:0;right:0;top:-17px;height:18px;background:linear-gradient(135deg,transparent 50%,var(--c) 50.5%) 0 0/24px 18px repeat-x,linear-gradient(225deg,transparent 50%,var(--c) 50.5%) 0 0/24px 18px repeat-x}
+.rhead{position:absolute;left:20px;right:44px;top:calc(76px + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:baseline;z-index:3}
 .rnum{font-family:var(--display);font-weight:900;font-size:64px;line-height:.8}
 .rnum small{font-size:22px;opacity:.6}
 .rcat{font-family:var(--mono);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
-.rword{position:absolute;left:0;right:0;top:41%;transform:translateY(-50%);text-align:center;font-family:var(--display);font-weight:900;font-size:clamp(150px,48vw,270px);line-height:.8;text-transform:uppercase;color:var(--cream);opacity:.95;white-space:nowrap;z-index:1;will-change:transform}
+.rword{position:absolute;left:0;right:0;top:41%;transform:translateY(-50%);text-align:center;font-family:var(--display);font-weight:900;line-height:.8;text-transform:uppercase;color:var(--cream);white-space:nowrap;z-index:1;will-change:transform}
 .rart{position:absolute;left:50%;top:47%;width:min(74vw,380px);margin-left:calc(min(74vw,380px) / -2);transform:translateY(-50%);z-index:2;will-change:transform;filter:drop-shadow(0 26px 20px rgba(0,0,0,.4))}
 .rart svg{width:100%;height:auto;overflow:visible}
-.rinfo{position:absolute;left:20px;right:20px;bottom:calc(110px + env(safe-area-inset-bottom));z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-.rinfo .rname{font-family:var(--serif);font-style:italic;font-size:clamp(28px,8vw,38px);line-height:1;text-shadow:0 2px 14px rgba(0,0,0,.35)}
-.rinfo .rrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.rbtn{min-height:44px;padding:0 18px;border-radius:999px;border:0;background:var(--cream);color:#16191B;font-weight:700;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-.rpill{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;background:rgba(0,0,0,.25);font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-.rbar{position:absolute;left:20px;right:20px;bottom:calc(92px + env(safe-area-inset-bottom));height:3px;border-radius:3px;background:rgba(255,255,255,.2);z-index:3;overflow:hidden}
-.rbar i{display:block;height:100%;background:var(--cream);transform-origin:left;transform:scaleX(0)}
-@media (prefers-reduced-motion:no-preference){
-  .rswap .rword{animation:wordin .7s var(--ease)}
-  .rswap .rinfo,.rswap .rnum{animation:fade .6s var(--ease)}
-  @keyframes wordin{from{clip-path:inset(100% 0 0 0);translate:0 20px}to{clip-path:inset(0 0 0 0);translate:0 0}}
-}
+.rinfo{position:absolute;left:20px;right:44px;bottom:calc(112px + env(safe-area-inset-bottom));z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.rname{font-family:var(--serif);font-style:italic;font-size:clamp(26px,7.6vw,36px);line-height:1;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.rrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.rbtn{min-height:44px;padding:0 18px;border-radius:999px;border:0;background:var(--cream);color:#16191B;font-weight:700;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:transform .2s var(--ease)}
+.rbtn:active{transform:scale(.94)}
+.rpill{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;background:rgba(0,0,0,.28);font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+/* Ruler down the side: the pointer shows how far through the favourites you are */
+.ruler{position:absolute;right:8px;top:50%;width:18px;height:min(46svh,320px);transform:translateY(-50%);z-index:60;border-radius:4px;background-color:var(--hv);box-shadow:inset 0 0 0 1.5px #16191B,0 6px 14px rgba(0,0,0,.35);background-image:repeating-linear-gradient(to bottom,#16191B 0 1.5px,transparent 1.5px 8px);background-size:7px 100%;background-repeat:no-repeat;background-position:right 2px top}
+.ruler b{position:absolute;right:20px;top:0;margin-top:-9px;width:0;height:0;border:9px solid transparent;border-left-color:var(--cream);border-right-width:0;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4));will-change:transform}
+
+/* Lineup: every tool on one long shelf that slides sideways as you scroll down */
+.lineup{position:relative}
+.lstage{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.lhead{padding:0 20px}
+.lhead h2{margin:4px 0 0;font-family:var(--display);font-weight:900;font-size:clamp(64px,20vw,104px);line-height:.82;text-transform:uppercase}
+.lhead h2 .serif{text-transform:none;color:var(--muted);font-size:.86em}
+.ltrack{display:flex;align-items:flex-end;gap:18px;padding:0 24px;width:max-content;will-change:transform}
+.lu{flex:none;width:150px;border:0;background:none;padding:0;display:flex;flex-direction:column;align-items:center;cursor:pointer;color:inherit}
+.lu svg{width:100%;height:auto;overflow:visible;filter:drop-shadow(0 10px 8px rgba(0,0,0,.25));transition:transform .3s var(--ease)}
+.lu:active svg{transform:translateY(-8px) rotate(-4deg)}
+.lu .dymo{margin-top:22px}
+.shelf{height:14px;margin-top:-52px;background:linear-gradient(#A8713A,var(--wood));box-shadow:0 10px 14px -6px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.2)}
+.lfoot{padding:50px 20px 0;display:flex;justify-content:space-between;font-family:var(--mono);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* Caution tape */
+.ctape{margin:26px -16px;width:calc(100% + 32px);transform:rotate(-2.5deg);background:var(--hv);color:#16191B;overflow:hidden;border-top:8px solid;border-bottom:8px solid;border-image:repeating-linear-gradient(-45deg,#16191B 0 12px,#F4C21B 12px 24px) 8;box-shadow:0 12px 20px -10px rgba(0,0,0,.4)}
+.ctape div{display:flex;width:max-content;font-family:var(--display);font-weight:900;font-size:26px;line-height:1;text-transform:uppercase;padding:9px 0;white-space:nowrap}
+.ctape span{padding-right:26px}
+@media (prefers-reduced-motion:no-preference){.ctape div{animation:marq 26s linear infinite}@keyframes marq{to{transform:translateX(-50%)}}}
 
 /* Statement: lights word by word */
-.say{padding:60px 8px 30px;text-align:left}
+.say{padding:34px 8px 20px}
 .say p{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(62px,19vw,104px);line-height:.86;text-transform:uppercase}
 .say p .serif{text-transform:none;font-size:.92em;display:block}
-.say .wd{opacity:.14;transition:opacity .35s, color .35s}
+.say .wd{opacity:.14;transition:opacity .35s,color .35s}
 .say .wd.lit{opacity:1}
 .say .wd.lit.hv{color:var(--hv);-webkit-text-stroke:1px var(--ink)}
-.say p.sub{margin:18px 0 0;color:var(--body);font-family:var(--sans);font-weight:400;font-size:17px;line-height:1.45;text-transform:none;max-width:30ch}
+.say p.sub2{margin:18px 0 0;color:var(--body);font-family:var(--sans);font-weight:400;font-size:17px;line-height:1.45;text-transform:none;max-width:30ch}
 
 /* Cards */
 .card{background:var(--surface);border-radius:22px;box-shadow:0 10px 24px -20px var(--shadow)}
@@ -191,22 +235,41 @@ body.onhero .top:not(.glassy){color:var(--cream)}
 .platform{display:flex;gap:12px;align-items:center}
 .swatch{width:12px;align-self:stretch;border-radius:6px;flex:none}
 .foot{margin:6px 4px 0;font-size:13px;color:var(--muted);text-align:center}
-.meter{height:14px;border-radius:7px;background:var(--sunk);overflow:hidden;margin-top:12px}
-.meter i{display:block;height:100%;background:var(--hv);border-radius:7px;transform-origin:left;transition:transform 1.2s var(--ease)}
-.rv:not(.in) .meter i{transform:scaleX(0)}
 
-/* Page titles for the other tabs */
-.ptitle{padding:6px 4px 0}
-.ptitle h1{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(76px,24vw,128px);line-height:.8;text-transform:uppercase}
-.ptitle h1 .acc{color:var(--ink)}
-.ptitle .sub{margin:12px 0 0;font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.15;color:var(--body)}
+/* Torque gauge (bargain meter): always night, the hi-vis arc glows */
+.gauge{position:relative;background:var(--night);color:var(--cream);border-radius:26px;padding:20px 18px 20px;overflow:hidden;text-align:center;box-shadow:inset 0 0 0 1px rgba(239,230,212,.1)}
+.gauge::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 70%,rgba(244,194,27,.3),transparent 70%)}
+.gauge>*{position:relative}
+.gauge svg{width:min(320px,92%);height:auto;overflow:visible;display:block;margin:10px auto 0}
+.gauge .garc{fill:none;stroke:var(--hv);stroke-width:14;stroke-linecap:round;stroke-dasharray:251.4;stroke-dashoffset:251.4;filter:drop-shadow(0 0 10px rgba(244,194,27,.8));transition:stroke-dashoffset 1.8s var(--ease) .2s}
+.gauge .gneedle{transform-box:view-box;transform-origin:100px 100px;transform:rotate(-90deg);transition:transform 1.8s cubic-bezier(.3,1.4,.5,1) .2s}
+.gauge.in .garc{stroke-dashoffset:var(--off)}
+.gauge.in .gneedle{transform:rotate(var(--deg))}
+.gauge .gbig{margin:10px 0 0;font-family:var(--display);font-weight:900;font-size:84px;line-height:.8}
+.gauge .gbig small{font-size:.45em}
+.gauge .gline{margin:8px 0 0;font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.1}
+.gauge .gnote{margin:8px auto 0;font-size:14px;color:rgba(239,230,212,.7);max-width:30ch}
+
+/* Tab heroes with artwork */
+.chero{position:relative;margin:0 0 4px;border-radius:30px;overflow:hidden;background:var(--night);color:var(--cream);padding:150px 20px 22px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:inset 0 0 0 1px rgba(239,230,212,.08)}
+.chero .stipple{opacity:.7}
+.chero .cglow{position:absolute;right:-30%;top:-20%;width:110%;height:110%;background:radial-gradient(40% 40% at 60% 45%,rgba(244,194,27,.34),transparent 70%)}
+.chero .emb{position:absolute;right:-4%;top:-2%;width:58%;filter:drop-shadow(0 18px 16px rgba(0,0,0,.5));transform-origin:70% 30%}
+.chero .emb svg{width:100%;height:auto;overflow:visible}
+@media (prefers-reduced-motion:no-preference){.chero .emb{animation:embin 1.2s cubic-bezier(.3,1.4,.5,1) both}@keyframes embin{from{transform:translate(30%,-10%) rotate(24deg) scale(.7);opacity:0}to{transform:none;opacity:1}}}
+.chero>.kicker,.chero h1,.chero p,.chero .swash{position:relative;z-index:1}
+.chero .kicker{color:rgba(239,230,212,.72)}
+.chero h1{margin:4px 0 0;font-family:var(--display);font-weight:900;font-size:clamp(76px,24vw,128px);line-height:.8;text-transform:uppercase;text-shadow:0 4px 24px rgba(0,0,0,.6)}
+.chero h1 .acc{color:var(--hv)}
+.chero h1.long{font-size:clamp(62px,19.5vw,104px)}
+.chero p{margin:12px 0 0;font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.1;max-width:13em;text-shadow:0 2px 12px rgba(0,0,0,.7)}
 
 /* Category: picker + swipeable tool pages */
-.picker{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px 6px;scrollbar-width:none}
+.picker{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:6px 16px 6px;scrollbar-width:none}
 .picker::-webkit-scrollbar{display:none}
-.pk{flex:none;width:86px;border:0;border-radius:16px;padding:8px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;background:var(--surface);font-size:12px;font-weight:700;line-height:1.1;text-align:center;box-shadow:inset 0 0 0 2px transparent;transition:box-shadow .2s,transform .2s}
+.pk{flex:none;width:86px;border:0;border-radius:16px;padding:8px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;background:var(--surface);font-size:12px;font-weight:700;line-height:1.1;text-align:center;transition:transform .25s var(--ease),background .25s;color:inherit}
 .pk svg{width:56px;height:auto;overflow:visible}
-.pk[aria-current="true"]{box-shadow:inset 0 0 0 2px var(--ink);transform:translateY(-2px)}
+.pk[aria-current="true"]{background:var(--hv);color:var(--hv-ink);transform:translateY(-3px) rotate(-2deg)}
 .posrow{display:flex;justify-content:space-between;align-items:center;margin:0 4px}
 .pos{font-family:var(--mono);font-weight:800;font-size:13px;letter-spacing:.1em;color:var(--muted);font-variant-numeric:tabular-nums}
 .dots{display:flex;gap:6px}
@@ -216,13 +279,24 @@ body.onhero .top:not(.glassy){color:var(--cream)}
 .rail::-webkit-scrollbar{display:none}
 .page{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;padding:0 16px;display:flex;flex-direction:column;gap:14px;min-width:0}
 .plate{position:relative;border-radius:200px 200px 28px 28px;padding:44px 16px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;overflow:hidden;color:var(--cream);background-image:radial-gradient(circle at center,rgba(0,0,0,.25) 0 2.2px,transparent 2.8px);background-size:20px 20px}
-.plate .verb{position:absolute;left:0;right:0;top:20%;text-align:center;font-family:var(--display);font-weight:900;font-size:clamp(120px,40vw,210px);line-height:.8;text-transform:uppercase;color:rgba(239,230,212,.95);white-space:nowrap;pointer-events:none}
+.plate .verb{position:absolute;left:0;right:0;top:20%;text-align:center;font-family:var(--display);font-weight:900;line-height:.8;text-transform:uppercase;color:rgba(239,230,212,.95);white-space:nowrap;pointer-events:none}
 .plate .big{position:relative;z-index:1;width:min(300px,84%);margin-top:34px;filter:drop-shadow(0 18px 14px rgba(0,0,0,.4))}
 .plate .big svg{width:100%;height:auto;overflow:visible}
 .plate .dymo{position:relative;z-index:2}
 .plate .who{position:relative;z-index:2;font-family:var(--mono);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.92;text-align:center}
 .status{position:absolute;z-index:2;top:16px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-radius:8px;padding:4px 8px;background:rgba(255,255,255,.92);color:#17191A;white-space:nowrap}
 .status.lent{background:var(--warn);color:#fff}
+/* the plate opens up when its page arrives */
+@media (prefers-reduced-motion:no-preference){
+  .page .plate{clip-path:inset(16% 20% 26% 20% round 200px 200px 28px 28px);transition:clip-path .9s var(--ease)}
+  .page.cur .plate{clip-path:inset(0 0 0 0 round 200px 200px 28px 28px)}
+  .page .plate .big{transform:scale(.6) rotate(-14deg);transition:transform 1s cubic-bezier(.3,1.5,.5,1) .1s}
+  .page.cur .plate .big{transform:none}
+  .page .plate .verb{transform:translateY(40%);opacity:0;transition:transform .9s var(--ease) .15s,opacity .6s .15s}
+  .page.cur .plate .verb{transform:none;opacity:1}
+  .page .facts .fact{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--n) * 70ms + 250ms)}
+  .page.cur .facts .fact{opacity:1;transform:none}
+}
 .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .fact{background:var(--surface);border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
 .fact .k{font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
@@ -231,28 +305,45 @@ body.onhero .top:not(.glassy){color:var(--cream)}
 .fact .s{font-size:12px;color:var(--muted)}
 .fact.wide{grid-column:span 2}
 .fact.hvf{background:var(--hv);color:var(--hv-ink)}
-.fact.hvf .k,.fact.hvf .s{color:var(--hv-ink);opacity:.8}
+.fact.hvf .k{color:var(--hv-ink);opacity:.8}
+/* price facts are swing tags */
+.fact.tag{position:relative;border-radius:8px 18px 18px 8px;padding-left:28px}
+.fact.tag::before{content:"";position:absolute;left:10px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--muted)}
 .uses{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
 .uses li{display:flex;gap:10px;align-items:flex-start;font-size:16px}
 .uses li::before{content:"";width:10px;height:10px;margin-top:6px;border-radius:2px;background:var(--hv);flex:none;box-shadow:inset 0 0 0 2px var(--ink)}
 .kit{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .kit li{background:var(--sunk);border-radius:10px;padding:6px 10px;font-size:15px}
-.specs{margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px}
-.specs dt{font-family:var(--mono);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
-.specs dd{margin:0}
 .note{background:var(--sunk);border-left:6px solid var(--hv);border-radius:14px;padding:14px 16px;font-size:16px;color:var(--body)}
+/* Blueprint spec card: the drawing redraws itself as a white outline */
+.bp{position:relative;border-radius:22px;padding:16px;color:#EAF2FF;background-color:var(--blue);background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:60px 60px,60px 60px,12px 12px,12px 12px;overflow:hidden}
+.bp h2{margin:0;font-family:var(--mono);font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.bp .bpart{width:min(240px,74%);margin:8px auto 2px}
+.bp .bpart svg{width:100%;height:auto;overflow:visible}
+.bp .bpart svg *{fill:none!important;stroke:#EAF2FF!important;stroke-width:1.6!important;animation:none!important}
+.bp .dim{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;justify-content:center;opacity:.9}
+.bp .dim::before,.bp .dim::after{content:"";flex:1;height:1px;background:#EAF2FF;max-width:70px}
+.bp dl{margin:12px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-family:var(--mono);font-size:13px}
+.bp dt{font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.bp dd{margin:0;font-weight:600}
+@media (prefers-reduced-motion:no-preference){.bp .bpart svg *{stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 2.4s ease .3s}.page.cur .bp .bpart svg *{stroke-dashoffset:0}}
 .pairs{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
 .pair{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:8px 14px 8px 8px;background:var(--sunk);cursor:pointer;font-weight:700;font-size:15px;text-align:left;color:inherit}
 .lendform{display:flex;gap:8px;margin-top:12px}
 .lendform input{flex:1;min-width:0;min-height:48px;border-radius:12px;border:1px solid var(--line);background:var(--bg);padding:0 12px;font-size:17px}
-.btn{min-height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);font-weight:700;font-size:15px;cursor:pointer;flex:none}
+.btn{min-height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);font-weight:700;font-size:15px;cursor:pointer;flex:none;transition:transform .2s var(--ease)}
+.btn:active{transform:scale(.94)}
 .btn.hvb{background:var(--hv);color:var(--hv-ink)}
 .swipehint{text-align:center;font-size:13px;color:var(--muted);margin:0}
 
-/* Care + Lent */
+/* Care + Lent. Tick boxes are hex nuts that turn when you tick them. */
 .task{display:flex;align-items:flex-start;gap:12px;padding:14px;cursor:pointer}
 .task+.task{border-top:1px solid var(--line)}
-.task input{width:26px;height:26px;margin:2px 0 0;flex:none;accent-color:var(--ink);cursor:pointer}
+.task input{appearance:none;-webkit-appearance:none;width:30px;height:30px;margin:0;flex:none;cursor:pointer;display:grid;place-items:center;background:var(--muted);clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%);transition:transform .6s cubic-bezier(.3,1.5,.5,1),background .3s}
+.task input::after{content:"";width:13px;height:13px;border-radius:50%;background:var(--surface);transition:all .3s}
+.task input:checked{background:var(--hv);transform:rotate(180deg)}
+.task input:checked::after{width:7px;height:7px;background:var(--hv-ink)}
+.task:focus-within{outline:3px solid var(--hv);outline-offset:-3px;border-radius:14px}
 .task .tt2{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .task .tk{font-family:var(--mono);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .task .when{font-size:13px;color:var(--muted)}
@@ -273,20 +364,20 @@ body.onhero .top:not(.glassy){color:var(--cream)}
 .h2s{margin:0 4px 10px;font-family:var(--display);font-weight:900;font-size:32px;line-height:.95;text-transform:uppercase}
 
 /* Search sheet */
-.sheet{position:fixed;inset:0;z-index:30;background:var(--bg);display:flex;flex-direction:column}
+.sheet{position:fixed;inset:0;z-index:80;background:var(--bg);display:flex;flex-direction:column}
 @media (prefers-reduced-motion:no-preference){.sheet.open{animation:fade .35s var(--ease)}}
 .sheet .shead{max-width:560px;width:100%;margin:0 auto;padding:calc(12px + env(safe-area-inset-top)) 16px 10px;display:flex;gap:10px;align-items:center}
 .search{flex:1;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 14px;min-height:52px}
 .search input{flex:1;border:0;background:transparent;outline:none;font-size:17px;min-width:0}
 .sheet .sbody{flex:1;overflow-y:auto;max-width:560px;width:100%;margin:0 auto;padding:4px 16px 40px}
 
-/* Tab bar */
-.tabs{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:min(460px,calc(100% - 20px));border-radius:24px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 14px 30px -12px var(--shadow),inset 0 0 0 1px var(--line);padding:6px;z-index:10;display:flex;gap:2px}
-.tab{flex:1;min-width:0;min-height:56px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:700;color:var(--muted);text-decoration:none;position:relative;transition:background .25s,color .25s}
-.tab svg{width:24px;height:24px}
-.tab[aria-current="page"]{background:var(--ink);color:var(--bg)}
-.tab .dot{position:absolute;top:5px;right:calc(50% - 22px);min-width:18px;height:18px;border-radius:9px;background:var(--warn);color:#fff;font-size:11px;line-height:18px;text-align:center;padding:0 5px}
-.tab .dot.hvd{background:var(--hv);color:var(--hv-ink)}
+/* Tab bar: the selected tab is a strip of hi-vis tape */
+.tabs{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:min(460px,calc(100% - 20px));border-radius:24px;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 14px 30px -12px var(--shadow),inset 0 0 0 1px var(--line);padding:6px;z-index:70;display:flex;gap:2px}
+.tab{flex:1;min-width:0;min-height:56px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:700;color:var(--muted);text-decoration:none;position:relative;transition:background .25s,color .25s,transform .25s var(--ease)}
+.tab svg{width:26px;height:26px}
+.tab[aria-current="page"]{background:var(--hv);color:var(--hv-ink);transform:translateY(-4px) rotate(-2deg);box-shadow:0 8px 14px -8px rgba(0,0,0,.5)}
+@media (prefers-reduced-motion:no-preference){.tab[aria-current="page"] svg{animation:wig .6s var(--ease)}@keyframes wig{0%{transform:rotate(0)}30%{transform:rotate(-18deg) scale(1.15)}60%{transform:rotate(10deg)}100%{transform:none}}}
+.tab .dot{position:absolute;top:3px;right:calc(50% - 24px);min-width:18px;height:18px;border-radius:9px;background:var(--warn);color:#fff;font-size:11px;line-height:18px;text-align:center;padding:0 5px}
 
 /* Drawing motion: only where the drawing is the star (.live) */
 svg [class^="a-"]{transform-box:view-box}
@@ -299,7 +390,7 @@ svg [class^="a-"]{transform-box:view-box}
   .live .a-sway{animation:sway 3s ease-in-out infinite}
   .live .a-air path{stroke-dasharray:6 8;animation:air .6s linear infinite}
   .live .a-leaf{animation:leaf 2.4s ease-in infinite}
-  .live .a-leaf:nth-of-type(2){animation-delay:1.2s}
+  .live .a-leaf2{animation:leaf 2.4s ease-in 1.2s infinite}
   .live .a-blink{animation:blink 1.2s steps(2) infinite}
   .live .a-charge rect{animation:charge 1.8s ease-in-out infinite}
   .live .a-charge rect:nth-child(2){animation-delay:.3s}.live .a-charge rect:nth-child(3){animation-delay:.6s}
@@ -308,13 +399,14 @@ svg [class^="a-"]{transform-box:view-box}
   .live .a-bob2{animation:bob 2.4s ease-in-out .6s infinite}
   .live .a-tick{animation:tick 2s steps(1) infinite}
   .live .a-snip{animation:snip 2.2s ease-in-out infinite}
+  .live .a-snip2{animation:snip2 2.2s ease-in-out infinite}
   .live .a-slide{animation:slide 2.6s ease-in-out infinite}
   .live .a-tap{animation:tap 1.3s cubic-bezier(.5,0,.6,1) infinite}
   .live .a-bubble{animation:bubble 4s ease-in-out infinite}
   .live .a-glint{animation:glint 3s ease-in-out infinite}
+  .live .a-drop{animation:drop 1.8s ease-in infinite}
   .live .a-float{animation:float 5s ease-in-out infinite}
 }
-@keyframes spin{to{transform:rotate(360deg)}}
 @keyframes chop{0%,55%,100%{transform:rotate(0)}70%,80%{transform:rotate(9deg)}}
 @keyframes buzz{0%{transform:translate(0,0)}25%{transform:translate(.6px,-.4px)}50%{transform:translate(-.5px,.5px)}75%{transform:translate(.4px,.3px)}}
 @keyframes puff{0%{transform:translate(0,0) scale(.4);opacity:0}20%{opacity:.8}100%{transform:translate(var(--dx,-14px),-18px) scale(1.4);opacity:0}}
@@ -327,24 +419,27 @@ svg [class^="a-"]{transform-box:view-box}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 @keyframes tick{0%{transform:rotate(0)}25%{transform:rotate(-14deg)}50%{transform:rotate(-28deg)}75%{transform:rotate(-14deg)}}
 @keyframes snip{0%,100%{transform:rotate(0)}50%{transform:rotate(-10deg)}}
+@keyframes snip2{0%,100%{transform:rotate(0)}50%{transform:rotate(10deg)}}
 @keyframes slide{0%,100%{transform:translateX(-10px)}50%{transform:translateX(2px)}}
 @keyframes tap{0%,100%{transform:rotate(0)}40%{transform:rotate(-24deg)}55%{transform:rotate(4deg)}}
 @keyframes bubble{0%,100%{transform:translateX(-5px)}50%{transform:translateX(5px)}}
 @keyframes glint{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes drop{0%{transform:translateY(0);opacity:0}15%{opacity:1}80%{opacity:1}100%{transform:translateY(46px);opacity:0}}
 @keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
-@media (max-width:360px){.board .grid{gap:10px 6px}.tape b{font-size:28px}.tab{font-size:10px}.tab svg{width:22px;height:22px}}
+@media (max-width:360px){.board .grid{gap:10px 6px}.tab{font-size:10px}.tab svg{width:22px;height:22px}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top" id="top">
     <div class="brand"><i aria-hidden="true"></i>Tool Shed</div>
+    <div class="level" aria-hidden="true"><div class="vial"><i id="bubble"></i></div></div>
     <div class="acts">
       <button class="iconbtn" id="searchBtn" aria-label="Search tools"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
       <button class="iconbtn" id="themeBtn" aria-label="Switch light or dark"></button>
     </div>
   </header>
-  <main id="main" aria-live="polite"><p class="empty">Opening the shed…</p></main>
+  <main id="main" aria-live="polite"><div class="loader"><div><svg viewBox="0 0 200 200" id="loadBlade"></svg><p>Opening the shed…</p></div></div></main>
 </div>
 <nav class="tabs" id="tabs" aria-label="Sections"></nav>
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="Search">
@@ -356,8 +451,8 @@ svg [class^="a-"]{transform-box:view-box}
 </div>
 <script>
 'use strict';
-/* ---------- Drawings: original flat SVGs, viewBox 0 0 160 120. c = brand colour. a-* groups move when the drawing is shown large. ---------- */
-const D='#2A2E30', M='#C9CDD0', G='#8E959A', S='#E7D3A6';
+/* ---------- Drawings: original flat SVGs, viewBox 0 0 160 120. c = brand colour. a-* parts move when the drawing is shown large (.live). ---------- */
+const D='#2A2E30', M='#C9CDD0', G='#8E959A', S='#E7D3A6', W='#8A5A2B', HV='#F4C21B';
 const ART={
   mitresaw:c=>`<rect x="14" y="94" width="132" height="12" rx="3" fill="${D}"/><ellipse cx="78" cy="94" rx="42" ry="6" fill="${G}"/><rect x="34" y="82" width="88" height="8" rx="2" fill="${M}"/><rect x="112" y="40" width="10" height="56" rx="3" fill="${D}"/>
     <g class="a-chop" style="transform-origin:117px 44px"><rect x="42" y="30" width="80" height="5" rx="2.5" fill="${M}"/><rect x="42" y="39" width="80" height="5" rx="2.5" fill="${M}"/>
@@ -366,35 +461,53 @@ const ART={
   sander:c=>`<g class="a-puff"><circle cx="24" cy="96" r="5" fill="${S}"/><circle cx="120" cy="100" r="4" fill="${S}" style="--dx:14px"/><circle cx="30" cy="100" r="3.5" fill="${S}"/></g>
     <g class="a-buzz"><ellipse cx="74" cy="98" rx="48" ry="9" fill="${D}"/><path d="M30 96q0-42 44-48q44 6 44 48z" fill="${c}"/><path d="M52 56q22-28 44 0q-22 9-44 0z" fill="${D}"/><rect x="64" y="72" width="20" height="7" rx="3.5" fill="#F2F2EE"/><rect x="114" y="74" width="22" height="14" rx="7" fill="#5A6064"/><path d="M132 64q20-2 18 20q-2 18-18 12z" fill="${G}"/><path d="M36 92h76" stroke="${D}" stroke-width="2" opacity=".35"/></g>`,
   vac:c=>`<g class="a-sway" style="transform-origin:110px 60px"><path d="M110 58q34 0 30 30q-2 16 12 18" fill="none" stroke="#5A6064" stroke-width="8" stroke-linecap="round"/></g><rect x="34" y="46" width="74" height="56" rx="12" fill="${c}"/><rect x="28" y="34" width="86" height="18" rx="7" fill="${D}"/><rect x="58" y="22" width="26" height="12" rx="6" fill="none" stroke="${D}" stroke-width="6"/><rect x="48" y="62" width="46" height="7" rx="3.5" fill="#FFFFFF" opacity=".35"/><rect x="46" y="76" width="18" height="10" rx="2" fill="${D}" opacity=".7"/><circle class="a-blink" cx="98" cy="43" r="3" fill="#7CD85A"/><circle cx="46" cy="106" r="7" fill="${D}"/><circle cx="96" cy="106" r="7" fill="${D}"/>`,
-  blower:c=>`<g class="a-air"><path d="M18 54H0M18 62H-6M18 70H2" stroke="${S}" stroke-width="3" stroke-linecap="round" fill="none"/></g><path class="a-leaf" d="M6 44q6-8 12 0q-6 6-12 0z" fill="#9BB04A"/><path class="a-leaf" d="M2 78q6-8 12 0q-6 6-12 0z" fill="#C0883A"/>
+  blower:c=>`<g class="a-air"><path d="M18 54H0M18 62H-6M18 70H2" stroke="${S}" stroke-width="3" stroke-linecap="round" fill="none"/></g><path class="a-leaf" d="M6 44q6-8 12 0q-6 6-12 0z" fill="#9BB04A"/><path class="a-leaf2" d="M2 78q6-8 12 0q-6 6-12 0z" fill="#C0883A"/>
     <path d="M20 56h76v12H24q-4 0-4-4z" fill="${D}"/><path d="M92 44h34q14 0 14 15v8q0 15-14 15H92z" fill="${c}"/><path d="M102 46q10-22 28 0" fill="none" stroke="${D}" stroke-width="7" stroke-linecap="round"/><rect x="106" y="82" width="28" height="20" rx="3" fill="${D}"/><rect x="110" y="86" width="20" height="4" rx="2" fill="${c}"/><path d="M60 68q-8 38 30 36q8-16 6-36z" fill="#7F826C"/><circle cx="118" cy="62" r="5" fill="${D}" opacity=".5"/>`,
   battery:c=>`<rect x="32" y="34" width="40" height="14" rx="3" fill="#5A6064"/><rect x="20" y="44" width="64" height="54" rx="7" fill="${D}"/><rect x="20" y="44" width="64" height="16" rx="7" fill="${c}"/><g class="a-charge"><rect x="32" y="72" width="11" height="8" rx="2" fill="${c}"/><rect x="46" y="72" width="11" height="8" rx="2" fill="${c}"/><rect x="60" y="72" width="11" height="8" rx="2" fill="${c}"/></g><rect x="34" y="86" width="22" height="5" rx="2.5" fill="${G}"/><rect x="92" y="74" width="54" height="26" rx="6" fill="${D}"/><rect x="100" y="62" width="38" height="16" rx="4" fill="${c}"/><circle class="a-blink" cx="136" cy="88" r="3.5" fill="#7CD85A"/><path d="M146 92q10 0 8 14" fill="none" stroke="${D}" stroke-width="3" stroke-linecap="round"/>`,
   wheelbarrow:c=>`<g class="a-rock" style="transform-origin:34px 108px"><path d="M26 40h92l-16 36H42z" fill="${c}"/><path d="M24 38h96" stroke="${D}" stroke-width="6" stroke-linecap="round"/><path d="M104 66l44 10" stroke="#5A6064" stroke-width="6" stroke-linecap="round"/><path d="M52 76l-6 26M96 74l6 28" stroke="#7A5A3A" stroke-width="5" stroke-linecap="round"/><path d="M34 94L60 76" stroke="#5A6064" stroke-width="5" stroke-linecap="round"/><path d="M40 50h60" stroke="#000" stroke-width="3" opacity=".15"/>
     <g class="a-spin" style="transform-origin:34px 94px"><circle cx="34" cy="94" r="15" fill="${D}"/><path d="M34 82v24M22 94h24" stroke="${G}" stroke-width="2.5"/><circle cx="34" cy="94" r="5" fill="${M}"/></g></g>`,
-  toolbag:c=>`<g class="a-bob"><rect x="36" y="20" width="7" height="44" rx="2" fill="#8A5A2B"/><rect x="24" y="14" width="30" height="11" rx="3" fill="#5A6064"/></g><path d="M66 60l14-36" stroke="${M}" stroke-width="6" stroke-linecap="round"/><circle cx="82" cy="20" r="7" fill="none" stroke="${M}" stroke-width="5"/><g class="a-bob2"><rect x="111" y="22" width="3.5" height="30" fill="${M}"/><rect x="106" y="38" width="13" height="22" rx="5" fill="#C2413A"/></g><rect x="94" y="30" width="3.5" height="28" fill="${M}"/><rect x="90" y="44" width="12" height="18" rx="5" fill="#2B5FA8"/><path d="M26 58h108l-9 44H35z" fill="${c}"/><rect x="24" y="54" width="112" height="11" rx="3" fill="${D}"/><rect x="36" y="78" width="88" height="7" fill="${D}"/><path d="M52 54q28-26 56 0" fill="none" stroke="${D}" stroke-width="6" stroke-linecap="round"/>`,
+  toolbag:c=>`<g class="a-bob"><rect x="36" y="20" width="7" height="44" rx="2" fill="${W}"/><rect x="24" y="14" width="30" height="11" rx="3" fill="#5A6064"/></g><path d="M66 60l14-36" stroke="${M}" stroke-width="6" stroke-linecap="round"/><circle cx="82" cy="20" r="7" fill="none" stroke="${M}" stroke-width="5"/><g class="a-bob2"><rect x="111" y="22" width="3.5" height="30" fill="${M}"/><rect x="106" y="38" width="13" height="22" rx="5" fill="#C2413A"/></g><rect x="94" y="30" width="3.5" height="28" fill="${M}"/><rect x="90" y="44" width="12" height="18" rx="5" fill="#2B5FA8"/><path d="M26 58h108l-9 44H35z" fill="${c}"/><rect x="24" y="54" width="112" height="11" rx="3" fill="${D}"/><rect x="36" y="78" width="88" height="7" fill="${D}"/><path d="M52 54q28-26 56 0" fill="none" stroke="${D}" stroke-width="6" stroke-linecap="round"/>`,
   sockets:c=>`<rect x="16" y="28" width="128" height="74" rx="9" fill="${c}"/><rect x="24" y="36" width="112" height="58" rx="5" fill="${D}"/>${[0,1,2,3,4,5,6].map(i=>`<circle cx="${36+i*15}" cy="52" r="${4+i*.6}" fill="${M}" stroke="${G}" stroke-width="1.5"/>`).join('')}<g class="a-tick" style="transform-origin:108px 76.5px"><rect x="34" y="72" width="66" height="9" rx="4.5" fill="${M}"/></g><circle cx="108" cy="76.5" r="10" fill="${M}"/><circle cx="108" cy="76.5" r="4" fill="${G}"/><rect x="62" y="22" width="36" height="8" rx="3" fill="${D}"/>`,
   handset:c=>`<rect x="16" y="28" width="128" height="74" rx="9" fill="${c}"/><rect x="24" y="36" width="112" height="58" rx="5" fill="${D}"/><g class="a-snip" style="transform-origin:46px 70px"><path d="M38 86l20-34" stroke="${M}" stroke-width="5" stroke-linecap="round"/><path d="M36 88l8-6" stroke="#C2413A" stroke-width="7" stroke-linecap="round"/></g><path d="M52 86l-6-34" stroke="${M}" stroke-width="5" stroke-linecap="round"/><path d="M54 88l-6-6" stroke="#C2413A" stroke-width="7" stroke-linecap="round"/><rect x="72" y="46" width="4" height="22" fill="${M}"/><rect x="69" y="66" width="10" height="20" rx="4" fill="#E8B400"/><rect x="88" y="46" width="4" height="22" fill="${M}"/><rect x="85" y="66" width="10" height="20" rx="4" fill="#E8B400"/><path d="M106 84l18-30" stroke="${M}" stroke-width="6" stroke-linecap="round"/><circle cx="126" cy="50" r="6" fill="none" stroke="${M}" stroke-width="4"/><rect x="62" y="22" width="36" height="8" rx="3" fill="${D}"/>`,
   screwdrivers:c=>[0,1,2,3,4].map(i=>{const x=36+i*22,h=[0,6,2,8,4][i];return `<g class="a-bob" style="animation-delay:${i*.25}s"><rect x="${x+5}" y="${14+h}" width="4" height="46" fill="${M}"/><path d="M${x+5} ${14+h}l2-6l2 6z" fill="${G}"/><rect x="${x}" y="${58+h}" width="14" height="40" rx="6" fill="${i%2?D:c}"/><rect x="${x+3}" y="${66+h}" width="8" height="3" rx="1.5" fill="#fff" opacity=".4"/></g>`}).join(''),
   knife:c=>`<g class="a-slide"><path d="M124 60l26-6l-8 20l-16 3z" fill="#E2E5E7" stroke="${G}" stroke-width="1.5"/></g><path d="M22 74l86-18q12-2 16 8l2 10q2 10-10 12l-88 8q-10 0-10-10z" fill="${c}"/><g class="a-slide"><rect x="54" y="66" width="24" height="6" rx="3" fill="${D}"/></g><path d="M30 80l70-8" stroke="${D}" stroke-width="2" opacity=".35"/><circle cx="110" cy="72" r="3" fill="${D}"/>`,
-  bits:c=>`<rect x="18" y="74" width="80" height="26" rx="5" fill="${c}"/>${[0,1,2,3,4,5].map(i=>{const x=26+i*12,h=26+i*6;return `<rect x="${x}" y="${74-h}" width="${3+i*.5}" height="${h}" fill="${M}"/><path d="M${x} ${74-h+4}l${3+i*.5} 4M${x} ${74-h+12}l${3+i*.5} 4M${x} ${74-h+20}l${3+i*.5} 4" stroke="${G}" stroke-width="1.2"/>`}).join('')}<g class="a-tap" style="transform-origin:115px 100px"><rect x="112" y="40" width="7" height="60" rx="2" fill="#8A5A2B"/><path d="M100 30h32v12h-32z" fill="#5A6064"/><path d="M132 32q10 2 12 10h-12z" fill="#5A6064"/></g>`,
+  bits:c=>`<rect x="18" y="74" width="80" height="26" rx="5" fill="${c}"/>${[0,1,2,3,4,5].map(i=>{const x=26+i*12,h=26+i*6;return `<rect x="${x}" y="${74-h}" width="${3+i*.5}" height="${h}" fill="${M}"/><path d="M${x} ${74-h+4}l${3+i*.5} 4M${x} ${74-h+12}l${3+i*.5} 4M${x} ${74-h+20}l${3+i*.5} 4" stroke="${G}" stroke-width="1.2"/>`}).join('')}<g class="a-tap" style="transform-origin:115px 100px"><rect x="112" y="40" width="7" height="60" rx="2" fill="${W}"/><path d="M100 30h32v12h-32z" fill="#5A6064"/><path d="M132 32q10 2 12 10h-12z" fill="#5A6064"/></g>`,
   level:c=>`<rect x="6" y="48" width="148" height="26" rx="4" fill="${c}"/><rect x="6" y="48" width="12" height="26" rx="3" fill="${D}"/><rect x="142" y="48" width="12" height="26" rx="3" fill="${D}"/><rect x="28" y="55" width="30" height="12" rx="6" fill="${D}"/><rect x="102" y="55" width="30" height="12" rx="6" fill="${D}"/><rect x="68" y="52" width="24" height="18" rx="3" fill="${D}"/><rect x="72" y="56" width="16" height="10" rx="5" fill="#B9E36A"/><circle class="a-bubble" cx="80" cy="61" r="3" fill="#fff" opacity=".9"/><path d="M75 56v10M85 56v10" stroke="${D}" stroke-width="1.2"/>`,
   shed:c=>`<path d="M20 50l60-28l60 28z" fill="#5A6064"/><rect class="a-glint" x="72" y="32" width="16" height="6" rx="2" fill="#DDEFFA"/><rect x="28" y="48" width="104" height="58" fill="${c}"/><rect x="52" y="58" width="27" height="48" fill="${D}" opacity=".45"/><rect x="81" y="58" width="27" height="48" fill="${D}" opacity=".45"/><rect x="74" y="76" width="3" height="12" rx="1.5" fill="${D}"/><rect x="83" y="76" width="3" height="12" rx="1.5" fill="${D}"/><path d="M36 56v46M44 56v46M116 56v46M124 56v46" stroke="${D}" stroke-width="2" opacity=".3"/><rect x="24" y="104" width="112" height="6" rx="2" fill="${D}"/>`,
+  drill:c=>`<g class="a-puff"><circle cx="10" cy="52" r="3.5" fill="${S}"/><circle cx="14" cy="36" r="3" fill="${S}"/><circle cx="8" cy="46" r="2.5" fill="${S}"/></g><g class="a-buzz"><rect x="4" y="40.5" width="26" height="5" rx="1" fill="${G}"/><path d="M8 40.5l4 5M14 40.5l4 5M20 40.5l4 5" stroke="${D}" stroke-width="1"/></g><path d="M28 34h10v18H28z" fill="${M}"/><path d="M38 30h14v26H38z" fill="${D}"/><path d="M52 26h60q12 0 12 12v10q0 10-10 10H52z" fill="${c}"/><rect x="60" y="33" width="42" height="5" rx="2.5" fill="${D}" opacity=".4"/><path d="M84 58h28l8 36H92z" fill="${c}"/><path d="M92 66h18l4 20H96z" fill="${D}" opacity=".35"/><path d="M84 60q-10 2-8 14h12z" fill="${D}"/><rect x="84" y="92" width="48" height="16" rx="4" fill="${D}"/><rect x="90" y="96" width="22" height="4" rx="2" fill="${c}"/><circle class="a-blink" cx="124" cy="100" r="2.5" fill="#7CD85A"/>`,
+  circsaw:c=>`<rect x="16" y="96" width="128" height="6" rx="2" fill="${M}"/><g class="a-spin" style="transform-origin:68px 70px"><circle cx="68" cy="70" r="31" fill="#E2E5E7" stroke="${D}" stroke-width="3"/><circle cx="68" cy="70" r="22" fill="none" stroke="${G}" stroke-width="2" stroke-dasharray="4 4"/><path d="M68 48v44M46 70h44" stroke="${G}" stroke-width="1.6"/></g><path d="M34 70a34 34 0 0 1 68 0z" fill="${c}"/><rect x="88" y="46" width="44" height="26" rx="9" fill="${c}"/><rect x="96" y="54" width="26" height="4" rx="2" fill="${D}" opacity=".45"/><path d="M92 46q8-26 40-12l-4 9q-20-8-25 4z" fill="${D}"/><circle cx="68" cy="70" r="5" fill="${D}"/><g class="a-puff"><circle cx="30" cy="92" r="4" fill="${S}"/><circle cx="24" cy="88" r="3" fill="${S}"/><circle cx="36" cy="94" r="3" fill="${S}"/></g>`,
+  tape:c=>`<g class="a-slide"><rect x="8" y="84" width="62" height="11" fill="${HV}" stroke="${D}" stroke-width="1.5"/><path d="M16 84v5M24 84v7M32 84v5M40 84v7M48 84v5M56 84v7" stroke="${D}" stroke-width="1.3"/><rect x="4" y="81" width="5" height="17" fill="${G}"/></g><rect x="54" y="28" width="78" height="74" rx="18" fill="${c}"/><circle cx="93" cy="63" r="21" fill="${D}"/><circle cx="93" cy="63" r="8" fill="${M}"/><rect x="122" y="40" width="8" height="20" rx="3" fill="${D}"/><rect x="64" y="94" width="24" height="5" rx="2.5" fill="${D}" opacity=".5"/>`,
+  clamp:c=>`<rect x="14" y="30" width="128" height="9" rx="2" fill="${M}"/><path d="M22 26h18v58H22z" fill="${c}"/><rect x="40" y="68" width="10" height="16" rx="2" fill="${D}"/><g class="a-slide"><path d="M88 26h18v58H88z" fill="${c}"/><rect x="78" y="68" width="10" height="16" rx="2" fill="${D}"/><path d="M106 44h20q10 0 10 10v34h-13V58h-17z" fill="${D}"/><path d="M110 62q-10 6-6 22h8z" fill="${c}"/></g>`,
+  spade:c=>`<g class="a-bob"><rect x="76" y="20" width="8" height="58" rx="3" fill="${W}"/><rect x="62" y="6" width="36" height="16" rx="8" fill="none" stroke="${c}" stroke-width="7"/><rect x="58" y="72" width="44" height="7" rx="2" fill="${D}"/><path d="M60 78h40v14q0 16-20 24q-20-8-20-24z" fill="${M}" stroke="${G}" stroke-width="1.5"/><path d="M80 80v30" stroke="${G}" stroke-width="1.5"/></g><g class="a-puff"><circle cx="54" cy="110" r="4" fill="#7A5A3A"/><circle cx="106" cy="112" r="3.5" fill="#7A5A3A" style="--dx:14px"/><circle cx="62" cy="114" r="3" fill="#7A5A3A"/></g>`,
+  ladder:c=>`<path d="M50 106L72 18h16l22 88" fill="none" stroke="${M}" stroke-width="7" stroke-linejoin="round"/><path d="M67 40h26M62 60h36M57 80h46" stroke="${c}" stroke-width="6" stroke-linecap="round"/><rect x="64" y="10" width="32" height="10" rx="3" fill="${c}"/><rect x="42" y="102" width="16" height="7" rx="2" fill="${D}"/><rect x="102" y="102" width="16" height="7" rx="2" fill="${D}"/><path class="a-glint" d="M120 24l3 7l7 3l-7 3l-3 7l-3-7l-7-3l7-3z" fill="${HV}"/>`,
   generic:c=>`<rect x="30" y="40" width="100" height="50" rx="10" fill="${c}"/><rect x="60" y="30" width="40" height="12" rx="4" fill="${D}"/>`
 };
 const svg=t=>`<svg viewBox="0 0 160 120" aria-hidden="true">${(ART[t.art]||ART.generic)(t.colour||'#7B7F78')}</svg>`;
+/* Tab artwork */
+const EMB={
+  power:()=>`<svg viewBox="0 0 160 120">${ART.drill(HV)}<path class="a-blink" d="M30 6l-8 16h8l-5 14l16-20h-9l6-10z" fill="${HV}"/></svg>`,
+  hand:()=>`<svg viewBox="0 0 160 120"><g class="a-snip" style="transform-origin:80px 62px"><g transform="rotate(-38 80 62)"><rect x="76" y="22" width="9" height="88" rx="3" fill="${W}"/><rect x="58" y="10" width="44" height="18" rx="4" fill="${G}"/><path d="M58 12q-12 2-14 14h14z" fill="${G}"/></g></g><g class="a-snip2" style="transform-origin:80px 62px"><g transform="rotate(38 80 62)"><rect x="75.5" y="30" width="10" height="64" rx="4" fill="${HV}"/><path d="M68 28a13 13 0 1 1 25 0l-6-2v-10h-13v10z" fill="${HV}"/><circle cx="80.5" cy="102" r="10" fill="none" stroke="${HV}" stroke-width="7"/></g></g><circle cx="80" cy="62" r="5" fill="${D}"/></svg>`,
+  yard:()=>`<svg viewBox="0 0 160 120">${ART.spade(HV)}<path class="a-leaf" d="M120 50q8-10 16 0q-8 8-16 0z" fill="#9BB04A"/><path class="a-leaf2" d="M124 84q8-10 16 0q-8 8-16 0z" fill="#C0883A"/></svg>`,
+  care:()=>`<svg viewBox="0 0 160 120"><path d="M96 62L140 26" stroke="${M}" stroke-width="6" stroke-linecap="round"/><path d="M52 52q14-26 30 0" fill="none" stroke="${M}" stroke-width="6" stroke-linecap="round"/><path d="M40 58h62l8 48H32z" fill="${HV}"/><rect x="36" y="52" width="70" height="10" rx="3" fill="${D}"/><rect x="48" y="74" width="46" height="7" rx="3.5" fill="${D}" opacity=".35"/><path class="a-drop" d="M142 32q7 11 0 16q-7-5 0-16z" fill="${HV}"/></svg>`,
+  lent:()=>`<svg viewBox="0 0 160 120"><g class="a-sway" style="transform-origin:80px 2px"><path d="M80 2v30" stroke="${M}" stroke-width="2.5"/><path d="M54 32h52l12 18v60H42V50z" fill="${HV}"/><circle cx="80" cy="46" r="6" fill="#121516"/><path d="M56 70h48M56 84h48M56 98h30" stroke="${D}" stroke-width="5" stroke-linecap="round"/></g></svg>`
+};
+/* Saw blade (hero + loader) */
+function bladePath(n,R,r){let d='';for(let i=0;i<n;i++){const a=i/n*Math.PI*2,b=(i+.62)/n*Math.PI*2,c=(i+1)/n*Math.PI*2;d+=`${i?'L':'M'}${(100+R*Math.cos(a)).toFixed(1)} ${(100+R*Math.sin(a)).toFixed(1)}L${(100+r*Math.cos(b)).toFixed(1)} ${(100+r*Math.sin(b)).toFixed(1)}L${(100+r*Math.cos(c)).toFixed(1)} ${(100+r*Math.sin(c)).toFixed(1)}`}return d+'Z'}
+const bladeSvg=(fill='#262C30',edge='#4B555B')=>`<path d="${bladePath(30,98,86)}" fill="${fill}" stroke="${edge}" stroke-width="1.2"/><circle cx="100" cy="100" r="66" fill="none" stroke="${edge}" stroke-width="1"/>${[0,1,2,3,4,5].map(i=>`<rect x="97" y="22" width="6" height="34" rx="3" fill="#121516" transform="rotate(${i*60+15} 100 100)"/>`).join('')}<circle cx="100" cy="100" r="30" fill="none" stroke="${HV}" stroke-width="2" opacity=".7"/><circle cx="100" cy="100" r="11" fill="#121516" stroke="${edge}" stroke-width="2"/>`;
+document.getElementById('loadBlade').innerHTML=bladeSvg('#8E959A','#5A6064');
 const ICON={
   shed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 10l9-6 9 6v10H3z"/><circle cx="9" cy="13" r=".7" fill="currentColor"/><circle cx="12" cy="13" r=".7" fill="currentColor"/><circle cx="15" cy="13" r=".7" fill="currentColor"/><circle cx="9" cy="16.5" r=".7" fill="currentColor"/><circle cx="12" cy="16.5" r=".7" fill="currentColor"/><circle cx="15" cy="16.5" r=".7" fill="currentColor"/></svg>',
-  power:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg>',
-  hand:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l9-9M11 5l3-2 7 7-2 3-3-1-3-3z"/></svg>',
-  yard:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8M12 13C8 13 5 10 5 5c4 0 7 3 7 8zM12 11c0-4 3-7 7-7 0 4-3 7-7 7z"/></svg>',
-  care:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.3L4 17l3 3 5.2-5.2a4 4 0 0 0 5.3-5.3l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>',
-  lent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg>'
+  power:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6h8a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2h-3l1.5 7h-4L9 12H7z"/><path d="M7 9H2"/></svg>',
+  hand:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l9-9"/><path d="M11 5l3-2 7 7-2 3-3-1-3-3z"/></svg>',
+  yard:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9M9 3h6"/><path d="M8 12h8v3c0 3-2 5-4 6-2-1-4-3-4-6z"/></svg>',
+  care:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h10l1 8H3z"/><path d="M14 14l6-6"/><path d="M6 12c1-4 5-4 6 0"/><path d="M21 12v2"/></svg>',
+  lent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12V5h7l9 9-7 7z"/><circle cx="8.5" cy="9.5" r="1.2" fill="currentColor"/></svg>'
 };
 const arrow='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>';
 
 /* ---------- State + helpers ---------- */
 const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let data=null, loans=store.get('ts-loans',{}), careDone=store.get('ts-care',{}), view='shed';
+let data=null, loans=store.get('ts-loans',{}), careDone=store.get('ts-care',{}), view='';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>n==null?null:'$'+(Math.round(n*100)%100?n.toLocaleString('en-NZ',{minimumFractionDigits:2,maximumFractionDigits:2}):Math.round(n).toLocaleString('en-NZ'));
@@ -403,13 +516,16 @@ const days=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
 const niceDate=d=>new Date(d+'T12:00:00').toLocaleDateString('en-NZ',{day:'numeric',month:'short',year:'numeric'});
 const label=t=>[t.brand,t.name].filter(Boolean).join(' ');
 const pad=n=>String(n).padStart(2,'0');
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const tools=()=>data.tools;
 const byId=id=>tools().find(t=>t.id===id);
 const cats=()=>data.categories||[];
 const inCat=c=>tools().filter(t=>t.category===c);
+const featured=()=>{const f=tools().filter(t=>t.featured).sort((a,b)=>a.featured-b.featured);return f.length?f:tools().slice(0,8)};
 const loanOf=t=>loans[t.id]||(t.lentTo?{to:t.lentTo,on:t.lentOn||null,repo:true}:null);
 const deep=c=>`color-mix(in srgb, ${c} 62%, #0b0d0e)`;
-const words=(txt,accIdx=-1)=>txt.split(' ').map((w,k)=>{const s=`<span class="w"><span style="--k:${k}">${esc(w)}</span></span>`;return k===accIdx?`<span class="acc">${s}</span>`:s}).join(' ');
+const words=txt=>txt.split(' ').map((w,k)=>`<span class="w"><span style="--k:${k}">${esc(w)}</span></span>`).join(' ');
+const fit=(w,max,share=.94)=>`min(${max}px,${(share*100/(Math.max(3,w.length)*.5)).toFixed(1)}vw)`;
 function careList(){
   const out=[];
   for(const t of tools()) for(const c of (t.care||[])){
@@ -425,83 +541,85 @@ const go=t=>{ location.hash=t.category+'/'+t.id; };
 /* ---------- Shed (home) ---------- */
 function viewShed(){
   const ts=tools(), paid=ts.reduce((s,t)=>s+(t.paid||0),0), home=ts.filter(t=>!loanOf(t)).length;
-  const due=careList().filter(x=>x.due), out=ts.filter(loanOf);
-  const priced=ts.filter(t=>t.newPrice&&t.paid!=null), newSum=priced.reduce((s,t)=>s+t.newPrice,0), paidP=priced.reduce((s,t)=>s+t.paid,0);
+  const due=careList().filter(x=>x.due), out=ts.filter(loanOf), feat=featured();
+  const priced=ts.filter(t=>t.newPrice&&t.paid!=null&&!t.demo), newSum=priced.reduce((s,t)=>s+t.newPrice,0), paidP=priced.reduce((s,t)=>s+t.paid,0);
+  const save=newSum?1-paidP/newSum:0;
   const platforms={}; ts.forEach(t=>{if(t.power&&!/corded/i.test(t.power))(platforms[t.power]=platforms[t.power]||[]).push(t)});
+  const demoN=ts.filter(t=>t.demo).length;
   const needs=[
-    ...out.map(t=>{const l=loanOf(t);return `<button class="need rv" data-go="${t.id}"><span class="nt"><span class="lvl">Out</span><span class="mini">${svg(t)}</span></span><h3>${esc(t.tag||t.name)} is with ${esc(l.to)}</h3><p>${l.on?'Since '+niceDate(l.on)+' · '+days(l.on,today())+' days':'On loan'}</p></button>`}),
-    ...due.map(x=>`<button class="need rv" data-go="${x.t.id}"><span class="nt"><span class="lvl care">Care due</span><span class="mini">${svg(x.t)}</span></span><h3>${esc(x.t.tag||x.t.name)}</h3><p>${esc(x.c.text)}</p></button>`)
+    ...out.map(t=>{const l=loanOf(t);return `<button class="need screws rv" data-go="${t.id}"><span class="nt"><span class="lvl">Out</span><span class="mini">${svg(t)}</span></span><h3>${esc(t.tag||t.name)} is with ${esc(l.to)}</h3><p>${l.on?'Since '+niceDate(l.on)+' · '+days(l.on,today())+' days':'On loan'}</p></button>`}),
+    ...due.map(x=>`<button class="need screws rv" data-go="${x.t.id}"><span class="nt"><span class="lvl care">Care due</span><span class="mini">${svg(x.t)}</span></span><h3>${esc(x.t.tag||x.t.name)}</h3><p>${esc(x.c.text)}</p></button>`)
   ];
-  if(!needs.length) needs.push(`<div class="need rv"><span class="nt"><span class="lvl calm">All good</span></span><h3>Nothing needs you</h3><p>Every tool is home and looked after.</p></div>`);
-  const motes=Array.from({length:14},(_,i)=>`<i style="left:${(i*37)%100}%;top:${55+(i*23)%45}%;animation-delay:${(i*0.7)%9}s"></i>`).join('');
+  if(!needs.length) needs.push(`<div class="need screws rv"><span class="nt"><span class="lvl calm">All good</span></span><h3>Nothing needs you</h3><p>Every tool is home and looked after.</p></div>`);
+  const motes=Array.from({length:14},(_,i)=>`<i style="left:${30+(i*37)%70}%;top:${50+(i*23)%45}%;animation-delay:${(i*0.7)%9}s"></i>`).join('');
   const slots=ts.map((t,i)=>{const l=loanOf(t);return `<button class="slot ${t.size||'small'} ${l?'ghost':''}" style="--i:${i}" data-go="${t.id}" aria-label="${esc(label(t))}${l?', lent to '+esc(l.to):''}"><span class="art">${svg(t)}</span>${l?`<span class="out">With ${esc(l.to)}</span>`:''}<span class="dymo">${esc(t.tag||t.name)}</span></button>`}).join('');
-  return `<section class="hero" id="hero"><div class="hstage"><div class="stipple"></div><div class="hglow"></div><div class="motes">${motes}</div>
+  const panels=feat.map((t,i)=>{const l=loanOf(t), cat=cats().find(c=>c.id===t.category), w=t.verb||t.tag||'';
+    return `<div class="panel" data-i="${i}" style="--c:${deep(t.colour)};z-index:${i+1}">${i?'<div class="teeth"></div>':''}
+      <div class="rhead"><div class="rnum">${pad(i+1)}<small> / ${pad(feat.length)}</small></div><div class="rcat">${esc(cat?cat.name:'')}</div></div>
+      <div class="rword" style="font-size:${fit(w,270)}">${esc(w)}</div>
+      <div class="rart"><div class="a-float">${svg(t)}</div></div>
+      <div class="rinfo"><span class="dymo lg">${esc(t.tag||t.name)}</span><span class="rname">${esc(label(t))}</span><span class="rrow">${t.paid!=null?`<span class="rpill">Paid ${money(t.paid)}</span>`:''}${t.newPrice?`<span class="rpill">New ${money(t.newPrice)}</span>`:''}${l?`<span class="rpill" style="background:var(--warn)">With ${esc(l.to)}</span>`:''}<button class="rbtn" data-go="${t.id}">Open ${arrow}</button></span></div>
+    </div>`}).join('');
+  const tapeTxt='Measure twice · Cut once · Put it back where it hangs · ';
+  return `<section class="hero" id="hero"><div class="hstage"><div class="stipple"></div><div class="hglow"></div>
+      <div class="blade" id="blade"><svg viewBox="0 0 200 200" aria-hidden="true">${bladeSvg()}</svg></div><div class="motes">${motes}</div>
       <div class="hcopy" id="hcopy"><span class="kicker" style="color:rgba(239,230,212,.7)">${esc(data.shed?.place||'')}</span>
       <h1 class="tt">${words('The')}<br><span class="acc">${words('Shed')}</span></h1>
       <p class="hsub sub">Every tool, where it hangs, and what it's good for.</p>
-      <div class="hstats sub"><span class="pill"><b data-count="${ts.length}">0</b> tools</span><span class="pill"><b data-count="${home}">0</b> at home</span><span class="pill"><b>${due.length}</b> jobs due</span></div></div>
+      <div class="hstats sub"><span class="pill"><b data-count="${ts.length}">0</b> tools</span><span class="pill"><b data-count="${home}">0</b> home</span><span class="pill"><b>${due.length}</b> ${due.length===1?'job':'jobs'} due</span></div></div>
       <div class="hscroll"><i></i>Scroll</div><div class="mist"></div></div></section>
   <div class="flow">
     <div class="sechead"><h2>On the <span class="serif">bench</span></h2><span class="kicker">${needs.length>1?needs.length+' things':''}</span></div>
     <div class="needs">${needs.join('')}</div>
-    <div class="tape rv" role="group" aria-label="Shed totals"><div><b>${ts.length}</b><span>Tools</span></div><div><b>${home}</b><span>At home</span></div><div><b>${money(paid)}</b><span>Paid</span></div></div>
+    <div class="tapewrap rv" role="group" aria-label="Shed totals"><div class="tcase"><i></i></div><div class="tape"><div><b>${ts.length}</b><span>Tools</span></div><div><b>${home}</b><span>At home</span></div><div><b>${money(Math.round(paid))}</b><span>Paid</span></div></div></div>
     <div class="sechead"><h2>The <span class="serif">wall</span></h2><span class="kicker">Tap a tool</span></div>
     <section class="board" id="board" aria-label="Pegboard"><div class="grid">${slots}</div></section>
-    <div class="sechead"><h2>One by <span class="serif">one</span></h2><span class="kicker">Keep scrolling</span></div>
+    <div class="sechead"><h2>The <span class="serif">favourites</span></h2><span class="kicker">Keep scrolling</span></div>
   </div>
-  <section class="reel" id="reel" style="height:calc(${ts.length} * 62svh + 100svh)"><div class="rstage live" id="rstage">
-    <div class="rglow"></div>
-    <div class="rhead"><div class="rnum" id="rnum"></div><div class="rcat" id="rcat"></div></div>
-    <div class="rword" id="rword"></div>
-    <div class="rart" id="rart"></div>
-    <div class="rinfo" id="rinfo"></div>
-    <div class="rbar"><i id="rbar"></i></div>
+  <section class="reel" id="reel" style="height:calc(${feat.length} * 70svh + 100svh)"><div class="rstage" id="rstage">${panels}<div class="ruler" aria-hidden="true"><b id="rmark"></b></div></div></section>
+  <section class="lineup" id="lineup"><div class="lstage" id="lstage">
+    <div class="lhead"><span class="kicker">${ts.length} tools</span><h2>The whole <span class="serif">kit</span></h2></div>
+    <div><div class="ltrack" id="ltrack">${ts.map(t=>`<button class="lu" data-go="${t.id}" aria-label="${esc(label(t))}">${svg(t)}<span class="dymo">${esc(t.tag||t.name)}</span></button>`).join('')}</div><div class="shelf"></div>
+    <div class="lfoot"><span>Tap one to open it</span><span id="lcount">01 / ${pad(ts.length)}</span></div></div>
   </div></section>
   <div class="flow">
-    <section class="say" id="say"><p>${'Less buying.'.split(' ').map(w=>`<span class="wd">${w}</span>`).join(' ')} <span class="serif">${'More fixing.'.split(' ').map((w,k)=>`<span class="wd ${k?'hv':''}">${w}</span>`).join(' ')}</span></p><p class="sub">A good used tool does the job for half the price. Look after it and it lasts.</p></section>
-    ${priced.length?`<div class="card cardpad rv"><span class="kicker">Bargain meter</span><h2 style="margin-top:6px">${money(paidP)} <span class="serif" style="text-transform:none;font-size:.8em;color:var(--muted)">instead of</span> ${money(newSum)}</h2><div class="meter"><i style="transform:scaleX(${Math.min(1,paidP/newSum).toFixed(3)})"></i></div><p style="margin:10px 0 0;color:var(--body);font-size:15px">What you paid for the ${priced.length} tools with a known new price, against buying them new.</p></div>`:''}
+    <div class="ctape" aria-hidden="true"><div><span>${tapeTxt.repeat(3)}</span><span>${tapeTxt.repeat(3)}</span></div></div>
+    <section class="say" id="say"><p>${'Less buying.'.split(' ').map(w=>`<span class="wd">${w}</span>`).join(' ')} <span class="serif">${'More fixing.'.split(' ').map((w,k)=>`<span class="wd ${k?'hv':''}">${w}</span>`).join(' ')}</span></p><p class="sub2">A good used tool does the job for half the price. Look after it and it lasts.</p></section>
+    ${priced.length?`<div class="gauge rv" style="--off:${(251.4*(1-save)).toFixed(1)};--deg:${(-90+180*save).toFixed(1)}deg"><span class="kicker" style="color:rgba(239,230,212,.7)">Bargain meter</span>
+      <svg viewBox="0 0 200 112" aria-hidden="true"><path d="M20 100A80 80 0 0 1 180 100" fill="none" stroke="rgba(239,230,212,.14)" stroke-width="14" stroke-linecap="round"/><path class="garc" d="M20 100A80 80 0 0 1 180 100"/>${Array.from({length:11},(_,i)=>{const a=Math.PI*(1-i/10),x1=100+62*Math.cos(a),y1=100-62*Math.sin(a),x2=100+56*Math.cos(a),y2=100-56*Math.sin(a);return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="rgba(239,230,212,.5)" stroke-width="1.5"/>`}).join('')}<g class="gneedle"><path d="M100 100L100 40" stroke="#EFE6D4" stroke-width="3" stroke-linecap="round"/></g><circle cx="100" cy="100" r="7" fill="#EFE6D4"/></svg>
+      <p class="gbig">${Math.round(save*100)}<small>%</small></p><p class="gline">under the new price</p><p class="gnote">${money(paidP)} paid for ${priced.length} tools that cost ${money(newSum)} new.</p></div>`:''}
     ${Object.entries(platforms).map(([p,list])=>`<div class="card cardpad platform rv"><span class="swatch" style="background:${list[0].colour}"></span><div><span class="kicker">Battery platform</span><h2>${esc(p)}</h2><p style="margin:6px 0 0;color:var(--body)">${list.map(t=>esc(t.tag||t.name)).join(' · ')}</p></div></div>`).join('')}
-    <p class="foot">Updated ${niceDate(data.updated)}</p>
+    <p class="foot">Updated ${niceDate(data.updated)}${demoN?` · ${demoN} sample tools included for now`:''}</p>
   </div>`;
 }
-let reelCur=-1;
-function reelSet(i){
-  const t=tools()[i]; if(!t) return;
-  const st=$('#rstage'); st.style.setProperty('--c',deep(t.colour));
-  const l=loanOf(t), cat=cats().find(c=>c.id===t.category);
-  $('#rnum').innerHTML=`${pad(i+1)}<small> / ${pad(tools().length)}</small>`;
-  $('#rcat').textContent=cat?cat.name:'';
-  const w=t.verb||t.tag||''; $('#rword').textContent=w; $('#rword').style.fontSize=Math.min(270,innerWidth*.94/(Math.max(3,w.length)*.5))+'px';
-  $('#rart').innerHTML=`<div class="a-float">${svg(t)}</div>`;
-  $('#rinfo').innerHTML=`<span class="dymo lg">${esc(t.tag||t.name)}</span><span class="rname">${esc(label(t))}</span><span class="rrow">${t.paid!=null?`<span class="rpill">Paid ${money(t.paid)}</span>`:''}${t.newPrice?`<span class="rpill">New ${money(t.newPrice)}</span>`:''}${l?`<span class="rpill" style="background:var(--warn)">With ${esc(l.to)}</span>`:''}<button class="rbtn" data-go="${t.id}">Open ${arrow}</button></span>`;
-  st.classList.remove('rswap'); void st.offsetWidth; st.classList.add('rswap');
-}
 
-/* ---------- Category: swipe through tool pages ---------- */
+/* ---------- Category: artwork hero, then swipe through tool pages ---------- */
 function toolPage(t,i,n){
   const l=loanOf(t), care=careList().filter(x=>x.t===t);
   const save=t.paid!=null&&t.newPrice?Math.round(100-t.paid/t.newPrice*100):null;
-  const pairs=(t.pairs||[]).map(byId).filter(Boolean);
+  const pairs=(t.pairs||[]).map(byId).filter(Boolean), w=t.verb||'';
+  const bp=[...(t.model?[['Model',t.model]]:[]),['Power',t.power||'Hand tool'],...(t.specs||[])];
+  let k=0;
   return `<article class="page" data-id="${t.id}">
     <div class="plate live" style="background-color:${t.colour}">
-      <span class="status ${l?'lent':''}">${l?'With '+esc(l.to):'In the shed'}</span>
-      <span class="verb" aria-hidden="true" style="font-size:min(210px,${(84/Math.max(3,(t.verb||'').length)/.5).toFixed(1)}vw)">${esc(t.verb||'')}</span>
-      <div class="big a-float">${svg(t)}</div>
+      <span class="status ${l?'lent':''}">${l?'With '+esc(l.to):t.demo?'Sample tool':'In the shed'}</span>
+      <span class="verb" aria-hidden="true" style="font-size:${fit(w,210,.84)}">${esc(w)}</span>
+      <div class="big"><div class="a-float">${svg(t)}</div></div>
       <span class="dymo lg">${esc(t.name)}</span>
       <span class="who">${esc([t.brand,t.model].filter(Boolean).join(' · '))}</span>
     </div>
     <div class="facts">
-      <div class="fact"><span class="k">Paid</span><span class="v num">${money(t.paid)||'–'}</span>${t.paid==null?'<span class="s">Not recorded</span>':''}</div>
-      <div class="fact"><span class="k">New price</span><span class="v num">${money(t.newPrice)||'–'}</span><span class="s">${t.newFrom?esc(t.newFrom):'Not looked up yet'}</span></div>
-      ${save!=null?`<div class="fact wide hvf"><span class="k">Bargain</span><span class="v" style="font-weight:700">${save}% under the new price</span></div>`:''}
-      <div class="fact"><span class="k">Power</span><span class="v">${esc(t.power||'Hand tool')}</span></div>
-      <div class="fact"><span class="k">Condition</span><span class="v">${esc({good:'Good',fair:'Fair',worn:'Worn'}[t.condition]||'Working')}</span></div>
-      ${t.spot?`<div class="fact wide"><span class="k">Lives</span><span class="v">${esc(t.spot)}</span></div>`:''}
+      <div class="fact tag" style="--n:${k++}"><span class="k">Paid</span><span class="v num">${money(t.paid)||'–'}</span>${t.paid==null?'<span class="s">Not recorded</span>':''}</div>
+      <div class="fact tag" style="--n:${k++}"><span class="k">New price</span><span class="v num">${money(t.newPrice)||'–'}</span><span class="s">${t.newFrom?esc(t.newFrom):'Not looked up yet'}</span></div>
+      ${save!=null?`<div class="fact wide hvf" style="--n:${k++}"><span class="k">Bargain</span><span class="v" style="font-weight:700">${save}% under the new price</span></div>`:''}
+      <div class="fact" style="--n:${k++}"><span class="k">Power</span><span class="v">${esc(t.power||'Hand tool')}</span></div>
+      <div class="fact" style="--n:${k++}"><span class="k">Condition</span><span class="v">${esc({good:'Good',fair:'Fair',worn:'Worn'}[t.condition]||'Working')}</span></div>
+      ${t.spot?`<div class="fact wide" style="--n:${k++}"><span class="k">Lives</span><span class="v">${esc(t.spot)}</span></div>`:''}
     </div>
     ${t.notes?`<div class="note">${esc(t.notes)}</div>`:''}
     ${(t.uses||[]).length?`<div class="card cardpad"><h2>Good for</h2><ul class="uses">${t.uses.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
     ${(t.includes||[]).length?`<div class="card cardpad"><h2>In the kit</h2><ul class="kit">${t.includes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
-    ${(t.specs||[]).length?`<div class="card cardpad"><h2>Specs</h2><dl class="specs">${t.specs.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></div>`:''}
+    <div class="bp"><h2>Blueprint</h2><div class="bpart">${svg(t)}</div><div class="dim">${esc(t.tag||t.name)}</div><dl>${bp.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl></div>
     ${care.length?`<div class="card"><div class="cardpad" style="padding-bottom:0"><h2>Care</h2></div>${care.map(x=>`<label class="task ${x.last&&!x.due?'done':''}"><input type="checkbox" data-care="${x.key}" ${x.last&&!x.due?'checked':''}><span class="tt2"><span class="tx">${esc(x.c.text)}</span><span class="when ${x.due?'due':''}">${x.due?'Due now':'Due in '+x.left+' day'+(x.left>1?'s':'')} · every ${x.c.every} days</span></span></label>`).join('')}</div>`:''}
     ${pairs.length?`<div class="card cardpad"><h2>Pairs with</h2><div class="pairs">${pairs.map(p=>`<button class="pair" data-go="${p.id}"><span class="mini">${svg(p)}</span>${esc(label(p))}</button>`).join('')}</div></div>`:''}
     <div class="card cardpad"><h2>${l?'On loan':'Lend it'}</h2>
@@ -511,9 +629,10 @@ function toolPage(t,i,n){
     <p class="swipehint">${n>1?(i<n-1?'Swipe for the next tool →':'← Swipe back'):''}</p>
   </article>`;
 }
+const chero=(key,kicker,titleHtml,sub)=>`<section class="chero live"><div class="stipple"></div><div class="cglow"></div><div class="emb">${(EMB[key]||EMB.hand)()}</div><span class="kicker">${kicker}</span><h1 class="tt ${titleHtml.includes('<br>')?'long':''}">${titleHtml}</h1><span class="swash"></span><p class="sub">${esc(sub)}</p></section>`;
 function viewCat(c){
   const list=inCat(c.id);
-  return `<div class="flow"><section class="ptitle"><span class="kicker">${list.length} tools</span><h1 class="tt"><span class="acc">${words(c.name)}</span></h1><span class="swash"></span><p class="sub">${esc(c.blurb||'')}</p></section>
+  return `<div class="flow">${chero(c.id,list.length+' tools',`<span class="acc">${words(c.name)}</span>`,c.blurb||'')}
     <div class="picker" id="picker">${list.map((t,i)=>`<button class="pk" data-idx="${i}" aria-current="${i===0}">${svg(t)}${esc(t.tag||t.name)}</button>`).join('')}</div>
     <div class="posrow"><span class="pos" id="pos">01 / ${pad(list.length)}</span><span class="dots" id="dots">${list.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</span></div>
     <div class="rail" id="rail">${list.map((t,i)=>toolPage(t,i,list.length)).join('')}</div></div>`;
@@ -523,7 +642,7 @@ function viewCat(c){
 function viewCare(){
   const list=careList(), due=list.filter(x=>x.due), later=list.filter(x=>!x.due);
   const task=x=>`<label class="task ${x.last&&!x.due?'done':''}"><input type="checkbox" data-care="${x.key}" ${x.last&&!x.due?'checked':''}><span class="tt2"><span class="tk">${esc(label(x.t))}</span><span class="tx">${esc(x.c.text)}</span><span class="when ${x.due?'due':''}">${x.due?(x.last?'Due now · last done '+niceDate(x.last):'Due now'):(x.last?'Done '+niceDate(x.last)+' · ':'')+'due in '+x.left+' day'+(x.left>1?'s':'')}</span></span></label>`;
-  return `<div class="flow"><section class="ptitle"><span class="kicker">${list.length} jobs</span><h1 class="tt">${words('Keep it')}<br><span class="acc">${words('sharp')}</span></h1><span class="swash"></span><p class="sub">Small jobs that keep the tools working. Tick one off and it comes back when it's due.</p></section>
+  return `<div class="flow">${chero('care',list.length+' jobs',`${words('Keep it')}<br><span class="acc">${words('sharp')}</span>`,"Small jobs that keep the tools working. Turn the nut when it's done.")}
   <section class="rv"><h2 class="h2s">Due now · ${due.length}</h2>${due.length?`<div class="card">${due.map(task).join('')}</div>`:'<p class="empty card">Nothing due. Nice work.</p>'}</section>
   ${later.length?`<section class="rv"><h2 class="h2s">Coming up</h2><div class="card">${later.map(task).join('')}</div></section>`:''}
   <p class="foot">Ticks are saved on this phone.</p></div>`;
@@ -531,7 +650,7 @@ function viewCare(){
 function row(t){const l=loanOf(t);return `<li><button class="item" data-go="${t.id}"><span class="thumb" style="background:color-mix(in srgb,${t.colour} 16%,transparent)">${svg(t)}</span><span class="txt"><b>${esc(label(t))}</b><span>${l?'With '+esc(l.to):esc([t.model,t.power].filter(Boolean).join(' · ')||'In the shed')}</span></span><span class="val">${money(t.paid)||''}</span></button></li>`}
 function viewLent(){
   const out=tools().filter(loanOf), home=tools().filter(t=>!loanOf(t));
-  return `<div class="flow"><section class="ptitle"><span class="kicker">${out.length} out</span><h1 class="tt">${words("Who's got")}<br><span class="acc">${words('it?')}</span></h1><span class="swash"></span><p class="sub">Lend a tool and it shows as an empty outline on the wall until it's back.</p></section>
+  return `<div class="flow">${chero('lent',out.length+' out',`${words("Who's got")}<br><span class="acc">${words('it?')}</span>`,"Lend a tool and it shows as an empty outline on the wall until it's back.")}
   <section class="rv"><h2 class="h2s">Out now · ${out.length}</h2>${out.length?`<div class="card">${out.map(t=>{const l=loanOf(t);return `<div class="loan"><span class="mini">${svg(t)}</span><div style="flex:1;min-width:0"><b>${esc(label(t))}</b><div style="font-size:14px;color:var(--muted)">With ${esc(l.to)}${l.on?' since '+niceDate(l.on)+' ('+days(l.on,today())+' days)':''}</div></div>${l.repo?'':`<button class="btn hvb" data-back="${t.id}">Back</button>`}</div>`}).join('')}</div>`:'<p class="empty card">Everything is home.</p>'}</section>
   <section class="rv"><h2 class="h2s">Lend something</h2><ul class="items card">${home.map(row).join('')}</ul></section>
   <p class="foot">Loans are saved on this phone.</p></div>`;
@@ -540,8 +659,8 @@ function viewLent(){
 /* ---------- Tabs, router ---------- */
 function tabs(cur){
   const due=careList().filter(x=>x.due).length, out=tools().filter(loanOf).length;
-  const T=[['shed','Shed'],...cats().map(c=>[c.id,c.name]),['care','Care',due,'hvd'],['lent','Lent',out]];
-  $('#tabs').innerHTML=T.map(([id,name,n,cls])=>`<a class="tab" href="#${id}" ${cur===id?'aria-current="page"':''}>${ICON[id]||ICON.hand}${esc(name)}${n?`<span class="dot ${cls||''}">${n}</span>`:''}</a>`).join('');
+  const T=[['shed','Shed'],...cats().map(c=>[c.id,c.name]),['care','Care',due],['lent','Lent',out]];
+  $('#tabs').innerHTML=T.map(([id,name,n])=>`<a class="tab" href="#${id}" ${cur===id?'aria-current="page"':''}>${ICON[id]||ICON.hand}${esc(name)}${n?`<span class="dot">${n}</span>`:''}</a>`).join('');
 }
 function parse(){ const [v,id]=location.hash.slice(1).split('/'); return {v:v||'shed',id}; }
 function render(keep){
@@ -550,15 +669,15 @@ function render(keep){
   const cat=cats().find(c=>c.id===v);
   if(!cat&&!['shed','care','lent'].includes(v)) v='shed';
   const same=v===view&&keep;
-  if(cat&&v===view&&$('#rail')&&!keep){ scrollRailTo(id,true); return; } // same category, just move to the tool
+  if(cat&&v===view&&$('#rail')&&!keep){ scrollRailTo(id,true); return; } // same category: just move to the tool
   view=v;
   const y=window.scrollY, railX=$('#rail')?.scrollLeft;
   $('#main').innerHTML=v==='shed'?viewShed():v==='care'?viewCare():v==='lent'?viewLent():viewCat(cat);
-  document.body.classList.toggle('onhero',v==='shed');
+  document.body.classList.toggle('dark-top',v==='shed');
   tabs(v);
   if(same){ window.scrollTo(0,y); if($('#rail')&&railX!=null) $('#rail').scrollLeft=railX; }
   else window.scrollTo(0,0);
-  wire(cat,same?null:id);
+  wire(cat,same?null:id,same);
 }
 function scrollRailTo(id,smooth){
   const rail=$('#rail'); if(!rail) return;
@@ -573,20 +692,23 @@ function railState(i){
   $$('#dots i').forEach((d,k)=>d.classList.toggle('on',k===i));
   $$('#picker .pk').forEach((p,k)=>p.setAttribute('aria-current',k===i));
   const pk=$$('#picker .pk')[i]; if(pk){ const pr=$('#picker'); pr.scrollTo({left:pk.offsetLeft-pr.clientWidth/2+pk.clientWidth/2,behavior:'smooth'}); }
-  // keep the rail as tall as the page on screen
-  const page=$$('#rail .page')[i]; if(page) $('#rail').style.height=page.scrollHeight+'px';
+  $$('#rail .page').forEach((p,k)=>p.classList.toggle('cur',k===i));
+  const page=$$('#rail .page')[i]; if(page) $('#rail').style.height=page.scrollHeight+'px'; // rail is as tall as the page on screen
 }
 let rio;
-function wire(cat,id){
+function sizeLineup(){ const lt=$('#ltrack'), lu=$('#lineup'); if(lt&&lu) lu.style.height=(innerHeight+Math.max(0,lt.scrollWidth-$('#lstage').clientWidth))+'px'; } // scroll distance = how far the shelf slides
+function wire(cat,id,same){
   rio&&rio.disconnect();
   rio='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'}):null;
   $$('.rv, #board').forEach(el=>rio?rio.observe(el):el.classList.add('in'));
-  if(view==='shed'){ reelCur=-1; onScroll(); countUp(); }
+  if(view==='shed'){ sizeLineup(); countUp(); }
   if(cat){
     const rail=$('#rail'); let tmr;
     rail.addEventListener('scroll',()=>{clearTimeout(tmr);tmr=setTimeout(()=>{const i=Math.round(rail.scrollLeft/rail.clientWidth),t=inCat(view)[i];if(!t)return;railState(i);history.replaceState(null,'','#'+view+'/'+t.id)},80)},{passive:true});
-    requestAnimationFrame(()=>scrollRailTo(id,false));
+    if(same) railState(Math.round(rail.scrollLeft/rail.clientWidth));
+    else requestAnimationFrame(()=>scrollRailTo(id,false));
   }
+  onScroll();
 }
 function countUp(){
   $$('[data-count]').forEach(el=>{const to=+el.dataset.count,t0=performance.now(),dur=1100;
@@ -595,29 +717,41 @@ function countUp(){
     setTimeout(()=>requestAnimationFrame(step),500);});
 }
 
-/* ---------- Scroll engine: hero shrinks, reel steps through tools, statement lights up ---------- */
-const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+/* ---------- Scroll engine ---------- */
 function onScroll(){
-  $('#top').classList.toggle('glassy',view!=='shed'?window.scrollY>8:window.scrollY>innerHeight*.9);
+  const sy=window.scrollY, max=document.documentElement.scrollHeight-innerHeight, vial=$('.vial');
+  $('#bubble').style.transform=`translateX(${((max>0?clamp(sy/max):0)-.5)*(vial.clientWidth-16)}px)`;
+  $('#top').classList.toggle('glassy',view!=='shed'?sy>8:sy>innerHeight*.9);
   if(view!=='shed') return;
   const h=$('#hero'), hc=$('#hcopy');
-  if(h&&hc){ const p=clamp(window.scrollY/(h.offsetHeight-innerHeight)); hc.style.transform=`translateY(${-60*p}px) scale(${1-.14*p})`; hc.style.opacity=clamp(1.25-p*1.5); }
+  if(h&&hc){ const p=clamp(sy/(h.offsetHeight-innerHeight)); hc.style.transform=`translateY(${-60*p}px) scale(${1-.14*p})`; hc.style.opacity=clamp(1.25-p*1.5); $('#blade').style.transform=`rotate(${sy*.22}deg) scale(${1+p*.25})`; }
   const reel=$('#reel');
   if(reel){
-    const r=reel.getBoundingClientRect(), total=r.height-innerHeight, p=clamp(-r.top/total), n=tools().length;
-    const x=p*n, i=Math.min(n-1,Math.floor(x)), f=clamp(x-i);
-    if(i!==reelCur){ reelCur=i; reelSet(i); }
-    const art=$('#rart'), word=$('#rword');
-    if(art) art.style.transform=`translateY(calc(-50% + ${(f-.5)*-40}px)) rotate(${(f-.5)*-14}deg) scale(${.9+.1*Math.sin(Math.PI*f)})`;
-    if(word) word.style.transform=`translateY(-50%) translateX(${(.5-f)*6}%)`;
-    $('#rbar').style.transform=`scaleX(${p})`;
+    const r=reel.getBoundingClientRect(), total=r.height-innerHeight, p=clamp(-r.top/total), ps=$$('#reel .panel'), n=ps.length;
+    const x=p*n, cur=Math.min(n-1,Math.floor(x)), near=r.top<innerHeight&&r.bottom>0;
+    ps.forEach((el,i)=>{
+      const t=i===0?1:clamp((x-(i-.42))/.42);   // 0 = below the screen, 1 = fully up. Panel i finishes rising as step i begins.
+      el.style.transform=`translate3d(0,${((1-t)*100).toFixed(2)}%,0)`;
+      const show=i===cur||i===cur+1;            // everything earlier is covered, everything later is still below
+      el.style.visibility=show?'visible':'hidden';
+      el.classList.toggle('live',near&&show&&t>0);
+      if(show){
+        const f=clamp((x-i+.42)/1.42), art=el.querySelector('.rart'), word=el.querySelector('.rword');
+        art.style.transform=`translateY(calc(-50% + ${(f-.5)*-46}px)) rotate(${(f-.5)*-18}deg) scale(${.86+.14*Math.sin(Math.PI*f)})`;
+        word.style.transform=`translateY(-50%) translateX(${(.5-f)*8}%)`;
+      }
+    });
+    const rm=$('#rmark'); rm.style.transform=`translateY(${p*rm.parentNode.clientHeight}px)`;
   }
+  const lu=$('#lineup');
+  if(lu){ const r=lu.getBoundingClientRect(), total=r.height-innerHeight, p=total>0?clamp(-r.top/total):0, lt=$('#ltrack'), dist=Math.max(0,lt.scrollWidth-$('#lstage').clientWidth);
+    lt.style.transform=`translate3d(${-p*dist}px,0,0)`; const n=tools().length; $('#lcount').textContent=`${pad(Math.min(n,1+Math.round(p*(n-1))))} / ${pad(n)}`; }
   const say=$('#say');
   if(say){ const r=say.getBoundingClientRect(), p=clamp((innerHeight*.85-r.top)/(r.height*.8)), ws=$$('#say .wd'); ws.forEach((w,k)=>w.classList.toggle('lit',p>(k+.5)/ws.length)); }
 }
 let ticking=false;
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{ticking=false;onScroll()})}},{passive:true});
-addEventListener('resize',()=>{onScroll(); const rail=$('#rail'); if(rail){const i=Math.round(rail.scrollLeft/rail.clientWidth); railState(i);}});
+addEventListener('resize',()=>{ if(!data) return; if(view==='shed') sizeLineup(); onScroll(); const rail=$('#rail'); if(rail) railState(Math.round(rail.scrollLeft/rail.clientWidth)); });
 
 /* ---------- Events ---------- */
 document.addEventListener('click',e=>{
@@ -628,7 +762,7 @@ document.addEventListener('click',e=>{
 document.addEventListener('change',e=>{
   const k=e.target.dataset&&e.target.dataset.care; if(!k) return;
   if(e.target.checked) careDone[k]=today(); else delete careDone[k];
-  store.set('ts-care',careDone); setTimeout(()=>render(true),280);
+  store.set('ts-care',careDone); setTimeout(()=>render(true),650);
 });
 document.addEventListener('submit',e=>{
   const f=e.target.closest('[data-lend]'); if(!f) return; e.preventDefault();
@@ -645,7 +779,7 @@ function results(){
   const list=tools().filter(t=>!q||[t.name,t.brand,t.model,t.tag,t.verb,t.notes,...(t.includes||[]),...(t.uses||[])].join(' ').toLowerCase().includes(q));
   $('#results').innerHTML=list.length?`<ul class="items card">${list.map(row).join('')}</ul>`:'<p class="empty">Nothing matches. Try another word.</p>';
 }
-$('#searchBtn').addEventListener('click',openSheet);
+$('#searchBtn').addEventListener('click',()=>{ if(data) openSheet(); });
 $('#sheetClose').addEventListener('click',closeSheet);
 $('#q').addEventListener('input',results);
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSheet(); });

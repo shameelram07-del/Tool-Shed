@@ -4,15 +4,27 @@ A phone-first page for every tool in the shed. Colours follow the 60/30/10 rule:
 
 ## How it flows
 
-- **Shed (home):** a dark dotted opening screen that shrinks into mist as you scroll. Then "On the bench" (tools out on loan and care jobs due), a tape-measure strip of totals, and the pegboard wall, where tools swing onto their hooks. Next is a scroll reel: one tool fills the screen at a time on its brand colour, numbered, with a giant action word behind it (CUT, SAND, CLEAN…) and the drawing tilting as you scroll. It ends with "Less buying. More fixing.", which lights up word by word, plus the bargain meter and battery platform.
-- **Power · Hand · Yard:** a big animated title, a picker row, then full tool pages you swipe through sideways. Each page has the moving drawing in front of its action word, then prices, what it's good for, what's in the kit, specs, care jobs, what it pairs with, and lending.
-- **Care:** small maintenance jobs. Tick one off and it comes back when it's due again.
+- **Shed (home):** a dark dotted opening screen with a big saw blade that turns as you scroll, then shrinks into mist. After that:
+  - **On the bench:** tools out on loan and care jobs due.
+  - **Tape measure:** the totals pull out of a tape-measure case.
+  - **The wall:** a pegboard where every tool swings onto its hook.
+  - **The favourites:** a scroll reel of the `featured` tools. Each one fills the screen on its brand colour with a giant action word behind it (CUT, SAND, DRILL…). The next one slides up over the last with a saw-tooth edge, and a ruler down the side shows how far through you are.
+  - **The whole kit:** every tool on one long shelf that slides sideways as you scroll down.
+  - **Caution tape**, then "Less buying. More fixing." lighting up word by word.
+  - **Bargain meter:** a glowing gauge of how far under the new price you paid.
+- **Power · Hand · Yard:** each tab opens with its own artwork (drill, crossed hammer and spanner, spade). Then a picker row and full tool pages you swipe through sideways. Each page opens up as it arrives: the moving drawing in front of its action word, price tags, what it's good for, what's in the kit, a blueprint card that redraws the tool as a white outline, care jobs, what it pairs with, and lending.
+- **Care:** small maintenance jobs. The tick boxes are hex nuts that turn when you tick them. A job comes back when it's due again.
 - **Lent:** who has what. A lent tool shows as a dashed outline on the wall until it's back.
 - **Search** (magnifying glass, top right) looks through names, brands, kit and uses.
+- **Spirit level** (top of every page): the bubble shows how far down the page you are.
 
-Every drawing moves differently: the saw blade spins, the sander buzzes, the vacuum hose sways, the blower blows leaves, the battery charger blinks, the wheelbarrow rocks and the level bubble drifts. Motion switches off when the phone's Reduce Motion setting is on.
+Every drawing moves differently: the saw blade spins, the sander buzzes, the vacuum hose sways, the blower blows leaves, the drill throws dust, the tape measure slides and the level bubble drifts. Motion switches off when the phone's Reduce Motion setting is on.
 
 Care ticks, loans and the light/dark choice are saved on each phone (browser storage), not in the repo.
+
+## Sample tools
+
+Tools with `"demo": true` in `data.json` are samples that fill the page out until the real list goes in. Their pages say "Sample tool", the home page footer counts them, and they are left out of the bargain meter. Delete them from `data.json` to remove them.
 
 ## Files
 
@@ -31,15 +43,17 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
 - `updated`: date of the last change (`YYYY-MM-DD`).
 - `careStart`: care timers for jobs never ticked count from this date.
 - `shed`: `{ name, place }`.
-- `categories[]`: `{ id, name }`.
+- `categories[]`: `{ id, name, blurb }`. Tab artwork exists for `power`, `hand` and `yard`.
 - `tools[]`:
   - `id`: short kebab-case, unique.
   - `name`: what it is, without the brand.
   - `tag`: short name for the wall label (about 12 characters).
   - `verb`: one action word shown huge behind the drawing (Cut, Sand, Clean…).
+  - `featured` (optional): a number. Tools with one appear in the home page reel, in that order (about 8 works best).
+  - `demo` (optional): `true` for a sample tool.
   - `brand`, `model`: `null` if unknown.
   - `category`: a category `id` (`power`, `hand` or `yard`). Each category is a tab in the bottom bar.
-  - `art`: drawing key (`mitresaw`, `sander`, `vac`, `blower`, `battery`, `wheelbarrow`, `toolbag`, `sockets`, `handset`, `screwdrivers`, `knife`, `bits`, `level`, `shed`, `generic`).
+  - `art`: drawing key (`mitresaw`, `sander`, `vac`, `blower`, `battery`, `wheelbarrow`, `toolbag`, `sockets`, `handset`, `screwdrivers`, `knife`, `bits`, `level`, `shed`, `drill`, `circsaw`, `tape`, `clamp`, `spade`, `ladder`, `generic`).
   - `colour`: brand colour for the drawing and the tool page.
   - `size`: wall slot size: `small`, `wide` or `big`.
   - `paid`: what was paid. `null` if not recorded.

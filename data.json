@@ -61,7 +61,8 @@
         "Skirting, framing and decking",
         "Picture frames and trim"
       ],
-      "pairs": []
+      "pairs": [],
+      "featured": 1
     },
     {
       "id": "makita-bo5030",
@@ -116,7 +117,8 @@
       ],
       "pairs": [
         "makita-vc2000l"
-      ]
+      ],
+      "featured": 2
     },
     {
       "id": "makita-vc2000l",
@@ -168,7 +170,8 @@
       ],
       "pairs": [
         "makita-bo5030"
-      ]
+      ],
+      "featured": 4
     },
     {
       "id": "ryobi-batteries",
@@ -218,6 +221,99 @@
       ]
     },
     {
+      "id": "demo-drill",
+      "name": "drill driver",
+      "tag": "Drill",
+      "verb": "Drill",
+      "brand": "DeWalt",
+      "model": "18V XR",
+      "category": "power",
+      "art": "drill",
+      "colour": "#E8B400",
+      "size": "big",
+      "paid": 80,
+      "newPrice": 249,
+      "newFrom": "Sample price",
+      "power": "DeWalt 18V XR",
+      "includes": [
+        "Drill driver",
+        "2Ah battery",
+        "Charger"
+      ],
+      "specs": [
+        [
+          "Chuck",
+          "13mm keyless"
+        ],
+        [
+          "Speeds",
+          "2"
+        ]
+      ],
+      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
+      "care": [
+        {
+          "id": "chuck",
+          "text": "Blow the dust out of the chuck and wipe it down",
+          "every": 60
+        }
+      ],
+      "uses": [
+        "Drilling timber, metal and masonry",
+        "Driving screws all day"
+      ],
+      "pairs": [
+        "drill-bits"
+      ],
+      "demo": true,
+      "featured": 3
+    },
+    {
+      "id": "demo-circ-saw",
+      "name": "circular saw",
+      "tag": "Circ saw",
+      "verb": "Rip",
+      "brand": "Makita",
+      "model": "185mm",
+      "category": "power",
+      "art": "circsaw",
+      "colour": "#00898F",
+      "size": "big",
+      "paid": 60,
+      "newPrice": 199,
+      "newFrom": "Sample price",
+      "power": "Corded 240V",
+      "includes": [
+        "Saw",
+        "Rip fence",
+        "Blade spanner"
+      ],
+      "specs": [
+        [
+          "Blade",
+          "185mm"
+        ],
+        [
+          "Motor",
+          "1200W"
+        ]
+      ],
+      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
+      "care": [
+        {
+          "id": "blade",
+          "text": "Check the blade for pitch build-up and dull teeth",
+          "every": 90
+        }
+      ],
+      "uses": [
+        "Ripping sheets of ply",
+        "Straight cuts in framing timber"
+      ],
+      "pairs": [],
+      "demo": true
+    },
+    {
       "id": "fatmax-hand-lot",
       "name": "hand tool lot + tool bag",
       "tag": "Hand tools",
@@ -254,7 +350,8 @@
         "Assembling flat-packs",
         "A grab-and-go bag for jobs"
       ],
-      "pairs": []
+      "pairs": [],
+      "featured": 5
     },
     {
       "id": "toolpro-sockets",
@@ -389,7 +486,8 @@
         "Driving screws with the drill"
       ],
       "pairs": [
-        "fatmax-hand-lot"
+        "fatmax-hand-lot",
+        "demo-drill"
       ]
     },
     {
@@ -465,7 +563,71 @@
       ],
       "pairs": [
         "ox-level-600"
-      ]
+      ],
+      "featured": 6
+    },
+    {
+      "id": "demo-tape",
+      "name": "8m tape measure",
+      "tag": "Tape",
+      "verb": "Measure",
+      "brand": "Stanley",
+      "model": "FatMax",
+      "category": "hand",
+      "art": "tape",
+      "colour": "#E8B400",
+      "size": "small",
+      "paid": 10,
+      "newPrice": 38,
+      "newFrom": "Sample price",
+      "power": null,
+      "includes": [],
+      "specs": [
+        [
+          "Length",
+          "8m"
+        ]
+      ],
+      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
+      "care": [],
+      "uses": [
+        "Measure twice, cut once"
+      ],
+      "pairs": [],
+      "demo": true
+    },
+    {
+      "id": "demo-clamps",
+      "name": "quick clamps",
+      "tag": "Clamps",
+      "verb": "Hold",
+      "brand": "Irwin",
+      "model": "Quick-Grip",
+      "category": "hand",
+      "art": "clamp",
+      "colour": "#1F4E9C",
+      "size": "small",
+      "paid": 15,
+      "newPrice": 60,
+      "newFrom": "Sample price",
+      "power": null,
+      "includes": [
+        "300mm clamp ×2"
+      ],
+      "specs": [
+        [
+          "Opening",
+          "300mm"
+        ]
+      ],
+      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
+      "care": [],
+      "uses": [
+        "Holding glue-ups",
+        "A third hand at the bench"
+      ],
+      "pairs": [],
+      "demo": true
     },
     {
       "id": "ryobi-blower-vac",
@@ -501,7 +663,8 @@
       ],
       "pairs": [
         "ryobi-batteries"
-      ]
+      ],
+      "featured": 7
     },
     {
       "id": "wheelbarrow",
@@ -539,7 +702,10 @@
         "Moving soil, mulch and compost",
         "Carting heavy tools out to the car"
       ],
-      "pairs": []
+      "pairs": [
+        "demo-spade"
+      ],
+      "featured": 8
     },
     {
       "id": "keter-shed",
@@ -575,6 +741,80 @@
         "Keeping the tools dry and locked away"
       ],
       "pairs": []
+    },
+    {
+      "id": "demo-spade",
+      "name": "garden spade",
+      "tag": "Spade",
+      "verb": "Dig",
+      "brand": "Fiskars",
+      "model": null,
+      "category": "yard",
+      "art": "spade",
+      "colour": "#E35A1B",
+      "size": "small",
+      "paid": 12,
+      "newPrice": 65,
+      "newFrom": "Sample price",
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
+      "care": [
+        {
+          "id": "edge",
+          "text": "Clean the blade and touch up the edge with a file",
+          "every": 120
+        }
+      ],
+      "uses": [
+        "Digging and edging garden beds",
+        "Planting trees and shrubs"
+      ],
+      "pairs": [
+        "wheelbarrow"
+      ],
+      "demo": true
+    },
+    {
+      "id": "demo-ladder",
+      "name": "step ladder",
+      "tag": "Ladder",
+      "verb": "Climb",
+      "brand": "Bailey",
+      "model": "1.8m",
+      "category": "yard",
+      "art": "ladder",
+      "colour": "#C2413A",
+      "size": "small",
+      "paid": 30,
+      "newPrice": 159,
+      "newFrom": "Sample price",
+      "power": null,
+      "includes": [],
+      "specs": [
+        [
+          "Height",
+          "1.8m"
+        ],
+        [
+          "Load",
+          "120kg"
+        ]
+      ],
+      "notes": "Sample tool. It shows how the page looks until the real list goes in.",
+      "care": [
+        {
+          "id": "feet",
+          "text": "Check the feet and hinges before you climb",
+          "every": 180
+        }
+      ],
+      "uses": [
+        "Gutters, light fittings and high shelves"
+      ],
+      "pairs": [],
+      "demo": true
     }
   ]
 }
