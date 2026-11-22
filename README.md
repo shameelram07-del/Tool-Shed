@@ -10,7 +10,7 @@ A phone-first page for every tool in the shed. Colours follow the 60/30/10 rule:
   - **The wall:** a pegboard where every tool swings onto its hook.
   - **The whole kit:** every tool on one long shelf that slides sideways as you scroll down.
   - **Barrier tape**, then "Less buying. More fixing." lighting up word by word.
-- **Power · Hand · Yard:** each tab opens with its own artwork (drill, crossed hammer and spanner, spade). Then a picker row and full tool pages you swipe through sideways. Each page opens up as it arrives, and has two tabs: **Details** and **Care** (how to look after that tool). Details shows the moving drawing in front of its action word, what it's good for, what's in the kit, a blueprint card that redraws the tool as a white outline, care jobs and what it pairs with.
+- **Power · Hand · Yard:** each tab opens with its own artwork (drill, crossed hammer and spanner, spade). Then a picker row and full tool pages you swipe through sideways. Each page opens up as it arrives, and has two tabs: **Details** and **Care** (how to look after that tool). Details shows a blueprint drawing sheet (white linework on grid paper, the action word in outline, a dimension line and a title block with drawing number, scale, make, model and brand colour), what it's good for, what's in the kit, specs where known, care jobs and what it pairs with.
 - **Search** (magnifying glass, top right) looks through names, brands, kit and uses.
 - **Spirit level** (top of every page): the bubble shows how far down the page you are.
 

@@ -278,6 +278,9 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .fact.lives .v{color:var(--hv);font-weight:700}
 .pairs{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
 .pair{display:flex;align-items:center;gap:10px;border:0;border-radius:16px;padding:8px 14px 8px 8px;background:var(--sunk);cursor:pointer;font-weight:700;font-size:15px;text-align:left;color:inherit}
+.specs{margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px}
+.specs dt{font-family:var(--mono);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.specs dd{margin:0}
 /* Tool page tabs: Details | Care */
 .seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line)}
 .seg button{min-height:44px;border:0;border-radius:10px;background:transparent;font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .25s,color .25s}
@@ -295,6 +298,35 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .guide .gx{font-size:16px;line-height:1.35}
 .guide li.always .gi{background:var(--sunk);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
 .guide li.always .gf{color:var(--muted)}
+
+/* ===== Tool pages are blueprint drawing sheets: white linework on drafting-blue grid paper. The wall, shelf and picker stay in colour. ===== */
+:root{--bp:#163E6B;--bp-deep:#0F2E52;--bpl:#E8F1FF;--bpl-dim:rgba(232,241,255,.55);--bpgrid:rgba(232,241,255,.13);--bpgrid2:rgba(232,241,255,.05)}
+.plate,.pair .mini{background-color:var(--bp)!important;background-image:linear-gradient(var(--bpgrid) 1px,transparent 1px),linear-gradient(90deg,var(--bpgrid) 1px,transparent 1px),linear-gradient(var(--bpgrid2) 1px,transparent 1px),linear-gradient(90deg,var(--bpgrid2) 1px,transparent 1px)!important;background-size:48px 48px,48px 48px,12px 12px,12px 12px!important}
+/* linework */
+.plate svg *,.pair .mini svg *{fill:none!important;stroke:var(--bpl)!important;stroke-width:1.5!important;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round}
+.plate svg .x,.pair .mini svg .x{stroke-width:.8!important;opacity:.55}
+.plate svg text{fill:var(--bpl)!important;stroke:none!important;opacity:.8}
+.plate svg ellipse[fill="#000"],.pair .mini svg ellipse[fill="#000"]{display:none}
+.plate .big{filter:none!important}
+/* tool page plate becomes a drawing sheet */
+.plate{border-radius:28px!important;padding:46px 16px 16px!important;box-shadow:inset 0 0 0 1.5px rgba(232,241,255,.35)}
+.plate::after{content:"";position:absolute;inset:10px;border:1px solid rgba(232,241,255,.3);border-radius:20px;pointer-events:none}
+.plate::before{display:none}
+.plate .verb{color:transparent!important;-webkit-text-stroke:1.4px rgba(232,241,255,.32);opacity:1}
+.plate .big{width:min(310px,86%)}
+.status{background:transparent!important;color:var(--bpl)!important;box-shadow:inset 0 0 0 1.2px var(--bpl-dim)}
+.dimline{position:relative;z-index:2;width:min(300px,84%);display:flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bpl);margin-top:-4px}
+.dimline::before,.dimline::after{content:"";flex:1;height:1px;background:var(--bpl-dim)}
+.dimline span{white-space:nowrap}
+.dimline{background:linear-gradient(var(--bpl-dim),var(--bpl-dim)) left center/1px 10px no-repeat,linear-gradient(var(--bpl-dim),var(--bpl-dim)) right center/1px 10px no-repeat}
+.tblock{position:relative;z-index:2;align-self:stretch;margin-top:6px;border:1.2px solid var(--bpl-dim);border-radius:8px;color:var(--bpl);font-family:var(--mono);overflow:hidden}
+.tb-name{padding:8px 10px;font-weight:800;font-size:clamp(14px,4.2vw,18px);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--bpl-dim)}
+.tb-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.tb-row+.tb-row{border-top:1px solid var(--bpl-dim);grid-template-columns:2fr 1fr}
+.tb-row span{padding:6px 10px;font-size:12px;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tb-row span+span{border-left:1px solid var(--bpl-dim)}
+.tb-row em{display:block;font-style:normal;font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.65}
+.tb-sw i{display:inline-block;width:28px;height:10px;border-radius:2px;box-shadow:0 0 0 1px var(--bpl-dim);vertical-align:middle}
 /* Tab heroes with artwork */
 .chero{position:relative;margin:0 0 4px;border-radius:30px;overflow:hidden;background:var(--night);color:var(--cream);padding:150px 20px 22px;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:inset 0 0 0 1px rgba(228,231,234,.08)}
 .chero .stipple{opacity:.7}
@@ -953,15 +985,14 @@ function toolPage(t,i,n){
   const l=loanOf(t), care=(t.care||[]), gen=generalCare(t), home=t.storedIn?byId(t.storedIn):null, inside=tools().filter(x=>x.storedIn===t.id);
   const save=t.paid!=null&&t.newPrice?Math.round(100-t.paid/t.newPrice*100):null;
   const pairs=(t.pairs||[]).map(byId).filter(Boolean), w=t.verb||'';
-  const bp=[...(t.model?[['Model',t.model]]:[]),['Power',t.power||'Hand tool'],...(t.specs||[])];
   let k=0;
   return `<article class="page" data-id="${t.id}">
     <div class="plate live" style="background-color:${t.colour}">
       <span class="status ${l?'lent':''}">${l?'With '+esc(l.to):t.demo?'Sample tool':'In the shed'}</span>
       <span class="verb" aria-hidden="true" style="font-size:${fit(w,210,.84)}">${esc(w)}</span>
       <div class="big"><div class="a-float">${svg(t)}</div></div>
-      <span class="dymo lg">${esc(t.name)}</span>
-      <span class="who">${esc([t.brand,t.model].filter(Boolean).join(' · '))}</span>
+      <div class="dimline" aria-hidden="true"><span>${esc(t.tag||t.name)}</span></div>
+      <div class="tblock"><div class="tb-name">${esc(t.name)}</div><div class="tb-row"><span><em>Dwg</em>${pad(i+1)}/${pad(n)}</span><span><em>Scale</em>1:${({big:6,wide:4,small:3})[t.size]||4}</span><span><em>Make</em>${esc(t.brand||'—')}</span></div><div class="tb-row"><span class="tb-model"><em>Model</em>${esc(t.model||'—')}</span><span class="tb-sw"><em>Colour</em><i style="background:${t.colour}"></i></span></div></div>
     </div>
     <div class="facts">
       ${t.newPrice?`<div class="valfact fact" style="--n:${k++};padding:0"><div><span class="k">New price</span><span class="v">${money(t.newPrice)}</span><span class="s">${t.newUrl?`<a href="${esc(t.newUrl)}" target="_blank" rel="noopener">${esc(t.newFrom||'Source')}</a>`:esc(t.newFrom||'')}</span></div><div><span class="k">Worth used</span><span class="v acc">≈ ${money(usedOf(t))}</span><span class="s">${t.usedValue!=null?'Estimate':t.condition==='worn'?'About 40% of new (worn)':'About 55% of new'}</span></div></div>`:''}
@@ -975,7 +1006,7 @@ function toolPage(t,i,n){
     ${inside.length?`<div class="card cardpad"><h2>Stored inside · ${inside.length}</h2><div class="pairs">${inside.map(x=>`<button class="pair" data-go="${x.id}"><span class="mini">${svg(x)}</span>${esc(label(x))}</button>`).join('')}</div></div>`:''}
     ${(t.uses||[]).length?`<div class="card cardpad"><h2>Good for</h2><ul class="uses">${t.uses.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
     ${(t.includes||[]).length?`<div class="card cardpad"><h2>In the kit</h2><ul class="kit">${t.includes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
-    <div class="bp"><h2>Blueprint</h2><div class="bpart">${svg(t)}</div><div class="dim">${esc(t.tag||t.name)}</div><dl>${bp.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl></div>
+    ${(t.specs||[]).length?`<div class="card cardpad"><h2>Specs</h2><dl class="specs">${t.specs.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl></div>`:''}
     </div>
     <div class="pane" data-pane="care" hidden>
       <div class="card cardpad"><h2>How to care for it</h2><ul class="guide">${care.map(c=>`<li><span class="gi">${SEG.care}</span><span class="gt"><span class="gf">${often(c.every)}</span><span class="gx">${esc(c.text)}</span></span></li>`).join('')}${gen.map(x=>`<li class="always"><span class="gi">${SEG.check}</span><span class="gt"><span class="gf">Every time</span><span class="gx">${esc(x)}</span></span></li>`).join('')}</ul></div>
