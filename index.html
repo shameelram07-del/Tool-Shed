@@ -357,7 +357,7 @@ body.dark-top .top:not(.glassy){color:var(--cream)}
 .page{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;padding:0 16px;display:flex;flex-direction:column;gap:14px;min-width:0}
 .plate{container-type:inline-size;position:relative;border-radius:200px 200px 28px 28px;padding:44px 16px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;overflow:hidden;color:var(--cream);background-image:radial-gradient(circle at center,rgba(0,0,0,.25) 0 2.2px,transparent 2.8px);background-size:20px 20px}
 .plate .verb{position:absolute;left:0;right:0;top:20%;text-align:center;font-family:var(--display);font-weight:900;line-height:.8;text-transform:uppercase;color:rgba(228,231,234,.95);white-space:nowrap;pointer-events:none}
-.plate .big{position:relative;z-index:1;width:min(300px,84%);margin-top:34px;filter:drop-shadow(0 18px 14px rgba(0,0,0,.4))}
+.plate .big{position:relative;z-index:1;width:min(300px,84%);margin-top:14px;filter:drop-shadow(0 18px 14px rgba(0,0,0,.4))}
 .plate .big svg{width:100%;height:auto;overflow:visible}
 .plate .dymo{position:relative;z-index:2}
 .plate .who{position:relative;z-index:2;font-family:var(--mono);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.92;text-align:center}
@@ -989,7 +989,6 @@ function toolPage(t,i,n){
   return `<article class="page" data-id="${t.id}">
     <div class="plate live" style="background-color:${t.colour}">
       <span class="status ${l?'lent':''}">${l?'With '+esc(l.to):t.demo?'Sample tool':'In the shed'}</span>
-      <span class="verb" aria-hidden="true" style="font-size:${fit(w,210,.84)}">${esc(w)}</span>
       <div class="big"><div class="a-float">${svg(t)}</div></div>
       <div class="dimline" aria-hidden="true"><span>${esc(t.tag||t.name)}</span></div>
       <div class="tblock"><div class="tb-name">${esc(t.name)}</div><div class="tb-row"><span><em>Dwg</em>${pad(i+1)}/${pad(n)}</span><span><em>Scale</em>1:${({big:6,wide:4,small:3})[t.size]||4}</span><span><em>Make</em>${esc(t.brand||'—')}</span></div><div class="tb-row"><span class="tb-model"><em>Model</em>${esc(t.model||'—')}</span><span class="tb-sw"><em>Colour</em><i style="background:${t.colour}"></i></span></div></div>

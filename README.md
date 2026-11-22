@@ -10,7 +10,7 @@ A phone-first page for every tool in the shed. Colours follow the 60/30/10 rule:
   - **The wall:** a pegboard where every tool swings onto its hook.
   - **The whole kit:** every tool on one long shelf that slides sideways as you scroll down.
   - **Barrier tape**, then "Less buying. More fixing." lighting up word by word.
-- **Power · Hand · Yard:** each tab opens with its own artwork (drill, crossed hammer and spanner, spade). Then a picker row and full tool pages you swipe through sideways. Each page opens up as it arrives, and has two tabs: **Details** and **Care** (how to look after that tool). Details shows a blueprint drawing sheet (white linework on grid paper, the action word in outline, a dimension line and a title block with drawing number, scale, make, model and brand colour), what it's good for, what's in the kit, specs where known, care jobs and what it pairs with.
+- **Power · Hand · Yard:** each tab opens with its own artwork (drill, crossed hammer and spanner, spade). Then a picker row and full tool pages you swipe through sideways. Each page opens up as it arrives, and has two tabs: **Details** and **Care** (how to look after that tool). Details shows a blueprint drawing sheet (white linework on grid paper, a dimension line and a title block with drawing number, scale, make, model and brand colour), what it's good for, what's in the kit, specs where known, care jobs and what it pairs with.
 - **Search** (magnifying glass, top right) looks through names, brands, kit and uses.
 - **Spirit level** (top of every page): the bubble shows how far down the page you are.
 
@@ -40,7 +40,6 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
   - `id`: short kebab-case, unique.
   - `name`: what it is, without the brand.
   - `tag`: short name for the wall label (about 12 characters).
-  - `verb`: one action word shown huge behind the drawing (Cut, Sand, Clean…).
   - `brand`, `model`: `null` if unknown.
   - `category`: a category `id` (`power`, `hand` or `yard`). Each category is a tab in the bottom bar.
   - `art`: drawing key (`mitresaw`, `sander`, `vac`, `blower`, `battery`, `wheelbarrow`, `toolbag`, `sockets`, `handset`, `screwdrivers`, `knife`, `bits`, `level`, `shed`, `drill`, `circsaw`, `tape`, `clamp`, `spade`, `ladder`, `generic`).
