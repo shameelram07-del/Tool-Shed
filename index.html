@@ -913,7 +913,7 @@ function viewShed(){
   const tapeTxt='Measure twice · Cut once · Put it back where it hangs · ';
   return `<section class="hero" id="hero"><div class="hstage"><div class="stipple"></div><div class="hglow"></div>
       <div class="blade" id="blade"><svg viewBox="0 0 200 200" aria-hidden="true">${bladeSvg()}</svg></div><div class="motes">${motes}</div>
-      <div class="hcopy" id="hcopy"><span class="kicker" style="color:rgba(228,231,234,.7)">${esc(data.shed?.place||'')}</span>
+      <div class="hcopy" id="hcopy">
       <h1 class="tt">${words('The')}<br><span class="acc">${words('Shed')}</span></h1>
       <p class="hsub sub">Every tool, where it hangs, and what it's good for.</p>
       <div class="hstats sub"><span class="pill"><b data-count="${ts.length}">0</b> tools</span><span class="pill"><b data-count="${ts.filter(t=>t.category==='power').length}">0</b> power</span><span class="pill"><b>${due.length}</b> ${due.length===1?'job':'jobs'} due</span></div></div>

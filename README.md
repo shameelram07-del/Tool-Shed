@@ -37,7 +37,7 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
 - `updated`: date of the last change (`YYYY-MM-DD`).
 - `pricedOn`: the date the new prices were checked.
 - `careStart`: care timers for jobs never ticked count from this date.
-- `shed`: `{ name, place }`.
+- `shed`: `{ name }`.
 - `categories[]`: `{ id, name, blurb }`. Tab artwork exists for `power`, `hand` and `yard`.
 - `tools[]`:
   - `id`: short kebab-case, unique.
