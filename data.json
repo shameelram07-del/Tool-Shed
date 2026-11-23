@@ -134,11 +134,12 @@
       "pairs": [
         "makita-vc2000l"
       ],
-      "spot": "Pegboard",
+      "spot": "Off the board",
       "featured": 7,
       "newUrl": "https://www.mitre10.co.nz/shop/bosch-professional-multi-tool-gop-30-28-300-watt/p/300843",
       "priceCheck": true,
-      "usedValue": 100
+      "usedValue": 100,
+      "board": false
     },
     {
       "id": "bosch-gop12",
@@ -246,11 +247,12 @@
       "pairs": [
         "bosch-hammer-drill"
       ],
-      "spot": "Pegboard",
+      "spot": "Off the board",
       "condition": "worn",
       "newUrl": "https://www.bunnings.co.nz/products/tools/power-tools/drills/drill-driver",
       "priceCheck": true,
-      "usedValue": 70
+      "usedValue": 70,
+      "board": false
     },
     {
       "id": "bosch-impact",
@@ -459,9 +461,10 @@
         "Final finish sanding"
       ],
       "pairs": [],
-      "spot": "Pegboard",
+      "spot": "Off the board",
       "newUrl": "https://www.bunnings.co.nz/ryobi-1-3-sheet-sander-280w_p0282349",
-      "priceCheck": true
+      "priceCheck": true,
+      "board": false
     },
     {
       "id": "ryobi-quickturn",
@@ -738,6 +741,218 @@
       "priceCheck": true
     },
     {
+      "id": "bosch-rotary-hammer",
+      "name": "SDS rotary hammer drill",
+      "tag": "Rotary hammer",
+      "brand": "Bosch",
+      "model": "GBH (label worn)",
+      "category": "power",
+      "art": "rotaryhammer",
+      "colour": "#24394F",
+      "size": "big",
+      "paid": null,
+      "newPrice": 299,
+      "newFrom": "Bunnings · Bosch Pro SDS Plus rotary hammer (probably GBH 2-26)",
+      "power": "Corded 240V",
+      "includes": [],
+      "specs": [],
+      "notes": "Label is worn; model to confirm.",
+      "care": [
+        {
+          "id": "sds",
+          "text": "Clean and lightly grease the SDS bit shanks before fitting",
+          "every": 30
+        },
+        {
+          "id": "cord",
+          "text": "Check the cord where it enters the handle",
+          "every": 90
+        }
+      ],
+      "uses": [
+        "Drilling concrete and brick",
+        "Chiselling tiles and render (hammer-only mode)",
+        "Big holes for anchors and pipes"
+      ],
+      "pairs": [],
+      "spot": "Pegboard",
+      "newUrl": "https://www.bunnings.co.nz/bosch-professional-sds-plus-rotary-hammer-06112a3040_p0515841",
+      "priceCheck": true
+    },
+    {
+      "id": "bosch-blower",
+      "name": "cordless blower",
+      "tag": "Blower",
+      "brand": "Bosch",
+      "model": "GBL 18V-120",
+      "category": "power",
+      "art": "bblower",
+      "colour": "#1F5E8A",
+      "size": "wide",
+      "paid": null,
+      "newPrice": 138,
+      "newFrom": "Bunnings · GBL 18V-120 skin",
+      "power": "Bosch 18V Professional",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "intake",
+          "text": "Clear the air intake grille",
+          "every": 60
+        }
+      ],
+      "uses": [
+        "Blowing sawdust off the bench and out of the shed",
+        "Clearing leaves off paths and the drive",
+        "Drying off wet surfaces"
+      ],
+      "pairs": [],
+      "spot": "Bench",
+      "newUrl": "https://www.bunnings.co.nz/bosch-blue-gbl-18v-120-professional-blower-skin-only_p6200491"
+    },
+    {
+      "id": "ryobi-ros",
+      "name": "corded random orbital sander",
+      "tag": "Orbital sander",
+      "brand": "Ryobi",
+      "model": null,
+      "category": "power",
+      "art": "rros",
+      "colour": "#C9D21F",
+      "size": "small",
+      "paid": null,
+      "newPrice": 89,
+      "newFrom": "Bunnings · Ryobi 300W 125mm orbital sander",
+      "power": "Corded 240V",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "pad",
+          "text": "Check the hook-and-loop pad still grips the discs",
+          "every": 60
+        },
+        {
+          "id": "dust",
+          "text": "Empty the dust bag or canister",
+          "every": 14
+        }
+      ],
+      "uses": [
+        "Fast sanding of timber and paint",
+        "Smoothing between coats"
+      ],
+      "pairs": [],
+      "spot": "Bench",
+      "newUrl": "https://www.bunnings.co.nz/ryobi-300w-125mm-orbital-sander_p0261603"
+    },
+    {
+      "id": "ryobi-polisher",
+      "name": "car polisher",
+      "tag": "Polisher",
+      "brand": "Ryobi",
+      "model": null,
+      "category": "power",
+      "art": "polisher",
+      "colour": "#C9D21F",
+      "size": "small",
+      "paid": null,
+      "newPrice": 169,
+      "newFrom": "Bunnings · One+ 250mm buffer polisher (current model)",
+      "power": "Power type to confirm",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "bonnet",
+          "text": "Wash the lambswool bonnet and let it dry fully",
+          "every": 30
+        }
+      ],
+      "uses": [
+        "Polishing and buffing car paint",
+        "Bringing up a shine on boats and trailers"
+      ],
+      "pairs": [],
+      "spot": "Bench",
+      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-250mm-10-random-orbital-buffer-polisher-rbp18250-tool-only_p0359141",
+      "priceCheck": true
+    },
+    {
+      "id": "ryobi-inflator",
+      "name": "One+ air inflator",
+      "tag": "Air pump",
+      "brand": "Ryobi",
+      "model": "One+",
+      "category": "power",
+      "art": "inflator",
+      "colour": "#C9D21F",
+      "size": "small",
+      "paid": null,
+      "newPrice": 149,
+      "newFrom": "Bunnings · One+ multifunction inflator RMI18",
+      "power": "Ryobi One+ 18V",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "hose",
+          "text": "Check the hose and chuck for cracks or leaks",
+          "every": 90
+        }
+      ],
+      "uses": [
+        "Car, bike and trailer tyres",
+        "Balls and pool toys"
+      ],
+      "pairs": [],
+      "spot": "Pegboard",
+      "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-multifunction-inflator-rmi18-tool-only_p0873100"
+    },
+    {
+      "id": "wagner-sprayer",
+      "name": "cordless paint sprayer",
+      "tag": "Paint sprayer",
+      "brand": "Wagner",
+      "model": null,
+      "category": "power",
+      "art": "sprayer",
+      "colour": "#F2C21B",
+      "size": "small",
+      "paid": null,
+      "newPrice": 425,
+      "newFrom": "Mitre 10 · Wagner Flexio W600 cordless (closest match)",
+      "power": "Cordless 18V",
+      "includes": [],
+      "specs": [],
+      "notes": "Has red paint on it from the last job.",
+      "care": [
+        {
+          "id": "clean",
+          "text": "Flush and clean the nozzle and cup straight after every job",
+          "every": 14
+        },
+        {
+          "id": "seals",
+          "text": "Check the seals and O-rings; a drop of oil keeps them supple",
+          "every": 90
+        }
+      ],
+      "uses": [
+        "Fences, decks and furniture",
+        "Doors and trim"
+      ],
+      "pairs": [],
+      "spot": "Bench",
+      "newUrl": "https://www.mitre10.co.nz/shop/wagner-flexio-w600-cordless-paint-sprayer-18-volt/p/2042313",
+      "priceCheck": true
+    },
+    {
       "id": "hammers",
       "name": "hammers and mallets",
       "tag": "Hammers",
@@ -749,14 +964,16 @@
       "colour": "#8A5634",
       "size": "wide",
       "paid": null,
-      "newPrice": 60.92,
-      "newFrom": "Bunnings · mallet $7.98, wood mallet $12.98, club $14.98, claw $24.98",
+      "newPrice": 99.88,
+      "newFrom": "Bunnings / Mitre 10 · mallet $7.98, club $14.98, claw $24.98, yellow claw $11.98, ball pein $14.98, wooden mallet $24.98",
       "power": null,
       "includes": [
         "Rubber mallet (Craftright)",
-        "Wooden-handled mallet",
-        "Club hammer",
-        "Claw hammer"
+        "Club hammers",
+        "Claw hammers (one red and black)",
+        "Yellow-handled hammer",
+        "Ball pein hammer",
+        "Wooden mallet"
       ],
       "specs": [],
       "notes": "",
@@ -779,7 +996,8 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.bunnings.co.nz/craftright-450g-16oz-rubber-mallet_p0489971"
+      "newUrl": "https://www.bunnings.co.nz/trojan-16oz-450g-ball-pein-hammer_p0131362",
+      "priceCheck": true
     },
     {
       "id": "staple-gun",
@@ -826,10 +1044,13 @@
       "colour": "#2B5FA8",
       "size": "small",
       "paid": null,
-      "newPrice": 55.49,
-      "newFrom": "Bunnings · 9 pc ball-end hex keys",
+      "newPrice": 63.47,
+      "newFrom": "Bunnings / Mitre 10 · Kincrome 9 pc $55.49 + second 9 pc set $7.98",
       "power": null,
-      "includes": [],
+      "includes": [
+        "Ball-end hex key set (blue holder)",
+        "Second ball-end hex key set"
+      ],
       "specs": [],
       "notes": "",
       "care": [
@@ -845,7 +1066,8 @@
       ],
       "pairs": [],
       "spot": "Pegboard",
-      "newUrl": "https://www.bunnings.co.nz/kincrome-ball-point-hex-key-set-9-piece-metric_p0152375"
+      "newUrl": "https://www.bunnings.co.nz/kincrome-ball-point-hex-key-set-9-piece-metric_p0152375",
+      "priceCheck": true
     },
     {
       "id": "pliers",
@@ -1365,6 +1587,221 @@
         "ox-level-600"
       ],
       "newUrl": "https://www.mitre10.co.nz/shop/ox-spirit-level-1200mm/p/336771"
+    },
+    {
+      "id": "stud-detector",
+      "name": "wall and stud detector",
+      "tag": "Detector",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "detector",
+      "colour": "#C2413A",
+      "size": "small",
+      "paid": null,
+      "newPrice": 65,
+      "newFrom": "Bunnings · Ryobi stud finder (comparable)",
+      "power": "Battery",
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "batt",
+          "text": "Take the battery out if it'll sit unused for months",
+          "every": 180
+        }
+      ],
+      "uses": [
+        "Finding studs and nogs before fixing to a wall",
+        "Checking for pipes and live wires before drilling"
+      ],
+      "pairs": [],
+      "spot": "Pegboard",
+      "newUrl": "https://www.bunnings.co.nz/products/tools/hand-tools/measuring-tools/stud-finders",
+      "priceCheck": true
+    },
+    {
+      "id": "speed-square",
+      "name": "rafter / speed square",
+      "tag": "Speed square",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "square",
+      "colour": "#2B2E30",
+      "size": "small",
+      "paid": null,
+      "newPrice": 14.98,
+      "newFrom": "Mitre 10 · 175mm aluminium speed square",
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Marking square and 45° cuts",
+        "Setting out roof and stair angles"
+      ],
+      "pairs": [],
+      "spot": "Pegboard",
+      "newUrl": "https://www.mitre10.co.nz/shop/fuller-square-speed-175mm/p/364681"
+    },
+    {
+      "id": "mini-hacksaw",
+      "name": "junior hacksaw",
+      "tag": "Hacksaw",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "hacksaw",
+      "colour": "#C2413A",
+      "size": "small",
+      "paid": null,
+      "newPrice": 13.48,
+      "newFrom": "Bunnings · 150mm junior hacksaw",
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "blade",
+          "text": "Swap the blade when it stops biting",
+          "every": 180
+        }
+      ],
+      "uses": [
+        "Cutting bolts, pipe and plastic"
+      ],
+      "pairs": [],
+      "spot": "Pegboard",
+      "newUrl": "https://www.bunnings.co.nz/trojan-150mm-junior-hack-saw_p0191084"
+    },
+    {
+      "id": "pry-bar",
+      "name": "pry bar and scraper",
+      "tag": "Pry bar",
+      "brand": "Trojan",
+      "model": null,
+      "category": "hand",
+      "art": "prybar",
+      "colour": "#E88AB4",
+      "size": "small",
+      "paid": null,
+      "newPrice": 29.73,
+      "newFrom": "Bunnings · Trojan 375mm pry bar $24.98 + scraper $4.75",
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [],
+      "uses": [
+        "Lifting boards and skirting",
+        "Scraping glue, paint and sealant"
+      ],
+      "pairs": [],
+      "spot": "Pegboard",
+      "newUrl": "https://www.bunnings.co.nz/trojan-375mm-pry-bar_p0422981",
+      "priceCheck": true
+    },
+    {
+      "id": "box-level",
+      "name": "orange box level",
+      "tag": "Box level",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "level",
+      "colour": "#E3561B",
+      "size": "wide",
+      "paid": null,
+      "newPrice": 39.98,
+      "newFrom": "Bunnings · Trojan 600mm level",
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "check",
+          "text": "Flip test: read it, turn it end for end, and the bubble should sit the same",
+          "every": 180
+        }
+      ],
+      "uses": [
+        "Shelves, frames and quick checks"
+      ],
+      "pairs": [],
+      "spot": "Pegboard",
+      "newUrl": "https://www.bunnings.co.nz/products/tools/hand-tools/measuring-tools",
+      "priceCheck": true
+    },
+    {
+      "id": "caulking-gun",
+      "name": "caulking gun",
+      "tag": "Caulk gun",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "caulkgun",
+      "colour": "#E3561B",
+      "size": "small",
+      "paid": null,
+      "newPrice": 23.95,
+      "newFrom": "Bunnings · Monarch caulking gun",
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "clean",
+          "text": "Wipe the plunger and rod clean before sealant sets on it",
+          "every": 30
+        }
+      ],
+      "uses": [
+        "Silicone and sealant",
+        "Gap filler and construction adhesive"
+      ],
+      "pairs": [],
+      "spot": "Bench",
+      "newUrl": "https://www.bunnings.co.nz/monarch-10-5-heavy-duty-cradle-caulking-gun_p0097185",
+      "priceCheck": true
+    },
+    {
+      "id": "metal-toolbox",
+      "name": "metal tool box",
+      "tag": "Tool box",
+      "brand": null,
+      "model": null,
+      "category": "hand",
+      "art": "toolbox",
+      "colour": "#2E6B4E",
+      "size": "wide",
+      "paid": null,
+      "newPrice": 55,
+      "newFrom": "Estimate · comparable steel tool box (Bunnings Trojan box $40)",
+      "power": null,
+      "includes": [],
+      "specs": [],
+      "notes": "",
+      "care": [
+        {
+          "id": "rust",
+          "text": "Keep it dry and touch up chipped paint before rust starts",
+          "every": 365
+        }
+      ],
+      "uses": [
+        "Spare fixings and small tools",
+        "A grab box for jobs away from the shed"
+      ],
+      "pairs": [],
+      "spot": "Bench",
+      "newUrl": "https://www.bunnings.co.nz/trojan-466-x-224-x-210mm-tool-box_p0328122",
+      "priceCheck": true
     },
     {
       "id": "ryobi-blower-vac",

@@ -42,7 +42,7 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
   - `tag`: short name for the wall label (about 12 characters).
   - `brand`, `model`: `null` if unknown.
   - `category`: a category `id` (`power`, `hand` or `yard`). Each category is a tab in the bottom bar.
-  - `art`: drawing key (`mitresaw`, `sander`, `vac`, `blower`, `battery`, `wheelbarrow`, `toolbag`, `sockets`, `handset`, `screwdrivers`, `knife`, `bits`, `level`, `shed`, `drill`, `circsaw`, `tape`, `clamp`, `spade`, `ladder`, `generic`).
+  - `art`: drawing key (`mitresaw`, `sander`, `vac`, `blower`, `battery`, `wheelbarrow`, `toolbag`, `sockets`, `handset`, `screwdrivers`, `knife`, `bits`, `level`, `shed`, `drill`, `circsaw`, `tape`, `clamp`, `spade`, `ladder`, `rotaryhammer`, `bblower`, `rros`, `polisher`, `inflator`, `sprayer`, `detector`, `square`, `hacksaw`, `prybar`, `caulkgun`, `toolbox`, `generic`).
   - `colour`: brand colour for the drawing and the tool page.
   - `size`: wall slot size: `small`, `wide` or `big`.
   - `paid`: what was paid. `null` if not recorded.
@@ -54,11 +54,13 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
   - `uses[]`: what it's good for.
   - `pairs[]`: ids of tools it works with.
   - `condition` (optional): `good`, `fair` or `worn`.
-  - `spot` (optional): where it lives (e.g. Pegboard).
+  - `spot` (optional): where it lives (e.g. Pegboard, Bench, Off the board).
+  - `board` (optional): `false` keeps the tool off the pegboard wall on the home page (it still has its own page).
   - `storedIn` (optional): the `id` of the tool it's kept in, e.g. `keter-shed` for garden tools. The tool page links to it, and the Keter shed's page lists everything stored inside.
   - `care[]`: `{ id, text, every }` (`every` = days between jobs). Shown on the tool's Care tab with a plain-English frequency, plus general tips for that kind of tool.
 
 ## Where the list came from
 
+- **The pegboard photo (23 Nov 2026):** added the Bosch SDS rotary hammer and GBL 18V-120 blower, Ryobi corded orbital sander, polisher and One+ inflator, Wagner cordless sprayer, stud detector, and the hand tools on the white board (speed square, hacksaw, pry bar, box level, caulking gun, metal tool box, more hammers, second hex key set). The GOP 250 CE, old drill and sheet sander are kept but off the board.
 - **The pegboard photo (22 Nov 2026):** the Bosch, Ryobi and Makita power tools and the hand tools on the wall, plus the ToolPro socket set, Makita VC2000L vac and Makita BO5030 sander from separate photos. Every drawing is based on those photos.
 - **Flip Ledger "kept" items:** the Bosch mitre saw, Ryobi blower vac and batteries, Stanley hand tool lot, Bosch hand set, screwdriver set, Kincrome knife, drill bits, OX levels, wheelbarrow and Keter shed. These are not confirmed yet as still being in the shed.
