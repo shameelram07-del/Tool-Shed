@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-22",
+  "updated": "2026-11-24",
   "shed": {
     "name": "Keter 1150L shed"
   },
@@ -576,7 +576,9 @@
       ],
       "pairs": [],
       "newUrl": "https://www.bunnings.co.nz/bosch-professional-1400w-216mm-sliding-mitre-saw-gcm-800-sj-skin-only_p0356492",
-      "priceCheck": true
+      "priceCheck": true,
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "makita-bo5030",
@@ -738,7 +740,9 @@
         "ryobi-blower-vac"
       ],
       "newUrl": "https://www.bunnings.co.nz/ryobi-18v-one-lithium-high-performance-5-0ah-battery_p0518481",
-      "priceCheck": true
+      "priceCheck": true,
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "bosch-rotary-hammer",
@@ -1326,7 +1330,9 @@
       ],
       "pairs": [],
       "newUrl": "https://www.bunnings.co.nz/brands/s/stanley-fatmax-",
-      "priceCheck": true
+      "priceCheck": true,
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "toolpro-sockets",
@@ -1406,7 +1412,9 @@
       ],
       "pairs": [],
       "newUrl": "https://www.mitre10.co.nz/shop/hand-tools/tool-kits/c/RS2040",
-      "priceCheck": true
+      "priceCheck": true,
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "screwdriver-set",
@@ -1438,7 +1446,9 @@
         "Opening battery covers and fittings"
       ],
       "pairs": [],
-      "newUrl": "https://www.bunnings.co.nz/craftright-6-piece-screwdriver-set_p0585875"
+      "newUrl": "https://www.bunnings.co.nz/craftright-6-piece-screwdriver-set_p0585875",
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "kincrome-knife",
@@ -1470,7 +1480,9 @@
         "Cutting carpet, vinyl and plasterboard"
       ],
       "pairs": [],
-      "newUrl": "https://www.bunnings.co.nz/kincrome-150mm-folding-lock-back-utility-knife_p0234754"
+      "newUrl": "https://www.bunnings.co.nz/kincrome-150mm-folding-lock-back-utility-knife_p0234754",
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "drill-bits",
@@ -1509,7 +1521,9 @@
         "fatmax-hand-lot",
         "demo-drill"
       ],
-      "newUrl": "https://www.bunnings.co.nz/dewalt-flextorq-40-piece-screwdriver-impact-set_p0365149"
+      "newUrl": "https://www.bunnings.co.nz/dewalt-flextorq-40-piece-screwdriver-impact-set_p0365149",
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "ox-level-600",
@@ -1547,7 +1561,9 @@
       "pairs": [
         "ox-level-1200"
       ],
-      "newUrl": "https://www.mitre10.co.nz/shop/ox-spirit-level-600mm/p/336767"
+      "newUrl": "https://www.mitre10.co.nz/shop/ox-spirit-level-600mm/p/336767",
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "ox-level-1200",
@@ -1586,7 +1602,9 @@
       "pairs": [
         "ox-level-600"
       ],
-      "newUrl": "https://www.mitre10.co.nz/shop/ox-spirit-level-1200mm/p/336771"
+      "newUrl": "https://www.mitre10.co.nz/shop/ox-spirit-level-1200mm/p/336771",
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "stud-detector",
@@ -1840,7 +1858,8 @@
       ],
       "newUrl": "https://www.bunnings.co.nz/ryobi-one-18v-cordless-garden-vacuum-sweeper-r18xblv20-tool-only_p0360060",
       "storedIn": "keter-shed",
-      "priceCheck": true
+      "priceCheck": true,
+      "board": false
     },
     {
       "id": "wheelbarrow",
@@ -1880,7 +1899,9 @@
       "pairs": [
         "demo-spade"
       ],
-      "newUrl": "https://www.mitre10.co.nz/shop/stanley-galvanised-steel-wheelbarrow-90-litre/p/342691"
+      "newUrl": "https://www.mitre10.co.nz/shop/stanley-galvanised-steel-wheelbarrow-90-litre/p/342691",
+      "board": false,
+      "spot": "Off the board"
     },
     {
       "id": "keter-shed",
@@ -1916,7 +1937,9 @@
         "Keeping the garden tools dry and locked away"
       ],
       "pairs": [],
-      "newUrl": "https://www.bunnings.co.nz/keter-1150l-1410mm-x-820mm-elite-store-mini-shed_p0194473"
+      "newUrl": "https://www.bunnings.co.nz/keter-1150l-1410mm-x-820mm-elite-store-mini-shed_p0194473",
+      "board": false,
+      "spot": "Off the board"
     }
   ],
   "pricedOn": "2026-11-23"
