@@ -596,8 +596,7 @@
       "newFrom": "Bunnings · BO5030",
       "power": "Corded 240V",
       "includes": [
-        "Sander",
-        "Dust bag"
+        "Sander"
       ],
       "specs": [
         [
@@ -614,14 +613,14 @@
         ],
         [
           "Dust",
-          "Bag, or plugs into a vacuum"
+          "Dust port (no bag); plug into a vacuum"
         ],
         [
           "Made",
           "May 2025"
         ]
       ],
-      "notes": "Plug it into the Makita vac's tool socket and run the hose to the dust port for dust-free sanding.",
+      "notes": "No dust bag. Plug it into the Makita vac's tool socket and run the hose to the dust port for dust-free sanding.",
       "care": [
         {
           "id": "pad",
@@ -629,8 +628,8 @@
           "every": 60
         },
         {
-          "id": "bag",
-          "text": "Empty and tap out the dust bag",
+          "id": "port",
+          "text": "Clear the dust port and the holes in the pad",
           "every": 14
         }
       ],
