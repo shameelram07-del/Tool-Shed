@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24",
+  "updated": "2026-11-26",
   "shed": {
     "name": "Keter 1150L shed"
   },
@@ -606,11 +606,19 @@
         ],
         [
           "Motor",
-          "300W"
+          "300W, 230–240V"
+        ],
+        [
+          "Speed",
+          "12,000 orbits/min"
         ],
         [
           "Dust",
           "Bag, or plugs into a vacuum"
+        ],
+        [
+          "Made",
+          "May 2025"
         ]
       ],
       "notes": "Plug it into the Makita vac's tool socket and run the hose to the dust port for dust-free sanding.",
@@ -635,7 +643,8 @@
         "makita-vc2000l"
       ],
       "featured": 5,
-      "newUrl": "https://www.bunnings.co.nz/makita-random-orbital-sander-125mm_p0301665"
+      "newUrl": "https://www.bunnings.co.nz/makita-random-orbital-sander-125mm_p0301665",
+      "condition": "likenew"
     },
     {
       "id": "makita-vc2000l",

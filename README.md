@@ -53,7 +53,7 @@ Add, change or remove tools through the owner's Claude chat. Claude edits `data.
   - `includes[]`, `specs[[label, value]]`, `notes`.
   - `uses[]`: what it's good for.
   - `pairs[]`: ids of tools it works with.
-  - `condition` (optional): `good`, `fair` or `worn`.
+  - `condition` (optional): `likenew`, `good`, `fair` or `worn` (used value 75%, 55%, 55%, 40% of new).
   - `spot` (optional): where it lives (e.g. Pegboard, Bench, Off the board).
   - `board` (optional): `false` keeps the tool off the pegboard wall on the home page (it still has its own page).
   - `storedIn` (optional): the `id` of the tool it's kept in, e.g. `keter-shed` for garden tools. The tool page links to it, and the Keter shed's page lists everything stored inside.

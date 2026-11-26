@@ -1013,7 +1013,7 @@ function generalCare(t){ // tips that apply to every tool of a kind
   return out;
 }
 const go=t=>{ location.hash=t.category+'/'+t.id; };
-const usedOf=t=>t.usedValue!=null?t.usedValue:(t.newPrice?Math.round(t.newPrice*(t.condition==='worn'?.4:.55)):null); // rule of thumb: good used tools sell for about 55% of new
+const usedOf=t=>t.usedValue!=null?t.usedValue:(t.newPrice?Math.round(t.newPrice*(t.condition==='worn'?.4:t.condition==='likenew'?.75:.55)):null); // rule of thumb: good used tools sell for about 55% of new
 
 /* ---------- Shed (home) ---------- */
 function viewShed(){
@@ -1068,9 +1068,9 @@ function toolPage(t,i,n){
       <div class="tblock"><div class="tb-name">${esc(t.name)}</div><div class="tb-row"><span><em>Dwg</em>${pad(i+1)}/${pad(n)}</span><span><em>Scale</em>1:${({big:6,wide:4,small:3})[t.size]||4}</span><span><em>Make</em>${esc(t.brand||'—')}</span></div><div class="tb-row"><span class="tb-model"><em>Model</em>${esc(t.model||'—')}</span><span class="tb-sw"><em>Colour</em><i style="background:${t.colour}"></i></span></div></div>
     </div>
     <div class="facts">
-      ${t.newPrice?`<div class="valfact fact" style="--n:${k++};padding:0"><div><span class="k">New price</span><span class="v">${money(t.newPrice)}</span><span class="s">${t.newUrl?`<a href="${esc(t.newUrl)}" target="_blank" rel="noopener">${esc(t.newFrom||'Source')}</a>`:esc(t.newFrom||'')}${t.priceCheck?' <b class="chk">To confirm</b>':''}</span></div><div><span class="k">Worth used</span><span class="v acc">≈ ${money(usedOf(t))}</span><span class="s">${t.usedValue!=null?'Estimate for an older model':t.condition==='worn'?'About 40% of new (worn)':'About 55% of new'}</span></div></div>`:''}
+      ${t.newPrice?`<div class="valfact fact" style="--n:${k++};padding:0"><div><span class="k">New price</span><span class="v">${money(t.newPrice)}</span><span class="s">${t.newUrl?`<a href="${esc(t.newUrl)}" target="_blank" rel="noopener">${esc(t.newFrom||'Source')}</a>`:esc(t.newFrom||'')}${t.priceCheck?' <b class="chk">To confirm</b>':''}</span></div><div><span class="k">Worth used</span><span class="v acc">≈ ${money(usedOf(t))}</span><span class="s">${t.usedValue!=null?'Estimate for an older model':t.condition==='worn'?'About 40% of new (worn)':t.condition==='likenew'?'About 75% of new (like new)':'About 55% of new'}</span></div></div>`:''}
       <div class="fact" style="--n:${k++}"><span class="k">Power</span><span class="v">${esc(t.power||'Hand tool')}</span></div>
-      <div class="fact" style="--n:${k++}"><span class="k">Condition</span><span class="v">${esc({good:'Good',fair:'Fair',worn:'Worn'}[t.condition]||'Working')}</span></div>
+      <div class="fact" style="--n:${k++}"><span class="k">Condition</span><span class="v">${esc({likenew:'Like new',good:'Good',fair:'Fair',worn:'Worn'}[t.condition]||'Working')}</span></div>
       ${home?`<button class="fact wide lives" data-go="${home.id}" style="--n:${k++}"><span class="k">Lives</span><span class="v">Stored in the ${esc(home.brand?home.brand+' shed':home.name)} →</span></button>`:t.spot?`<div class="fact wide" style="--n:${k++}"><span class="k">Lives</span><span class="v">${esc(t.spot)}</span></div>`:''}
     </div>
     <div class="seg" role="tablist" aria-label="${esc(t.tag||t.name)}"><button role="tab" data-seg="info" aria-selected="true">${SEG.info}Details</button><button role="tab" data-seg="care" aria-selected="false">${SEG.care}Care</button></div>
